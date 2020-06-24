@@ -13,7 +13,7 @@ namespace RVTR.Account.WebApi.Controllers
   [ApiController]
   [ApiVersion("0.0")]
   [EnableCors("Public")]
-  [Route("api/v{version:apiVersion}/[controller]")]
+  [Route("{version:apiVersion}/[controller]")]
   public class ProfileController : ControllerBase
   {
     private readonly ILogger<ProfileController> _logger;
