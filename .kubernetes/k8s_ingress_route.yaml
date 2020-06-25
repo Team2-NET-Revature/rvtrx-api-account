@@ -8,7 +8,9 @@ spec:
     - http
   routes:
     - kind: Rule
-      match: PathPrefix(`/`)
+      match: PathPrefix(`/account`)
+      middlewares:
+        - name: account-stripprefix
       priority: 10
       services:
         - kind: Service
