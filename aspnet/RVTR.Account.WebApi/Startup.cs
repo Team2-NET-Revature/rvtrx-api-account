@@ -88,12 +88,17 @@ namespace RVTR.Account.WebApi
       applicationBuilder.UseTracing("accountapi.rest");
       applicationBuilder.UseHttpsRedirection();
       applicationBuilder.UseRouting();
-      applicationBuilder.UseSwagger();
+      applicationBuilder.UseSwagger(options =>
+      {
+        options.RouteTemplate = "accountapi/{documentName}/swagger.json";
+      });
       applicationBuilder.UseSwaggerUI(options =>
       {
+        options.RoutePrefix = "rest/accountapi";
+
         foreach (var description in descriptionProvider.ApiVersionDescriptions)
         {
-          options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName);
+          options.SwaggerEndpoint($"/accountapi/{description.GroupName}/swagger.json", description.GroupName);
         }
       });
 
