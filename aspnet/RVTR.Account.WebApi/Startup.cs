@@ -66,7 +66,7 @@ namespace RVTR.Account.WebApi
       services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ClientSwaggerOptions>();
       services.AddVersionedApiExplorer(options =>
       {
-        options.GroupNameFormat = "'v'V";
+        options.GroupNameFormat = "VV";
         options.SubstituteApiVersionInUrl = true;
       });
     }
@@ -90,15 +90,15 @@ namespace RVTR.Account.WebApi
       applicationBuilder.UseRouting();
       applicationBuilder.UseSwagger(options =>
       {
-        options.RouteTemplate = "accountapi/{documentName}/swagger.json";
+        options.RouteTemplate = "rest/account/{documentName}/swagger.json";
       });
       applicationBuilder.UseSwaggerUI(options =>
       {
-        options.RoutePrefix = "rest/accountapi";
+        options.RoutePrefix = "rest/account";
 
         foreach (var description in descriptionProvider.ApiVersionDescriptions)
         {
-          options.SwaggerEndpoint($"/accountapi/{description.GroupName}/swagger.json", description.GroupName);
+          options.SwaggerEndpoint($"/rest/account/{description.GroupName}/swagger.json", description.GroupName);
         }
       });
 
