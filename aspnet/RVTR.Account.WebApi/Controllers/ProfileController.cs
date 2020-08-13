@@ -47,7 +47,7 @@ namespace RVTR.Account.WebApi.Controllers
       }
       catch
       {
-        return NotFound(id);  
+        return NotFound(id);
       }
     }
 
