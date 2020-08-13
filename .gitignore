@@ -12,3 +12,4 @@ appsettings*
 
 # sonarcloud
 .sonarqube/
+/aspnet/.vs/RVTR.Account/xs/

@@ -1,8 +1,11 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RVTR.Account.DataContext;
+using RVTR.Account.ObjectModel.Models;
 
 namespace RVTR.Account.WebApi
 {
@@ -46,7 +49,56 @@ namespace RVTR.Account.WebApi
         var context = provider.GetRequiredService<AccountContext>();
 
         await context.Database.EnsureCreatedAsync();
-      }
+        context.Accounts.Add(new AccountModel
+        {
+
+          Id = 1,
+          Address = new AddressModel()
+          {
+            Id = 1,
+            City = "City",
+            Country = "Country",
+            PostalCode = "21345",
+            StateProvince = "Somewhere",
+            Street = "123 elm street"
+          },
+          Name = "Name",
+          Payments = new List<PaymentModel>()
+        {
+          new PaymentModel()
+          {
+            Id = 1,
+            BankCard = new BankCardModel()
+            {
+              Id = 1,
+              Expiry = new DateTime(),
+              Number = "xxxx-xxxx-xxxx-1234"
+            },
+            Name = "Visa"
+          }
+        },
+
+
+          Profiles = new List<ProfileModel>()
+        {
+          new ProfileModel()
+          {
+            Id = 1,
+            Email = "Test@test.com",
+            Name = new NameModel()
+            {
+              Id = 1,
+              Family = "Jones",
+              Given = "Tom",
+              ProfileId = 1,
+            },
+            Phone = "1234567891",
+            AccountId = 1
+          }
+        }
+        });
+        context.SaveChanges();
+      };
     }
   }
 }

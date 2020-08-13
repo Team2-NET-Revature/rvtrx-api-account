@@ -10,14 +10,14 @@ namespace RVTR.Account.DataContext.Repositories
   {
     private readonly AccountContext _context;
 
-    public virtual Repository<AccountModel> Account { get; }
+    public virtual AccountRepository Account { get; }
     public virtual Repository<ProfileModel> Profile { get; }
 
     public UnitOfWork(AccountContext context)
     {
       _context = context;
 
-      Account = new Repository<AccountModel>(context);
+      Account = new AccountRepository(context);
       Profile = new Repository<ProfileModel>(context);
     }
 

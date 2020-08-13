@@ -25,7 +25,7 @@ namespace RVTR.Account.UnitTesting.Tests
     {
       var contextMock = new Mock<AccountContext>(_options);
       var loggerMock = new Mock<ILogger<AccountController>>();
-      var repositoryMock = new Mock<Repository<AccountModel>>(new AccountContext(_options));
+      var repositoryMock = new Mock<AccountRepository>(new AccountContext(_options));
       var unitOfWorkMock = new Mock<UnitOfWork>(contextMock.Object);
 
       repositoryMock.Setup(m => m.DeleteAsync(0)).Throws(new Exception());
