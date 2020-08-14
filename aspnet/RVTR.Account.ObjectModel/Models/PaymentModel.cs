@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,7 +16,20 @@ namespace RVTR.Account.ObjectModel.Models
 
         public BankCardModel BankCard { get; set; }
 
-        public string Name { get; set; }
+        //public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Bank name cannot be null.", nameof(value));
+                }
+                _name = value;
+            }
+        }
 
         /// <summary>
         /// Represents the _Payment_ `Validate` method

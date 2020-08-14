@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,11 +14,37 @@ namespace RVTR.Account.ObjectModel.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string Email { get; set; }
+        //public string Email { get; set; }
+        private string _email;
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Email address cannot be null.", nameof(value));
+                }
+                _email = value;
+            }
+        }
 
         public NameModel Name { get; set; }
 
-        public string Phone { get; set; }
+        //public string Phone { get; set; }
+        private string _phone;
+        public string Phone
+        {
+            get => _phone;
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Phone number cannot be null.", nameof(value));
+                }
+                _phone = value;
+            }
+        }
 
         [ForeignKey("Account")]
         public int? AccountId { get; set; }

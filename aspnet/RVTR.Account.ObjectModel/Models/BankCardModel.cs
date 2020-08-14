@@ -16,7 +16,20 @@ namespace RVTR.Account.ObjectModel.Models
 
         public DateTime Expiry { get; set; }
 
-        public string Number { get; set; }
+        //public string Number { get; set; }
+        private string _number;
+        public string Number
+        {
+            get => _number;
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Credit card number cannot be null.", nameof(value));
+                }
+                _number = value;
+            }
+        }
 
         /// <summary>
         /// Represents the _BankCard_ `Validate` method
