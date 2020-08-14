@@ -9,68 +9,68 @@ using RVTR.Account.ObjectModel.Models;
 
 namespace RVTR.Account.WebApi
 {
-  /// <summary>
-  ///
-  /// </summary>
-  public class Program
-  {
     /// <summary>
     ///
     /// </summary>
-    /// <returns></returns>
-    public static async Task Main()
+    public class Program
     {
-      var host = CreateHostBuilder().Build();
-
-      await CreateDbContextAsync(host);
-      await host.RunAsync();
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    public static IHostBuilder CreateHostBuilder() =>
-      Host.CreateDefaultBuilder().ConfigureWebHostDefaults(webBuilder =>
-      {
-        webBuilder.UseStartup<Startup>();
-      });
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="host"></param>
-    /// <returns></returns>
-    public static async Task CreateDbContextAsync(IHost host)
-    {
-      using (var scope = host.Services.CreateScope())
-      {
-        var provider = scope.ServiceProvider;
-        var context = provider.GetRequiredService<AccountContext>();
-
-        await context.Database.EnsureCreatedAsync();
-        context.Accounts.Add(new AccountModel
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
+        public static async Task Main()
         {
+            var host = CreateHostBuilder().Build();
 
-          Id = 1,
-          Address = new AddressModel()
+            await CreateDbContextAsync(host);
+            await host.RunAsync();
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
+        public static IHostBuilder CreateHostBuilder() =>
+          Host.CreateDefaultBuilder().ConfigureWebHostDefaults(webBuilder =>
           {
-            Id = 1,
-            City = "City",
-            Country = "Country",
-            PostalCode = "21345",
-            StateProvince = "Somewhere",
-            Street = "123 elm street"
-          },
-          Name = "Name",
-          Payments = new List<PaymentModel>()
+              webBuilder.UseStartup<Startup>();
+          });
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        public static async Task CreateDbContextAsync(IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var provider = scope.ServiceProvider;
+                var context = provider.GetRequiredService<AccountContext>();
+
+                await context.Database.EnsureCreatedAsync();
+                context.Accounts.Add(new AccountModel
+                {
+
+                    Id = -2,
+                    Address = new AddressModel()
+                    {
+                        Id = -2,
+                        City = "City",
+                        Country = "Country",
+                        PostalCode = "21345",
+                        StateProvince = "Somewhere",
+                        Street = "123 elm street"
+                    },
+                    Name = "Name",
+                    Payments = new List<PaymentModel>()
         {
           new PaymentModel()
           {
-            Id = 1,
+            Id = -2,
             BankCard = new BankCardModel()
             {
-              Id = 1,
+              Id = -2,
               Expiry = new DateTime(),
               Number = "xxxx-xxxx-xxxx-1234"
             },
@@ -79,26 +79,26 @@ namespace RVTR.Account.WebApi
         },
 
 
-          Profiles = new List<ProfileModel>()
+                    Profiles = new List<ProfileModel>()
         {
           new ProfileModel()
           {
-            Id = 1,
+            Id = -2,
             Email = "Test@test.com",
             Name = new NameModel()
             {
-              Id = 1,
+              Id = -2,
               Family = "Jones",
               Given = "Tom",
-              ProfileId = 1,
+              ProfileId = -2,
             },
             Phone = "1234567891",
-            AccountId = 1
+            AccountId = -2
           }
         }
-        });
-        context.SaveChanges();
-      };
+                });
+                context.SaveChanges();
+            };
+        }
     }
-  }
 }
