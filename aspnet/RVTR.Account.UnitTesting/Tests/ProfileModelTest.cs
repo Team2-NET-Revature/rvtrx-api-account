@@ -6,9 +6,9 @@ using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
-  public class ProfileModelTest
-  {
-    public static readonly IEnumerable<Object[]> _profiles = new List<Object[]>
+    public class ProfileModelTest
+    {
+        public static readonly IEnumerable<Object[]> _profiles = new List<Object[]>
     {
       new object[]
       {
@@ -19,28 +19,28 @@ namespace RVTR.Account.UnitTesting.Tests
           Name = new NameModel(),
           Phone = "1234567890",
           AccountId = null,
-          Account = null
+          Account = null,
         }
       }
     };
 
-    [Theory]
-    [MemberData(nameof(_profiles))]
-    public void Test_Create_ProfileModel(ProfileModel profile)
-    {
-      var validationContext = new ValidationContext(profile);
-      var actual = Validator.TryValidateObject(profile, validationContext, null, true);
+        [Theory]
+        [MemberData(nameof(_profiles))]
+        public void Test_Create_ProfileModel(ProfileModel profile)
+        {
+            var validationContext = new ValidationContext(profile);
+            var actual = Validator.TryValidateObject(profile, validationContext, null, true);
 
-      Assert.True(actual);
+            Assert.True(actual);
+        }
+
+        [Theory]
+        [MemberData(nameof(_profiles))]
+        public void Test_Validate_ProfileModel(ProfileModel profile)
+        {
+            var validationContext = new ValidationContext(profile);
+
+            Assert.Empty(profile.Validate(validationContext));
+        }
     }
-
-    [Theory]
-    [MemberData(nameof(_profiles))]
-    public void Test_Validate_ProfileModel(ProfileModel profile)
-    {
-      var validationContext = new ValidationContext(profile);
-
-      Assert.Empty(profile.Validate(validationContext));
-    }
-  }
 }

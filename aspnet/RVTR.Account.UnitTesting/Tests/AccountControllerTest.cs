@@ -25,7 +25,7 @@ namespace RVTR.Account.UnitTesting.Tests
     {
       var contextMock = new Mock<AccountContext>(_options);
       var loggerMock = new Mock<ILogger<AccountController>>();
-      var repositoryMock = new Mock<Repository<AccountModel>>(new AccountContext(_options));
+      var repositoryMock = new Mock<AccountRepository>(new AccountContext(_options));
       var unitOfWorkMock = new Mock<UnitOfWork>(contextMock.Object);
 
       repositoryMock.Setup(m => m.DeleteAsync(0)).Throws(new Exception());
@@ -35,7 +35,7 @@ namespace RVTR.Account.UnitTesting.Tests
       repositoryMock.Setup(m => m.SelectAsync(0)).Throws(new Exception());
       repositoryMock.Setup(m => m.SelectAsync(1)).Returns(Task.FromResult<AccountModel>(null));
       repositoryMock.Setup(m => m.Update(It.IsAny<AccountModel>()));
-      unitOfWorkMock.Setup(m => m.Account).Returns(repositoryMock.Object);
+      unitOfWorkMock.Setup(m => m.Account).Returns((AccountRepository)repositoryMock.Object);
 
       _logger = loggerMock.Object;
       _unitOfWork = unitOfWorkMock.Object;

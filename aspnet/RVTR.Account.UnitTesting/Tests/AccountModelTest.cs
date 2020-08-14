@@ -6,9 +6,9 @@ using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
-  public class AccountModelTest
-  {
-    public static readonly IEnumerable<Object[]> _accounts = new List<Object[]>
+    public class AccountModelTest
+    {
+        public static readonly IEnumerable<Object[]> _accounts = new List<Object[]>
     {
       new object[]
       {
@@ -23,23 +23,23 @@ namespace RVTR.Account.UnitTesting.Tests
       }
     };
 
-    [Theory]
-    [MemberData(nameof(_accounts))]
-    public void Test_Create_AccountModel(AccountModel account)
-    {
-      var validationContext = new ValidationContext(account);
-      var actual = Validator.TryValidateObject(account, validationContext, null, true);
+        [Theory]
+        [MemberData(nameof(_accounts))]
+        public void Test_Create_AccountModel(AccountModel account)
+        {
+            var validationContext = new ValidationContext(account);
+            var actual = Validator.TryValidateObject(account, validationContext, null, true);
 
-      Assert.True(actual);
+            Assert.True(actual);
+        }
+
+        [Theory]
+        [MemberData(nameof(_accounts))]
+        public void Test_Validate_AccountModel(AccountModel account)
+        {
+            var validationContext = new ValidationContext(account);
+
+            Assert.Empty(account.Validate(validationContext));
+        }
     }
-
-    [Theory]
-    [MemberData(nameof(_accounts))]
-    public void Test_Validate_AccountModel(AccountModel account)
-    {
-      var validationContext = new ValidationContext(account);
-
-      Assert.Empty(account.Validate(validationContext));
-    }
-  }
 }
