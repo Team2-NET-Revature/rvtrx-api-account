@@ -52,25 +52,26 @@ namespace RVTR.Account.WebApi
                 context.Accounts.Add(new AccountModel
                 {
 
-                    Id = -2,
+                    Id = -1,
                     Address = new AddressModel()
                     {
-                        Id = -2,
+                        Id = -1,
                         City = "City",
                         Country = "Country",
                         PostalCode = "21345",
                         StateProvince = "Somewhere",
-                        Street = "123 elm street"
+                        Street = "123 elm street",
+                        AccountId = -1,
                     },
                     Name = "Name",
                     Payments = new List<PaymentModel>()
         {
           new PaymentModel()
           {
-            Id = -2,
+            Id = -1,
             BankCard = new BankCardModel()
             {
-              Id = -2,
+              Id = -1,
               Expiry = new DateTime(),
               Number = "xxxx-xxxx-xxxx-1234"
             },
@@ -83,17 +84,17 @@ namespace RVTR.Account.WebApi
         {
           new ProfileModel()
           {
-            Id = -2,
+            Id = -1,
             Email = "Test@test.com",
             Name = new NameModel()
             {
-              Id = -2,
+              Id = -1,
               Family = "Jones",
               Given = "Tom",
-              ProfileId = -2,
+              ProfileId = -1,
             },
             Phone = "1234567891",
-            AccountId = -2
+            AccountId = -1
           }
         }
                 });

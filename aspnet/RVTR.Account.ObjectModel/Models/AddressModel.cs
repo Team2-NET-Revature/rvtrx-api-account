@@ -23,6 +23,11 @@ namespace RVTR.Account.ObjectModel.Models
 
         public string Street { get; set; }
 
+        [ForeignKey("Account")]
+        public int? AccountId { get; set; }
+
+        public AccountModel Account { get; set; }
+
         /// <summary>
         /// Represents the _Address_ `Validate` method
         /// </summary>

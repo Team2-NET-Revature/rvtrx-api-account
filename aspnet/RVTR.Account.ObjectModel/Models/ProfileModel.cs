@@ -19,9 +19,10 @@ namespace RVTR.Account.ObjectModel.Models
 
         public string Phone { get; set; }
 
+        [ForeignKey("Account")]
         public int? AccountId { get; set; }
 
-        public virtual AccountModel Account { get; set; }
+        public AccountModel Account { get; set; }
 
         /// <summary>
         /// Represents the _Profile_ `Validate` method
