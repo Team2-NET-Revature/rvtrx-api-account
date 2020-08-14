@@ -86,7 +86,6 @@ namespace RVTR.Account.WebApi
 
       applicationBuilder.UseZipkin();
       applicationBuilder.UseTracing("accountapi.rest");
-      applicationBuilder.UseHttpsRedirection();
       applicationBuilder.UseRouting();
       applicationBuilder.UseSwagger(options =>
       {
