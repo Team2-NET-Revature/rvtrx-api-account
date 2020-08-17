@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RVTR.Account.ObjectModel.Models;
 using System.Linq;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ namespace RVTR.Account.DataContext
     {
         public DbSet<AccountModel> Accounts { get; set; }
         public DbSet<ProfileModel> Profiles { get; set; }
+        public DbSet<PaymentModel> Payments { get; set; }
 
         public AccountContext(DbContextOptions<AccountContext> options) : base(options) { }
 
