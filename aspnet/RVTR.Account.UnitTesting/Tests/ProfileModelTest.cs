@@ -16,7 +16,8 @@ namespace RVTR.Account.UnitTesting.Tests
         {
           Id = 0,
           Email = "email@email.com",
-          Name = new NameModel(),
+          Family = "family",
+          Given = "given",
           Phone = "1234567890",
           AccountId = null,
           Account = null,

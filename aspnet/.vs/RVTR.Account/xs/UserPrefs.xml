@@ -1,70 +1,56 @@
-﻿<Properties StartupConfiguration="{7E2DF5E7-D0CB-4A6A-9113-784B6A656FB4}|Default">
-<<<<<<< HEAD
-  <MonoDevelop.Ide.ItemProperties.RVTR.Account.WebApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RVTR.Account.DataContext/Repositories/AccountRepository.cs">
-    <Files>
-      <File FileName="RVTR.Account.WebApi/Controllers/AccountController.cs" Line="74" Column="49" />
-      <File FileName="RVTR.Account.WebApi/Startup.cs" Line="59" Column="10" />
-      <File FileName="RVTR.Account.DataContext/Repositories/Repository.cs" Line="16" Column="6" />
-      <File FileName="RVTR.Account.DataContext/Repositories/UnitOfWork.cs" Line="13" Column="41" />
-      <File FileName="RVTR.Account.WebApi/Controllers/ProfileController.cs" Line="1" Column="1" />
-      <File FileName="RVTR.Account.DataContext/Repositories/AccountRepository.cs" Line="13" Column="4" />
-      <File FileName="RVTR.Account.UnitTesting/Tests/AccountControllerTest.cs" Line="31" Column="75" />
-      <File FileName="RVTR.Account.DataContext/AccountContext.cs" Line="7" Column="35" NotebookId="1" />
-=======
+﻿<Properties StartupConfiguration="{A83E3B84-BEED-4A6F-BEF4-12EEE1CC87BA}|Default">
   <MonoDevelop.Ide.ItemProperties.RVTR.Account.WebApi PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RVTR.Account.WebApi/appsettings.json">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RVTR.Account.ObjectModel/Models/ProfileModel.cs">
     <Files>
-      <File FileName="RVTR.Account.DataContext/AccountContext.cs" Line="5" Column="14" />
-      <File FileName="RVTR.Account.WebApi/Controllers/ProfileController.cs" Line="51" Column="50" />
-      <File FileName="RVTR.Account.DataContext/Repositories/Repository.cs" Line="28" Column="68" />
-      <File FileName="RVTR.Account.DataContext/Repositories/UnitOfWork.cs" Line="22" Column="55" />
-      <File FileName="RVTR.Account.DataContext/Repositories/AccountRepository.cs" Line="24" Column="5" />
-      <File FileName="RVTR.Account.ObjectModel/packages.lock.json" />
-      <File FileName="RVTR.Account.UnitTesting/Tests/AccountControllerTest.cs" Line="83" Column="2" />
-      <File FileName="RVTR.Account.WebApi/Program.cs" Line="52" Column="47" />
-      <File FileName="RVTR.Account.WebApi/Startup.cs" Line="87" Column="7" />
-      <File FileName="RVTR.Account.WebApi/Controllers/AccountController.cs" Line="55" Column="90" />
-      <File FileName="RVTR.Account.ObjectModel/Models/AccountModel.cs" Line="17" Column="26" />
-      <File FileName="RVTR.Account.ObjectModel/Models/ProfileModel.cs" Line="32" Column="27" />
-      <File FileName="RVTR.Account.ObjectModel/Models/AddressModel.cs" Line="75" Column="28" />
-      <File FileName="RVTR.Account.ObjectModel/Models/BankCardModel.cs" Line="17" Column="28" />
-      <File FileName="RVTR.Account.ObjectModel/Models/NameModel.cs" Line="30" Column="27" />
-      <File FileName="RVTR.Account.ObjectModel/Models/PaymentModel.cs" Line="17" Column="26" />
-      <File FileName="RVTR.Account.UnitTesting/Tests/RepositoryTest.cs" Line="1" Column="1" />
-      <File FileName="RVTR.Account.WebApi/ResponseObjects/ErrorObject.cs" Line="2" Column="2" />
-      <File FileName="RVTR.Account.WebApi/ResponseObjects/MessageObject.cs" Line="1" Column="1" />
-      <File FileName="RVTR.Account.WebApi/ResponseObjects/ValidationError.cs" Line="10" Column="2" />
-      <File FileName="RVTR.Account.WebApi/appsettings.json" Line="1" Column="1" />
->>>>>>> origin/svc-account-accountrepo
+      <File FileName="RVTR.Account.DataContext/AccountContext.cs" Line="23" Column="68" />
+      <File FileName="RVTR.Account.DataContext/Repositories/AccountRepository.cs" Line="28" Column="33" />
+      <File FileName="RVTR.Account.WebRpc/Protos/account.proto" />
+      <File FileName="RVTR.Account.WebApi/Controllers/AccountController.cs" />
+      <File FileName="RVTR.Account.WebApi/Program.cs" />
+      <File FileName="RVTR.Account.WebApi/Startup.cs" />
+      <File FileName="RVTR.Account.WebApi/Controllers/AddressController.cs" />
+      <File FileName="RVTR.Account.WebApi/Controllers/ProfileController.cs" Line="182" Column="6" />
+      <File FileName="RVTR.Account.WebApi/ResponseObjects/ErrorObject.cs" />
+      <File FileName="RVTR.Account.WebApi/ResponseObjects/MessageObject.cs" />
+      <File FileName="RVTR.Account.WebApi/ResponseObjects/ValidationError.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/AccountControllerTest.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/ProfileControllerTest.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/AccountRepositoryTest.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/RepositoryTest.cs" />
+      <File FileName="RVTR.Account.DataContext/Repositories/Repository.cs" />
+      <File FileName="RVTR.Account.WebRpc/Startup.cs" />
+      <File FileName="RVTR.Account.WebRpc/Program.cs" />
+      <File FileName="RVTR.Account.WebRpc/Services/AccountService.cs" />
+      <File FileName="RVTR.Account.ObjectModel/Models/AccountModel.cs" />
+      <File FileName="RVTR.Account.ObjectModel/Models/AddressModel.cs" />
+      <File FileName="RVTR.Account.ObjectModel/Models/BankCardModel.cs" />
+      <File FileName="RVTR.Account.ObjectModel/Models/PaymentModel.cs" />
+      <File FileName="RVTR.Account.ObjectModel/Models/ProfileModel.cs" Line="71" Column="15" />
+      <File FileName="RVTR.Account.DataContext/RVTR.Account.DataContext.csproj" />
+      <File FileName="RVTR.Account.DataContext/Repositories/UnitOfWork.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/AccountModelTest.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/AddressControllerTest.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/AddressModelTest.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/ProfileModelTest.cs" />
+      <File FileName="RVTR.Account.UnitTesting/Tests/UnitOfWorkTest.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RVTR.Account" expanded="True">
             <Node name="RVTR.Account.DataContext" expanded="True">
-<<<<<<< HEAD
-              <Node name="Repositories" expanded="True">
-                <Node name="AccountRepository.cs" selected="True" />
+              <Node name="Repositories" expanded="True" />
+            </Node>
+            <Node name="RVTR.Account.ObjectModel" expanded="True">
+              <Node name="Models" expanded="True">
+                <Node name="ProfileModel.cs" selected="True" />
               </Node>
             </Node>
-            <Node name="RVTR.Account.ObjectModel" expanded="True" />
             <Node name="RVTR.Account.UnitTesting" expanded="True">
               <Node name="Tests" expanded="True" />
             </Node>
             <Node name="RVTR.Account.WebApi" expanded="True">
               <Node name="Controllers" expanded="True" />
-=======
-              <Node name="Repositories" expanded="True" />
-            </Node>
-            <Node name="RVTR.Account.ObjectModel" expanded="True">
-              <Node name="Models" expanded="True" />
-            </Node>
-            <Node name="RVTR.Account.UnitTesting" expanded="True" />
-            <Node name="RVTR.Account.WebApi" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="appsettings.json" selected="True" />
->>>>>>> origin/svc-account-accountrepo
             </Node>
           </Node>
         </State>

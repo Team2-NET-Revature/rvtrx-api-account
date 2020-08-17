@@ -86,13 +86,8 @@ namespace RVTR.Account.WebApi
           {
             Id = -1,
             Email = "Test@test.com",
-            Name = new NameModel()
-            {
-              Id = -1,
-              Family = "Jones",
-              Given = "Tom",
-              ProfileId = -1,
-            },
+            Family = "Jones",
+            Given = "Tom",
             Phone = "1234567891",
             AccountId = -1
           }
