@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,6 +30,11 @@ namespace RVTR.Account.ObjectModel.Models
                 _name = value;
             }
         }
+
+        [ForeignKey("Account")]
+        public int? AccountId { get; set; }
+
+        public AccountModel Account { get; set; }
 
         /// <summary>
         /// Represents the _Payment_ `Validate` method
