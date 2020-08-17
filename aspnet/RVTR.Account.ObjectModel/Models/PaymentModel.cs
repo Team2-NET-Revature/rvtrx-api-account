@@ -16,7 +16,7 @@ namespace RVTR.Account.ObjectModel.Models
 
         public BankCardModel BankCard { get; set; }
 
-        
+
         private string _name;
         public string Name
         {
@@ -32,6 +32,7 @@ namespace RVTR.Account.ObjectModel.Models
         }
 
         [ForeignKey("Account")]
+        [Required]
         public int? AccountId { get; set; }
 
         public AccountModel Account { get; set; }
