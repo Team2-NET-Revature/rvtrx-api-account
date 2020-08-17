@@ -14,9 +14,10 @@ namespace RVTR.Account.ObjectModel.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        
         public AddressModel Address { get; set; }
 
-        //public string Name { get; set; }
+        
         private string _name;
         public string Name
         {
@@ -30,9 +31,10 @@ namespace RVTR.Account.ObjectModel.Models
                 _name = value;
             }
         }
-
+       
         public IEnumerable<PaymentModel> Payments { get; set; }
 
+        
         public IEnumerable<ProfileModel> Profiles { get; set; }
 
         /// <summary>

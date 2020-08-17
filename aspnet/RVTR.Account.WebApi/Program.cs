@@ -62,6 +62,7 @@ namespace RVTR.Account.WebApi
                         StateProvince = "Somewhere",
                         Street = "123 elm street",
                         AccountId = -1,
+                        
                     },
                     Name = "Name",
                     Payments = new List<PaymentModel>()

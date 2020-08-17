@@ -16,7 +16,7 @@ namespace RVTR.Account.ObjectModel.Models
 
         public BankCardModel BankCard { get; set; }
 
-        //public string Name { get; set; }
+        
         private string _name;
         public string Name
         {

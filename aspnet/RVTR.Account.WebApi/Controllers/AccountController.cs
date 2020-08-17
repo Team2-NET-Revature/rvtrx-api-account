@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RVTR.Account.DataContext.Repositories;
 using RVTR.Account.ObjectModel.Models;
-using System.Threading.Tasks;
 using RVTR.Account.WebApi.ResponseObjects;
 using System;
 using Microsoft.AspNetCore.Http;

@@ -14,7 +14,7 @@ namespace RVTR.Account.ObjectModel.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        //public string Email { get; set; }
+        
         private string _email;
         public string Email
         {
@@ -43,7 +43,7 @@ namespace RVTR.Account.ObjectModel.Models
           }
         }
 
-        //public string Given { get; set; }
+        
         private string _given;
         public string Given
         {
@@ -59,7 +59,7 @@ namespace RVTR.Account.ObjectModel.Models
         }
 
 
-        //public string Phone { get; set; }
+        
         private string _phone;
         public string Phone
         {
@@ -75,8 +75,10 @@ namespace RVTR.Account.ObjectModel.Models
         }
 
         [ForeignKey("Account")]
+        [Required]
         public int? AccountId { get; set; }
 
+        
         public AccountModel Account { get; set; }
 
         /// <summary>

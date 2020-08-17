@@ -11,7 +11,7 @@ using RVTR.Account.WebApi.ResponseObjects;
 namespace RVTR.Account.WebApi.Controllers
 {
   /// <summary>
-  ///
+  /// Represents the _Profile Controller_ class
   /// </summary>
   [ApiController]
   [ApiVersion("0.0")]
@@ -23,7 +23,7 @@ namespace RVTR.Account.WebApi.Controllers
     private readonly UnitOfWork _unitOfWork;
 
     /// <summary>
-    ///
+    /// The _Profile Controller_ constructor
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="unitOfWork"></param>
@@ -56,7 +56,7 @@ namespace RVTR.Account.WebApi.Controllers
         {
           _logger.LogInformation($"Deleted the profile.");
         }
-        return Ok();
+        return Ok(MessageObject.Success);
       }
       catch
       {
@@ -64,12 +64,12 @@ namespace RVTR.Account.WebApi.Controllers
         {
           _logger.LogWarning($"Profile with ID number {id} does not exist.");
         }
-        return NotFound(new ErrorObject($"Profile with ID number {id} does not exist"));
+        return NotFound(new ErrorObject($"Profile with ID number {id} does not exist."));
       }
     }
 
     /// <summary>
-    /// Get all profiles
+    /// Get all profiles 
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -83,7 +83,7 @@ namespace RVTR.Account.WebApi.Controllers
         {
           _logger.LogError("A bad request was sent for the profiles.");
         }
-        return BadRequest(new ErrorObject("Invalid data sent"));
+        return BadRequest(new ErrorObject("Invalid data sent."));
       }
       else
       {
@@ -112,7 +112,7 @@ namespace RVTR.Account.WebApi.Controllers
       {
         if (_logger != null)
         {
-          _logger.LogDebug("Getting an profile by its ID number...");
+          _logger.LogDebug("Getting a profile by its ID number...");
         }
         profileModel = await _unitOfWork.Profile.SelectAsync(id);
       }
@@ -137,7 +137,7 @@ namespace RVTR.Account.WebApi.Controllers
         _logger.LogWarning($"Profile with ID number {id} does not exist.");
       }
       return NotFound(new ErrorObject($"Profile with ID number {id} does not exist."));
-      // return NotFound(id);
+      
     }
 
 
@@ -151,10 +151,26 @@ namespace RVTR.Account.WebApi.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post(ProfileModel profile)
     {
+      if (!ModelState.IsValid)
+      {
+        if (_logger != null)
+        {
+          _logger.LogError("A bad request was sent for the profile.");
+        }
+        return BadRequest(new ErrorObject("Invalid profile data sent."));
+      }
+      if (_logger != null)
+      {
+        _logger.LogDebug("Adding a profile...");
+      }
       await _unitOfWork.Profile.InsertAsync(profile);
       await _unitOfWork.CommitAsync();
 
-      return Accepted(profile);
+      if (_logger != null)
+      {
+        _logger.LogInformation($"Successfully added the profile {profile}.");
+      }
+      return Ok(MessageObject.Success);
     }
 
     /// <summary>
@@ -167,27 +183,39 @@ namespace RVTR.Account.WebApi.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Put(ProfileModel profile)
     {
-      if(!ModelState.IsValid)
+      try
+      {
+        if (!ModelState.IsValid)
+        {
+          if (_logger != null)
+          {
+            _logger.LogError("A bad request was sent for the profile.");
+          }
+          return BadRequest(new ErrorObject("Invalid profile data sent."));
+        }
+        if (_logger != null)
+        {
+          _logger.LogDebug("Updating a profile...");
+        }
+        _unitOfWork.Profile.Update(profile);
+        await _unitOfWork.CommitAsync();
+
+        if (_logger != null)
+        {
+          _logger.LogInformation($"Successfully updated the profile {profile}.");
+        }
+        return Ok(MessageObject.Success);
+      }
+      catch
       {
         if (_logger != null)
         {
-          _logger.LogError("A bad request was sent for the profile.");
+          _logger.LogWarning($"This profile does not exist.");
         }
-        return BadRequest(new ErrorObject("Invalid profile data sent"));
+        return NotFound(new ErrorObject($"Profile with ID number {profile.Id} does not exist."));
       }
-      if (_logger != null)
-      {
-        _logger.LogDebug("Updating a profile...");
-      }
-      _unitOfWork.Profile.Update(profile);
-      await _unitOfWork.CommitAsync();
-
-      if (_logger != null)
-      {
-        _logger.LogInformation($"Successfully updated the account {profile}.");
-      }
-      return Ok(MessageObject.Success);
-      //return Accepted(profile);
+      
+      
     }
    
   }

@@ -16,7 +16,7 @@ namespace RVTR.Account.ObjectModel.Models
 
         public DateTime Expiry { get; set; }
 
-        //public string Number { get; set; }
+        
         private string _number;
         public string Number
         {
