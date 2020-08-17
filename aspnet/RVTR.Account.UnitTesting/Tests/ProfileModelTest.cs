@@ -19,7 +19,7 @@ namespace RVTR.Account.UnitTesting.Tests
           Family = "family",
           Given = "given",
           Phone = "1234567890",
-          AccountId = null,
+          AccountId = 0,
           Account = null,
         }
       }

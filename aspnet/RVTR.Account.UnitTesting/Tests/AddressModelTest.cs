@@ -20,7 +20,7 @@ namespace RVTR.Account.UnitTesting.Tests
           PostalCode = "postalcode",
           StateProvince = "stateprovince",
           Street = "street",
-          AccountId = null,
+          AccountId = 0,
           Account = null,
         }
       }
