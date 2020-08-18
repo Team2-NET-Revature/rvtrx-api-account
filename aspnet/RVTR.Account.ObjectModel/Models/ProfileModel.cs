@@ -30,7 +30,7 @@ namespace RVTR.Account.ObjectModel.Models
         }
 
         private string _family;
-        public string Family
+        public string familyName
         {
           get => _family;
           set
@@ -45,7 +45,7 @@ namespace RVTR.Account.ObjectModel.Models
 
         
         private string _given;
-        public string Given
+        public string givenName
         {
           get => _given;
           set

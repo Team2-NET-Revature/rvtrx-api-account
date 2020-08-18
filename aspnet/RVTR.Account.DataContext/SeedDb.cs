@@ -12,6 +12,11 @@ namespace RVTR.Account.DataContext
     public static class SeedDb
     {
 			public static void Seed(AccountContext ctx){
+				 if (ctx.Accounts.Count() > 0) 
+				 {
+					ctx.Accounts.RemoveRange(ctx.Accounts);
+				 	ctx.SaveChanges();
+				 }
 					ctx.Accounts.Add(new AccountModel
 					{
 							Id = -1,
@@ -24,7 +29,6 @@ namespace RVTR.Account.DataContext
 								StateProvince = "Somewhere",
 								Street = "123 elm street",
 								AccountId = -1,
-
 							},
 							Name = "Name",
 							Payments = new List<PaymentModel>()
@@ -43,8 +47,8 @@ namespace RVTR.Account.DataContext
 							{
 								Id = -1,
 								Email = "Test@test.com",
-								Family = "Jones",
-								Given = "Tom",
+								familyName = "Jones",
+								givenName = "Tom",
 								Phone = "1234567891",
 								AccountId = -1
 							}
