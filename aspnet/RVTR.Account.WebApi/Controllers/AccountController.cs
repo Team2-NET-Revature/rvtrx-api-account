@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using RVTR.Account.DataContext.Repositories;
 using RVTR.Account.ObjectModel.Models;
 using RVTR.Account.WebApi.ResponseObjects;
-using System;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
@@ -41,7 +40,7 @@ namespace RVTR.Account.WebApi.Controllers
     /// <returns></returns>
     [HttpDelete("{id}")]
     [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
       try
@@ -65,7 +64,7 @@ namespace RVTR.Account.WebApi.Controllers
         {
           _logger.LogWarning($"Account with ID number {id} does not exist.");
         }
-        return NotFound(new ErrorObject ($"Account with ID number {id} does not exist"));
+        return NotFound(new ErrorObject($"Account with ID number {id} does not exist"));
       }
     }
 
@@ -75,25 +74,15 @@ namespace RVTR.Account.WebApi.Controllers
     /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<AccountModel>), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get()
     {
-      if (!ModelState.IsValid)
+
+      if (_logger != null)
       {
-        if (_logger != null)
-        {
-          _logger.LogError("A bad request was sent for the accounts.");
-        }
-        return BadRequest(new ErrorObject("Invalid data sent"));
+        _logger.LogInformation($"Retrieved the accounts.");
       }
-      else
-      {
-        if (_logger != null)
-        {
-          _logger.LogInformation($"Retrieved the accounts.");
-        }
-        return Ok(await _unitOfWork.Account.SelectAsync());
-      }
+      return Ok(await _unitOfWork.Account.SelectAsync());
+
     }
 
     /// <summary>
@@ -103,19 +92,18 @@ namespace RVTR.Account.WebApi.Controllers
     /// <returns></returns>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(int id)
     {
       AccountModel accountModel;
-      
-      if(_logger != null)
+
+      if (_logger != null)
       {
         _logger.LogDebug("Getting an account by its ID number...");
       }
       accountModel = await _unitOfWork.Account.SelectAsync(id);
-      
-     
+
+
       if (accountModel is AccountModel theAccount)
       {
         if (_logger != null)
@@ -128,7 +116,7 @@ namespace RVTR.Account.WebApi.Controllers
       {
         _logger.LogWarning($"Account with ID number {id} does not exist.");
       }
-      return NotFound(new ErrorObject ($"Account with ID number {id} does not exist."));
+      return NotFound(new ErrorObject($"Account with ID number {id} does not exist."));
     }
 
     /// <summary>
@@ -137,18 +125,10 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="account"></param>
     /// <returns></returns>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
     public async Task<IActionResult> Post([FromBody] AccountModel account)
     {
-      if(!ModelState.IsValid)
-      {
-        if (_logger != null)
-        {
-          _logger.LogError("A bad request was sent for the account.");
-        }
-        return BadRequest(new ErrorObject("Invalid account data sent"));
-      }
+
       if (_logger != null)
       {
         _logger.LogDebug("Adding an account...");
@@ -161,7 +141,7 @@ namespace RVTR.Account.WebApi.Controllers
         _logger.LogInformation($"Successfully added the account {account}.");
       }
       return Ok(MessageObject.Success);
-      
+
     }
 
     /// <summary>
@@ -170,20 +150,12 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="account"></param>
     /// <returns></returns>
     [HttpPut]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Put([FromBody] AccountModel account)
     {
       try
       {
-        if (!ModelState.IsValid)
-        {
-          if (_logger != null)
-          {
-            _logger.LogError("A bad request was sent for the account.");
-          }
-          return BadRequest(new ErrorObject("Invalid account data sent"));
-        }
         if (_logger != null)
         {
           _logger.LogDebug("Updating an account...");
@@ -198,7 +170,7 @@ namespace RVTR.Account.WebApi.Controllers
         }
         return Ok(MessageObject.Success);
       }
-      
+
       catch
       {
         if (_logger != null)
@@ -210,6 +182,5 @@ namespace RVTR.Account.WebApi.Controllers
 
     }
 
-    
   }
 }

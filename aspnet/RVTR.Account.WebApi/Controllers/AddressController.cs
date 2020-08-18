@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -39,7 +39,7 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(AddressModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
@@ -76,27 +76,16 @@ namespace RVTR.Account.WebApi.Controllers
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(IEnumerable<AddressModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-      if (!ModelState.IsValid)
+
+      if (_logger != null)
       {
-        if (_logger != null)
-        {
-          _logger.LogError("A bad request was sent for the addreses.");
-        }
-        return BadRequest(new ErrorObject("Invalid data sent"));
+        _logger.LogInformation($"Retrieved the addresses.");
       }
-      else
-      {
-        if (_logger != null)
-        {
-          _logger.LogInformation($"Retrieved the addresses.");
-        }
-        return Ok(await _unitOfWork.Address.SelectAsync());
-      }
-      
+      return Ok(await _unitOfWork.Address.SelectAsync());
+
     }
 
 
@@ -106,21 +95,20 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(AddressModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(int id)
     {
       AddressModel addressModel;
-      
+
       if (_logger != null)
       {
         _logger.LogDebug("Getting an address by its ID number...");
       }
       addressModel = await _unitOfWork.Address.SelectAsync(id);
-      
-      
-      if(addressModel is AddressModel theAddress)
+
+
+      if (addressModel is AddressModel theAddress)
       {
         if (_logger != null)
         {
@@ -142,18 +130,9 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="address"></param>
     /// <returns></returns>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(AddressModel), StatusCodes.Status200OK)]
     public async Task<IActionResult> Post(AddressModel address)
     {
-      if (!ModelState.IsValid)
-      {
-        if (_logger != null)
-        {
-          _logger.LogError("A bad request was sent for the address.");
-        }
-        return BadRequest(new ErrorObject("Invalid address data sent."));
-      }
       if (_logger != null)
       {
         _logger.LogDebug("Adding an address...");
@@ -174,20 +153,12 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="address"></param>
     /// <returns></returns>
     [HttpPut]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(AddressModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Put(AddressModel address)
     {
       try
       {
-        if (!ModelState.IsValid)
-        {
-          if (_logger != null)
-          {
-            _logger.LogError("A bad request was sent for the address.");
-          }
-          return BadRequest(new ErrorObject("Invalid address data sent."));
-        }
         if (_logger != null)
         {
           _logger.LogDebug("Updating an address...");
@@ -212,8 +183,8 @@ namespace RVTR.Account.WebApi.Controllers
           return NotFound(new ErrorObject($"Address with ID number {address.Id} does not exist."));
         }
       }
-      
+
     }
-     
+
   }
 }
