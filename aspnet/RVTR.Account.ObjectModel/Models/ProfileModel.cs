@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +14,7 @@ namespace RVTR.Account.ObjectModel.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        
+
         private string _email;
         public string Email
         {
@@ -29,57 +29,49 @@ namespace RVTR.Account.ObjectModel.Models
             }
         }
 
-<<<<<<< HEAD
-        private string _family;
-=======
         private string _familyname;
->>>>>>> 04b11969a93a3132793562777ab489aa08685024
         public string familyName
         {
-          get => _familyname;
-          set
-          {
-            if (string.IsNullOrEmpty(value))
+            get => _familyname;
+            set
             {
-              throw new ArgumentException("First name cannot be null.", nameof(value));
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("First name cannot be null.", nameof(value));
+                }
+                _familyname = value;
             }
-            _familyname = value;
-          }
         }
 
-        
-<<<<<<< HEAD
-        private string _given;
-=======
+
         private string _givenname;
->>>>>>> 04b11969a93a3132793562777ab489aa08685024
         public string givenName
         {
-          get => _givenname;
-          set
-          {
-            if (string.IsNullOrEmpty(value))
+            get => _givenname;
+            set
             {
-              throw new ArgumentException("Last name cannot be null.", nameof(value));
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Last name cannot be null.", nameof(value));
+                }
+                _givenname = value;
             }
-            _givenname = value;
-          }
         }
 
 
-        
+
         private string _phone;
         public string Phone
         {
-          get => _phone;
-          set
-          {
-            if (string.IsNullOrEmpty(value))
+            get => _phone;
+            set
             {
-              throw new ArgumentException("Phone number cannot be null.", nameof(value));
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Phone number cannot be null.", nameof(value));
+                }
+                _phone = value;
             }
-            _phone = value;
-          }
         }
         public string Type;
 
@@ -87,7 +79,7 @@ namespace RVTR.Account.ObjectModel.Models
         [Required]
         public int? AccountId { get; set; }
 
-        
+
         public AccountModel Account { get; set; }
 
         /// <summary>
