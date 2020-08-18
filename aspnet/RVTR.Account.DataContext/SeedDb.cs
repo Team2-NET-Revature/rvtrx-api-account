@@ -1,6 +1,7 @@
 ﻿using RVTR.Account.ObjectModel.Models;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace RVTR.Account.DataContext
 {
