@@ -29,32 +29,32 @@ namespace RVTR.Account.ObjectModel.Models
             }
         }
 
-        private string _family;
-        public string Family
+        private string _familyname;
+        public string familyName
         {
-          get => _family;
+          get => _familyname;
           set
           {
             if (string.IsNullOrEmpty(value))
             {
               throw new ArgumentException("First name cannot be null.", nameof(value));
             }
-            _family = value;
+            _familyname = value;
           }
         }
 
         
-        private string _given;
-        public string Given
+        private string _givenname;
+        public string givenName
         {
-          get => _given;
+          get => _givenname;
           set
           {
             if (string.IsNullOrEmpty(value))
             {
               throw new ArgumentException("Last name cannot be null.", nameof(value));
             }
-            _given = value;
+            _givenname = value;
           }
         }
 
@@ -73,6 +73,7 @@ namespace RVTR.Account.ObjectModel.Models
             _phone = value;
           }
         }
+        public string Type;
 
         [ForeignKey("Account")]
         [Required]

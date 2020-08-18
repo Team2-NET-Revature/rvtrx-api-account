@@ -18,7 +18,7 @@ namespace RVTR.Account.UnitTesting.Tests
       new object[]
       {
         new AccountModel() { Id = 1, Name = "name" },
-        new ProfileModel() { Id = 1, Email = "email", AccountId = 1 },
+        new ProfileModel() { Id = 1, Email = "email", familyName = "John", givenName="Johnny", AccountId = 1 },
         new AddressModel() { Id = 1, City = "Denver",  Country="USA", PostalCode="12345", StateProvince="CO", Street="street", AccountId = 1 },
       }
     };
