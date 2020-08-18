@@ -12,6 +12,7 @@ namespace RVTR.Account.DataContext
         public DbSet<AccountModel> Accounts { get; set; }
         public DbSet<ProfileModel> Profiles { get; set; }
         public DbSet<PaymentModel> Payments { get; set; }
+        public DbSet<AddressModel> Addresses { get; set; }
 
         public AccountContext(DbContextOptions<AccountContext> options) : base(options) { }
 

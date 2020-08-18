@@ -19,6 +19,7 @@ namespace RVTR.Account.UnitTesting.Tests
           familyName = "family",
           givenName = "given",
           Phone = "1234567890",
+          Type = "Adult",
           AccountId = 0,
           Account = null,
         }

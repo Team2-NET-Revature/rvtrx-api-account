@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RVTR.Account.ObjectModel.Models
 {
     /// <summary>
-    /// Represents the _Account_ model
+    /// Represents the _Account_ model 
     /// </summary>
     public class AccountModel : IValidatableObject
     {

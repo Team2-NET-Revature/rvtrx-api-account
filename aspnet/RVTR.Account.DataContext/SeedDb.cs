@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RVTR.Account.ObjectModel.Models;
-using System.Linq;
+﻿using RVTR.Account.ObjectModel.Models;
 using System.Collections.Generic;
 using System;
 
@@ -36,9 +34,10 @@ namespace RVTR.Account.DataContext
 								new PaymentModel()
 								{
 									Id = -1,
-									Expiry = new DateTime(),
-									Number = "xxxx-xxxx-xxxx-1234",
-									Name = "Visa"
+									cardExpirationDate = new DateTime(),
+									cardNumber = "xxxx-xxxx-xxxx-1234",
+									cardName = "Visa",
+									securityCode = "123"
 								}
 							},
 						Profiles = new List<ProfileModel>()
@@ -50,6 +49,7 @@ namespace RVTR.Account.DataContext
 								familyName = "Jones",
 								givenName = "Tom",
 								Phone = "1234567891",
+								Type = "Adult",
 								AccountId = -1
 							}
 						}

@@ -15,13 +15,14 @@ namespace RVTR.Account.UnitTesting.Tests
         new PaymentModel()
         {
           Id = 0,
-          Name = "name",
-          Number = "",
-          AccountId = 0,
+          cardName = "name",
+          cardNumber = "1234-1234-1234-1234",
+          securityCode = "111",
+         AccountId = 0,
           Account = null,
         }
       }
-    };
+    }; 
 
         [Theory]
         [MemberData(nameof(_payments))]
