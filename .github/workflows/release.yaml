@@ -134,13 +134,13 @@ jobs:
       - if: startsWith(github.ref, 'refs/heads/master')
         name: docker_push_head
         run: |
-          docker image tag account docker.pkg.github.com/rvtr/rvtr-api-account/account:master-aspnet-rest
-          docker image push docker.pkg.github.com/rvtr/rvtr-api-account/account:master-aspnet-rest
+          docker image tag account docker.pkg.github.com/rvtr/rvtr-svc-account/account:master-aspnet-rest
+          docker image push docker.pkg.github.com/rvtr/rvtr-svc-account/account:master-aspnet-rest
       - if: startsWith(github.ref, 'refs/tags/')
         name: docker_push
         run: |
-          docker image tag account docker.pkg.github.com/rvtr/rvtr-api-account/account:aspnet-rest
-          docker image push docker.pkg.github.com/rvtr/rvtr-api-account/account:aspnet-rest
+          docker image tag account docker.pkg.github.com/rvtr/rvtr-svc-account/account:aspnet-rest
+          docker image push docker.pkg.github.com/rvtr/rvtr-svc-account/account:aspnet-rest
       - name: docker_logout
         run: docker logout
 
@@ -160,6 +160,8 @@ jobs:
         run: az aks get-credentials --name rvtr-k8s-main --overwrite-existing --resource-group rvtr-grp-main
       - name: kubectl_apply
         run: kubectl apply --filename .kubernetes/
+      - name: kubectl_rollout
+        run: kubectl rollout restart --filename .kubernetes/k8s_deployment.yaml
       - name: az_logout
         run: az logout
 

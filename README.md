@@ -1,7 +1,7 @@
 # readme
 
-[![build status](https://github.com/RVTR/rvtr-api-account/workflows/build/badge.svg)](https://github.com/RVTR/rvtr-api-account/actions?query=workflow%3Abuild)
-[![release](https://github.com/RVTR/rvtr-api-account/workflows/release/badge.svg)](https://github.com/RVTR/rvtr-api-account/actions?query=workflow%3Arelease)
+[![build status](https://github.com/RVTR/rvtr-svc-account/workflows/build/badge.svg)](https://github.com/RVTR/rvtr-svc-account/actions?query=workflow%3Abuild)
+[![release](https://github.com/RVTR/rvtr-svc-account/workflows/release/badge.svg)](https://github.com/RVTR/rvtr-svc-account/actions?query=workflow%3Arelease)
 [![coverage status](https://sonarcloud.io/api/project_badges/measure?project=rvtr_api_account&metric=coverage)](https://sonarcloud.io/dashboard?id=rvtr_api_account)
 [![maintainability rating](https://sonarcloud.io/api/project_badges/measure?project=rvtr_api_account&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=rvtr_api_account)
 [![reliability rating](https://sonarcloud.io/api/project_badges/measure?project=rvtr_api_account&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=rvtr_api_account)
@@ -17,4 +17,4 @@ RVTR Servicehub Account API
 
 The project is made available under the terms of the [MIT License][license_mit].
 
-[license_mit]: https://github.com/rvtr/rvtr-api-account/blob/master/LICENSE 'mit license'
+[license_mit]: https://github.com/rvtr/rvtr-svc-account/blob/master/LICENSE 'mit license'
