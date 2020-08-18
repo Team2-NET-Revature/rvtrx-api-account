@@ -1,3 +1,6 @@
+# from repo root:
+# docker-compose -f .docker/docker_manifest.yaml -p account up --build
+
 networks:
   locally:
 
