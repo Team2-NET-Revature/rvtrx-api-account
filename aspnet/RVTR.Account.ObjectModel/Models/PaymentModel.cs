@@ -14,9 +14,23 @@ namespace RVTR.Account.ObjectModel.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public BankCardModel BankCard { get; set; }
+       public DateTime Expiry { get; set; }
 
-
+        
+        private string _number;
+        public string Number
+        {
+            get => _number;
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Credit card number cannot be null.", nameof(value));
+                }
+                _number = value;
+            }
+        }
+        
         private string _name;
         public string Name
         {
