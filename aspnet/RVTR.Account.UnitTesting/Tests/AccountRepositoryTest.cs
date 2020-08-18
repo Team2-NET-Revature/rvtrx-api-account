@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,8 @@ namespace RVTR.Account.UnitTesting.Tests
       new object[]
       {
         new AccountModel() { Id = 1, Name = "name" },
-        new ProfileModel() { Id = 1, Email = "email",  AccountId = 1 },
+        
+        
       }
     };
 
@@ -36,21 +38,14 @@ namespace RVTR.Account.UnitTesting.Tests
 
         using (var ctx = new AccountContext(_options))
         {
-          var lodgings = new Repository<AccountModel>(ctx);
+          var lodgings = new AccountRepository(ctx);
 
           var actual = await lodgings.SelectAsync();
 
           Assert.Empty(actual);
         }
 
-        using (var ctx = new AccountContext(_options))
-        {
-          var profiles = new Repository<ProfileModel>(ctx);
-
-          var actual = await profiles.SelectAsync();
-
-          Assert.Empty(actual);
-        }
+        
       }
       finally
       {
@@ -72,21 +67,13 @@ namespace RVTR.Account.UnitTesting.Tests
 
         using (var ctx = new AccountContext(_options))
         {
-          var lodgings = new Repository<AccountModel>(ctx);
+          var lodgings = new AccountRepository(ctx);
 
           var actual = await lodgings.SelectAsync(1);
 
           Assert.Null(actual);
         }
 
-        using (var ctx = new AccountContext(_options))
-        {
-          var profiles = new Repository<ProfileModel>(ctx);
-
-          var actual = await profiles.SelectAsync(1);
-
-          Assert.Null(actual);
-        }
       }
       finally
       {
