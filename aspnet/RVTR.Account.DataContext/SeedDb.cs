@@ -37,7 +37,7 @@ namespace RVTR.Account.DataContext
                                 {
                                     Id = -1,
                                     cardExpirationDate = new DateTime(),
-                                    cardNumber = "xxxx-xxxx-xxxx-1234",
+                                    cardNumber = "xxxx-1234",
                                     cardName = "Visa",
                                     securityCode = "123"
                                 }
