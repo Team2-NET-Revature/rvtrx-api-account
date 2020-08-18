@@ -26,8 +26,5 @@ namespace RVTR.Account.DataContext.Repositories
                                                                           .Include(x => x.Profiles)
                                                                           .Include(x => x.Payments)
                                                                           .ToListAsync();
-
-    
-
   }
 }
