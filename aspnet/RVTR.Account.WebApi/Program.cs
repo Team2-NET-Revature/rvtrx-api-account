@@ -95,7 +95,7 @@ namespace RVTR.Account.WebApi
         }
                 });
                 context.SaveChanges();
-            };
+            }
         }
     }
 }
