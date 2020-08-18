@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RVTR.Account.ObjectModel.Models;
 
-
 namespace RVTR.Account.DataContext
 {
   /// <summary>
@@ -16,7 +15,7 @@ namespace RVTR.Account.DataContext
 
     public AccountContext(DbContextOptions<AccountContext> options) : base(options) { }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+   protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.Entity<AccountModel>().HasKey(e => e.Id);
       modelBuilder.Entity<AddressModel>().HasKey(e => e.Id);
