@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RVTR.Account.ObjectModel.Models;
-using System.Linq;
+﻿using RVTR.Account.ObjectModel.Models;
 using System.Collections.Generic;
 using System;
 
