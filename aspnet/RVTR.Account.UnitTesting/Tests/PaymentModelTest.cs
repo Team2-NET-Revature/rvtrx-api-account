@@ -6,9 +6,9 @@ using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
-    public class PaymentModelTest
-    {
-        public static readonly IEnumerable<Object[]> _payments = new List<Object[]>
+  public class PaymentModelTest
+  {
+    public static readonly IEnumerable<Object[]> _payments = new List<Object[]>
     {
       new object[]
       {
@@ -22,25 +22,25 @@ namespace RVTR.Account.UnitTesting.Tests
           Account = null,
         }
       }
-    }; 
+    };
 
-        [Theory]
-        [MemberData(nameof(_payments))]
-        public void Test_Create_PaymentModel(PaymentModel payment)
-        {
-            var validationContext = new ValidationContext(payment);
-            var actual = Validator.TryValidateObject(payment, validationContext, null, true);
+    [Theory]
+    [MemberData(nameof(_payments))]
+    public void Test_Create_PaymentModel(PaymentModel payment)
+    {
+      var validationContext = new ValidationContext(payment);
+      var actual = Validator.TryValidateObject(payment, validationContext, null, true);
 
-            Assert.True(actual);
-        }
-
-        [Theory]
-        [MemberData(nameof(_payments))]
-        public void Test_Validate_PaymentModel(PaymentModel payment)
-        {
-            var validationContext = new ValidationContext(payment);
-
-            Assert.Empty(payment.Validate(validationContext));
-        }
+      Assert.True(actual);
     }
+
+    [Theory]
+    [MemberData(nameof(_payments))]
+    public void Test_Validate_PaymentModel(PaymentModel payment)
+    {
+      var validationContext = new ValidationContext(payment);
+
+      Assert.Empty(payment.Validate(validationContext));
+    }
+  }
 }

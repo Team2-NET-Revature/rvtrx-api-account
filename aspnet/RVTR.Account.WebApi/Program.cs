@@ -9,48 +9,48 @@ using RVTR.Account.ObjectModel.Models;
 
 namespace RVTR.Account.WebApi
 {
+  /// <summary>
+  ///
+  /// </summary>
+  public class Program
+  {
     /// <summary>
     ///
     /// </summary>
-    public class Program
+    /// <returns></returns>
+    public static async Task Main()
     {
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        public static async Task Main()
-        {
-            var host = CreateHostBuilder().Build();
+      var host = CreateHostBuilder().Build();
 
-            await CreateDbContextAsync(host);
-            await host.RunAsync();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        public static IHostBuilder CreateHostBuilder() =>
-          Host.CreateDefaultBuilder().ConfigureWebHostDefaults(webBuilder =>
-          {
-              webBuilder.UseStartup<Startup>();
-          });
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="host"></param>
-        /// <returns></returns>
-        public static async Task CreateDbContextAsync(IHost host)
-        {
-            using (var scope = host.Services.CreateScope())
-            {
-                var provider = scope.ServiceProvider;
-                var context = provider.GetRequiredService<AccountContext>();
-
-                await context.Database.EnsureCreatedAsync();
-                SeedDb.Seed(context);
-            }
-        }
+      await CreateDbContextAsync(host);
+      await host.RunAsync();
     }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
+    public static IHostBuilder CreateHostBuilder() =>
+      Host.CreateDefaultBuilder().ConfigureWebHostDefaults(webBuilder =>
+      {
+        webBuilder.UseStartup<Startup>();
+      });
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="host"></param>
+    /// <returns></returns>
+    public static async Task CreateDbContextAsync(IHost host)
+    {
+      using (var scope = host.Services.CreateScope())
+      {
+        var provider = scope.ServiceProvider;
+        var context = provider.GetRequiredService<AccountContext>();
+
+        await context.Database.EnsureCreatedAsync();
+        SeedDb.Seed(context);
+      }
+    }
+  }
 }

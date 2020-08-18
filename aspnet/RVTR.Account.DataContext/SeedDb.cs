@@ -5,33 +5,33 @@ using System.Linq;
 
 namespace RVTR.Account.DataContext
 {
-    /// <summary>
-    /// Represents the _Account_ context
-    /// </summary>
-    public static class SeedDb
+  /// <summary>
+  /// Represents the _Account_ context
+  /// </summary>
+  public static class SeedDb
+  {
+    public static void Seed(AccountContext ctx)
     {
-        public static void Seed(AccountContext ctx)
+      if (ctx.Accounts.Count() > 0)
+      {
+        ctx.Accounts.RemoveRange(ctx.Accounts);
+        ctx.SaveChanges();
+      }
+      ctx.Accounts.Add(new AccountModel
+      {
+        Id = -1,
+        Address = new AddressModel()
         {
-            if (ctx.Accounts.Count() > 0)
-            {
-                ctx.Accounts.RemoveRange(ctx.Accounts);
-                ctx.SaveChanges();
-            }
-            ctx.Accounts.Add(new AccountModel
-            {
-                Id = -1,
-                Address = new AddressModel()
-                {
-                    Id = -1,
-                    City = "City",
-                    Country = "Country",
-                    PostalCode = "21345",
-                    StateProvince = "Somewhere",
-                    Street = "123 elm street",
-                    AccountId = -1,
-                },
-                Name = "Name",
-                Payments = new List<PaymentModel>()
+          Id = -1,
+          City = "City",
+          Country = "Country",
+          PostalCode = "21345",
+          StateProvince = "Somewhere",
+          Street = "123 elm street",
+          AccountId = -1,
+        },
+        Name = "Name",
+        Payments = new List<PaymentModel>()
                             {
                                 new PaymentModel()
                                 {
@@ -42,7 +42,7 @@ namespace RVTR.Account.DataContext
                                     securityCode = "123"
                                 }
                             },
-                Profiles = new List<ProfileModel>()
+        Profiles = new List<ProfileModel>()
                         {
                             new ProfileModel()
                             {
@@ -55,8 +55,8 @@ namespace RVTR.Account.DataContext
                                 AccountId = -1
                             }
                         }
-            });
-            ctx.SaveChanges();
-        }
+      });
+      ctx.SaveChanges();
     }
+  }
 }

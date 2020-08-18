@@ -19,8 +19,8 @@ namespace RVTR.Account.UnitTesting.Tests
       new object[]
       {
         new AccountModel() { Id = 1, Name = "name" },
-        
-        
+
+
       }
     };
 
@@ -45,7 +45,7 @@ namespace RVTR.Account.UnitTesting.Tests
           Assert.Empty(actual);
         }
 
-        
+
       }
       finally
       {

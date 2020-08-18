@@ -10,7 +10,7 @@ namespace RVTR.Account.WebApi.ResponseObjects
     /// The _Validation Error_ constructor
     /// </summary>
     /// <param name="e"></param>
-    public ValidationError(ArgumentException e) : base (e.Message)
+    public ValidationError(ArgumentException e) : base(e.Message)
     {
     }
   }
