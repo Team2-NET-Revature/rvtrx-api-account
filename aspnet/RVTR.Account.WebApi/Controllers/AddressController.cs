@@ -112,22 +112,14 @@ namespace RVTR.Account.WebApi.Controllers
     public async Task<IActionResult> Get(int id)
     {
       AddressModel addressModel;
-      try
+      
+      if (_logger != null)
       {
-        if (_logger != null)
-        {
-          _logger.LogDebug("Getting an address by its ID number...");
-        }
-        addressModel = await _unitOfWork.Address.SelectAsync(id);
+        _logger.LogDebug("Getting an address by its ID number...");
       }
-      catch(ArgumentException e)
-      {
-        if (_logger != null)
-        {
-          _logger.LogError("A bad request was sent for the address.");
-        }
-        return BadRequest(new ValidationError(e));
-      }
+      addressModel = await _unitOfWork.Address.SelectAsync(id);
+      
+      
       if(addressModel is AddressModel theAddress)
       {
         if (_logger != null)

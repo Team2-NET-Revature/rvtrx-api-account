@@ -7,6 +7,7 @@ using RVTR.Account.ObjectModel.Models;
 using RVTR.Account.WebApi.ResponseObjects;
 using System;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace RVTR.Account.WebApi.Controllers
 {
@@ -39,8 +40,8 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
       try
@@ -73,7 +74,7 @@ namespace RVTR.Account.WebApi.Controllers
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<AccountModel>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get()
     {
@@ -101,29 +102,20 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(int id)
     {
       AccountModel accountModel;
-      try
+      
+      if(_logger != null)
       {
-        if(_logger != null)
-        {
-          _logger.LogDebug("Getting an account by its ID number...");
-        }
-        accountModel = await _unitOfWork.Account.SelectAsync(id);
+        _logger.LogDebug("Getting an account by its ID number...");
       }
-      catch (ArgumentException e)
-      {
-        if(_logger != null)
-        {
-          _logger.LogError("A bad request was sent for the account.");
-        }
-        return BadRequest(new ValidationError(e));
-
-      }
+      accountModel = await _unitOfWork.Account.SelectAsync(id);
+      
+     
       if (accountModel is AccountModel theAccount)
       {
         if (_logger != null)
@@ -200,7 +192,6 @@ namespace RVTR.Account.WebApi.Controllers
         await _unitOfWork.CommitAsync();
 
 
-        //return Accepted(account);
         if (_logger != null)
         {
           _logger.LogInformation($"Successfully updated the account {account}.");

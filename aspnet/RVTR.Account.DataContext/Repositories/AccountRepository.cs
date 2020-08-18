@@ -19,12 +19,14 @@ namespace RVTR.Account.DataContext.Repositories
                                                                           .Include(x => x.Address)
                                                                           .Include(x => x.Profiles)
                                                                           .Include(x => x.Payments)
+                                                                          .ThenInclude(y => y.BankCard)
                                                                           .FirstOrDefaultAsync();
 
     public override async Task<IEnumerable<AccountModel>> SelectAsync() => await _db
                                                                           .Include(x => x.Address)
                                                                           .Include(x => x.Profiles)
                                                                           .Include(x => x.Payments)
+                                                                          .ThenInclude(y => y.BankCard)
                                                                           .ToListAsync();
 
     
