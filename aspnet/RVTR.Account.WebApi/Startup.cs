@@ -50,16 +50,16 @@ namespace RVTR.Account.WebApi
       {
         cors.AddPolicy("Public", policy =>
         {
-      policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-    });
+          policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+        });
       });
 
       services.AddDbContext<AccountContext>(options =>
       {
         options.UseNpgsql(_configuration.GetConnectionString("pgsql"), options =>
         {
-      options.EnableRetryOnFailure(3);
-    });
+          options.EnableRetryOnFailure(3);
+        });
       });
 
       services.AddScoped<ClientZipkinMiddleware>();
