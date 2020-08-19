@@ -19,8 +19,6 @@ namespace RVTR.Account.UnitTesting.Tests
       new object[]
       {
         new AccountModel() { Id = 1, Name = "name" },
-
-
       }
     };
 
@@ -45,8 +43,8 @@ namespace RVTR.Account.UnitTesting.Tests
           Assert.Empty(actual);
         }
 
-
       }
+
       finally
       {
         await _connection.CloseAsync();
@@ -80,8 +78,6 @@ namespace RVTR.Account.UnitTesting.Tests
         await _connection.CloseAsync();
       }
     }
-
-
 
     public AccountRepositoryTest()
     {

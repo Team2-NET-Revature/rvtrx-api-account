@@ -84,8 +84,8 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_404_Response()
     {
-
       var result = await _controller.Get(-100);
+
       Assert.IsType<Microsoft.AspNetCore.Mvc.NotFoundObjectResult>(result);
     }
 

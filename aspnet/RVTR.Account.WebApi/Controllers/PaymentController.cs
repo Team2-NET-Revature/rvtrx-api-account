@@ -140,7 +140,6 @@ namespace RVTR.Account.WebApi.Controllers
 
     }
 
-
     /// <summary>
     /// Updates a payment
     /// </summary>

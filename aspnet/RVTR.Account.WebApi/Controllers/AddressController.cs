@@ -66,10 +66,7 @@ namespace RVTR.Account.WebApi.Controllers
         }
         return NotFound(new ErrorObject($"Address with ID number {id} does not exist."));
       }
-
-
     }
-
 
     /// <summary>
     /// Get all addresses
@@ -87,7 +84,6 @@ namespace RVTR.Account.WebApi.Controllers
       return Ok(await _unitOfWork.Address.SelectAsync());
 
     }
-
 
     /// <summary>
     /// Get a user's address with address ID number
@@ -122,7 +118,6 @@ namespace RVTR.Account.WebApi.Controllers
       }
       return NotFound(new ErrorObject($"Address with ID number {id} does not exist."));
     }
-
 
     /// <summary>
     /// Add an address to an account

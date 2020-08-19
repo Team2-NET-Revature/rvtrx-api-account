@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RVTR.Account.ObjectModel.Models
 {
   /// <summary>
-  /// Represents the _Account_ model 
+  /// Represents the _Account_ model
   /// </summary>
   public class AccountModel : IValidatableObject
   {
@@ -14,9 +14,7 @@ namespace RVTR.Account.ObjectModel.Models
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-
     public AddressModel Address { get; set; }
-
 
     private string _name;
     public string Name
@@ -33,7 +31,6 @@ namespace RVTR.Account.ObjectModel.Models
     }
 
     public IEnumerable<PaymentModel> Payments { get; set; }
-
 
     public IEnumerable<ProfileModel> Profiles { get; set; }
 

@@ -18,7 +18,7 @@ namespace RVTR.Account.UnitTesting.Tests
           cardName = "name",
           cardNumber = "1234-1234-1234-1234",
           securityCode = "111",
-         AccountId = 0,
+          AccountId = 0,
           Account = null,
         }
       }
