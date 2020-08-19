@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,6 +47,7 @@ namespace RVTR.Account.WebApi
         var context = provider.GetRequiredService<AccountContext>();
 
         await context.Database.EnsureCreatedAsync();
+        await SeedDb.Seed(context);
       }
     }
   }

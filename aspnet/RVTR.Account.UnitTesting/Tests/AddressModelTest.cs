@@ -19,7 +19,9 @@ namespace RVTR.Account.UnitTesting.Tests
           Country = "country",
           PostalCode = "postalcode",
           StateProvince = "stateprovince",
-          Street = "street"
+          Street = "street",
+          AccountId = 0,
+          Account = null,
         }
       }
     };

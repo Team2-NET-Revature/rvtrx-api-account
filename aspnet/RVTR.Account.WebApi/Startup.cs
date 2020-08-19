@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -64,6 +66,9 @@ namespace RVTR.Account.WebApi
       services.AddScoped<UnitOfWork>();
       services.AddSwaggerGen();
       services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ClientSwaggerOptions>();
+      services.AddControllers().AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+      );
       services.AddVersionedApiExplorer(options =>
       {
         options.GroupNameFormat = "VV";
@@ -72,13 +77,16 @@ namespace RVTR.Account.WebApi
     }
 
     /// <summary>
-    ///
+    /// 
     /// </summary>
     /// <param name="descriptionProvider"></param>
     /// <param name="applicationBuilder"></param>
     /// <param name="hostEnvironment"></param>
-    public void Configure(IApiVersionDescriptionProvider descriptionProvider, IApplicationBuilder applicationBuilder, IWebHostEnvironment hostEnvironment)
+    /// <param name="loggerFactory"></param>
+    public void Configure(IApiVersionDescriptionProvider descriptionProvider, IApplicationBuilder applicationBuilder, IWebHostEnvironment hostEnvironment, ILoggerFactory loggerFactory)
     {
+      loggerFactory.AddFile("Logs/ts-{Date}.txt");
+
       if (hostEnvironment.IsDevelopment())
       {
         applicationBuilder.UseDeveloperExceptionPage();

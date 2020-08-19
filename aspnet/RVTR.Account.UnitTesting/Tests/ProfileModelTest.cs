@@ -16,10 +16,12 @@ namespace RVTR.Account.UnitTesting.Tests
         {
           Id = 0,
           Email = "email@email.com",
-          Name = new NameModel(),
+          familyName = "family",
+          givenName = "given",
           Phone = "1234567890",
-          AccountId = null,
-          Account = null
+          Type = "Adult",
+          AccountId = 0,
+          Account = null,
         }
       }
     };

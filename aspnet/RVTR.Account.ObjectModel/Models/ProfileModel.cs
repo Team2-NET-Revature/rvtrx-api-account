@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RVTR.Account.ObjectModel.Models
@@ -12,19 +12,41 @@ namespace RVTR.Account.ObjectModel.Models
 
     public string Email { get; set; }
 
-    public NameModel Name { get; set; }
+    public string familyName { get; set; }
+
+    public string givenName { get; set; }
 
     public string Phone { get; set; }
 
+    public string Type { get; set; }
+
     public int? AccountId { get; set; }
 
-    public virtual AccountModel Account { get; set; }
-
+    public AccountModel Account { get; set; }
+     
     /// <summary>
     /// Represents the _Profile_ `Validate` method
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+      if (string.IsNullOrEmpty(Email))
+      {
+        yield return new ValidationResult("Email cannot be null.");
+      }
+      if (string.IsNullOrEmpty(familyName))
+      {
+        yield return new ValidationResult("familyName cannot be null.");
+      }
+      if (string.IsNullOrEmpty(givenName))
+      {
+        yield return new ValidationResult("givenName cannot be null.");
+      }
+      if (string.IsNullOrEmpty(Phone))
+      {
+        yield return new ValidationResult("Phone cannot be null.");
+      }
+    }
   }
 }

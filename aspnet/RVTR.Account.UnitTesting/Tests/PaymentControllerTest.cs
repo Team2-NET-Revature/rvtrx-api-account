@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,33 +13,33 @@ using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
-  public class AccountControllerTest
+  public class PaymentControllerTest
   {
     private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
     private static readonly DbContextOptions<AccountContext> _options = new DbContextOptionsBuilder<AccountContext>().UseSqlite(_connection).Options;
-    private readonly AccountController _controller;
-    private readonly ILogger<AccountController> _logger;
+    private readonly PaymentController _controller;
+    private readonly ILogger<PaymentController> _logger;
     private readonly UnitOfWork _unitOfWork;
 
-    public AccountControllerTest()
+    public PaymentControllerTest()
     {
       var contextMock = new Mock<AccountContext>(_options);
-      var loggerMock = new Mock<ILogger<AccountController>>();
-      var repositoryMock = new Mock<AccountRepository>(new AccountContext(_options));
+      var loggerMock = new Mock<ILogger<PaymentController>>();
+      var repositoryMock = new Mock<Repository<PaymentModel>>(new AccountContext(_options));
       var unitOfWorkMock = new Mock<UnitOfWork>(contextMock.Object);
 
       repositoryMock.Setup(m => m.DeleteAsync(0)).Throws(new Exception());
       repositoryMock.Setup(m => m.DeleteAsync(1)).Returns(Task.FromResult(1));
-      repositoryMock.Setup(m => m.InsertAsync(It.IsAny<AccountModel>())).Returns(Task.FromResult<AccountModel>(null));
-      repositoryMock.Setup(m => m.SelectAsync()).Returns(Task.FromResult<IEnumerable<AccountModel>>(null));
+      repositoryMock.Setup(m => m.InsertAsync(It.IsAny<PaymentModel>())).Returns(Task.FromResult<PaymentModel>(null));
+      repositoryMock.Setup(m => m.SelectAsync()).Returns(Task.FromResult<IEnumerable<PaymentModel>>(null));
       repositoryMock.Setup(m => m.SelectAsync(0)).Throws(new Exception());
-      repositoryMock.Setup(m => m.SelectAsync(1)).Returns(Task.FromResult<AccountModel>(null));
-      repositoryMock.Setup(m => m.Update(It.IsAny<AccountModel>()));
-      unitOfWorkMock.Setup(m => m.Account).Returns((AccountRepository)repositoryMock.Object);
+      repositoryMock.Setup(m => m.SelectAsync(1)).Returns(Task.FromResult<PaymentModel>(null));
+      repositoryMock.Setup(m => m.Update(It.IsAny<PaymentModel>()));
+      unitOfWorkMock.Setup(m => m.Payment).Returns(repositoryMock.Object);
 
       _logger = loggerMock.Object;
       _unitOfWork = unitOfWorkMock.Object;
-      _controller = new AccountController(_logger, _unitOfWork);
+      _controller = new PaymentController(_logger, _unitOfWork);
     }
 
     [Fact]
@@ -68,7 +67,7 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_Controller_Post()
     {
-      var resultPass = await _controller.Post(new AccountModel());
+      var resultPass = await _controller.Post(new PaymentModel());
 
       Assert.NotNull(resultPass);
     }
@@ -76,17 +75,9 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_Controller_Put()
     {
-      var resultPass = await _controller.Put(new AccountModel());
+      var resultPass = await _controller.Put(new PaymentModel());
 
       Assert.NotNull(resultPass);
-    }
-    
-    [Fact]
-    public async void Test_404_Response()
-    {
-      var result = await _controller.Get(-100);
-
-      Assert.IsType<NotFoundObjectResult>(result);
     }
   }
 }

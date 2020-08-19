@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RVTR.Account.ObjectModel.Models;
 
 namespace RVTR.Account.DataContext
@@ -10,6 +10,8 @@ namespace RVTR.Account.DataContext
   {
     public DbSet<AccountModel> Accounts { get; set; }
     public DbSet<ProfileModel> Profiles { get; set; }
+    public DbSet<PaymentModel> Payments { get; set; }
+    public DbSet<AddressModel> Addresses { get; set; }
 
     public AccountContext(DbContextOptions<AccountContext> options) : base(options) { }
 
@@ -17,8 +19,6 @@ namespace RVTR.Account.DataContext
     {
       modelBuilder.Entity<AccountModel>().HasKey(e => e.Id);
       modelBuilder.Entity<AddressModel>().HasKey(e => e.Id);
-      modelBuilder.Entity<BankCardModel>().HasKey(e => e.Id);
-      modelBuilder.Entity<NameModel>().HasKey(e => e.Id);
       modelBuilder.Entity<PaymentModel>().HasKey(e => e.Id);
       modelBuilder.Entity<ProfileModel>().HasKey(e => e.Id);
     }
