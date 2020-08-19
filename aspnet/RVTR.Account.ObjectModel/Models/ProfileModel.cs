@@ -10,58 +10,17 @@ namespace RVTR.Account.ObjectModel.Models
   {
     public int Id { get; set; }
 
-    private string _email;
-    public string Email
-    {
-      get => _email;
-      set
-      {
-        _email = value;
-      }
-    }
+    public string Email { get; set; }
 
-    private string _familyName;
-    public string familyName
-    {
-      get => _familyName;
-      set
-      {
-        _familyName = value;
-      }
-    }
+    public string familyName { get; set; }
 
-    private string _givenName;
-    public string givenName
-    {
-      get => _givenName;
-      set
-      {
-        _givenName = value;
-      }
-    }
+    public string givenName { get; set; }
 
-    private string _phone;
-    public string Phone
-    {
-      get => _phone;
-      set
-      {
-        _phone = value;
-      }
-    }
+    public string Phone { get; set; }
 
-    private string _type;
-    public string Type
-    {
-      get => _type;
-      set
-      {
-        _type = value;
-      }
-    }
+    public string Type { get; set; }
 
     public int? AccountId { get; set; }
-
 
     public AccountModel Account { get; set; }
      

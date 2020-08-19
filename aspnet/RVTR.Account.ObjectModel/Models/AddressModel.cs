@@ -10,55 +10,15 @@ namespace RVTR.Account.ObjectModel.Models
   {
     public int Id { get; set; }
 
-    private string _city;
-    public string City
-    {
-      get => _city;
-      set
-      {
-        _city = value;
-      }
-    }
+    public string City { get; set; }
 
-    private string _country;
-    public string Country
-    {
-      get => _country;
-      set
-      {
-        _country = value;
-      }
-    }
+    public string Country { get; set; }
 
-    private string _postalcode;
-    public string PostalCode
-    {
-      get => _postalcode;
-      set
-      {
-        _postalcode = value;
-      }
-    }
+    public string PostalCode { get; set; }
 
-    private string _stateprovince;
-    public string StateProvince
-    {
-      get => _stateprovince;
-      set
-      {
-        _stateprovince = value;
-      }
-    }
+    public string StateProvince { get; set; }
 
-    private string _street;
-    public string Street
-    {
-      get => _street;
-      set
-      {
-        _street = value;
-      }
-    }
+    public string Street { get; set; }
 
     public int AccountId { get; set; }
 

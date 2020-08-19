@@ -12,15 +12,7 @@ namespace RVTR.Account.ObjectModel.Models
 
     public AddressModel Address { get; set; }
 
-    private string _name;
-    public string Name
-    {
-      get => _name;
-      set
-      {
-        _name = value;
-      }
-    }
+    public string Name { get; set; }
 
     public IEnumerable<PaymentModel> Payments { get; set; }
 

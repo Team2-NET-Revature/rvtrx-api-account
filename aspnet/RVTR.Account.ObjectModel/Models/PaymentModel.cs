@@ -13,34 +13,11 @@ namespace RVTR.Account.ObjectModel.Models
 
     public DateTime cardExpirationDate { get; set; }
 
-    private string _cardNumber;
-    public string cardNumber
-    {
-      get => _cardNumber;
-      set
-      {
-        _cardNumber = value;
-      }
-    }
-    private string _securitycode;
-    public string securityCode
-    {
-      get => _securitycode;
-      set
-      {
-        _securitycode = value;
-      }
-    }
+    public string cardNumber { get; set; }
 
-    private string _cardname;
-    public string cardName
-    {
-      get => _cardname;
-      set
-      {
-        _cardname = value;
-      }
-    }
+    public string securityCode { get; set; }
+
+    public string cardName { get; set; }
 
     public int AccountId { get; set; }
     public AccountModel Account { get; set; }
