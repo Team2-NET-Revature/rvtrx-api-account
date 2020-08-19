@@ -6,7 +6,7 @@ using RVTR.Account.ObjectModel.Models;
 namespace RVTR.Account.DataContext.Repositories
 {
   /// <summary>
-  /// Represents the _Repository_ generic
+  /// Represents the _Account_Repository_
   /// </summary>
   /// <typeparam name="TEntity"></typeparam>
   public class AccountRepository : Repository<AccountModel>

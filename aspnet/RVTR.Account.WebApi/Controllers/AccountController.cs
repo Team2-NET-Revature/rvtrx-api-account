@@ -56,7 +56,7 @@ namespace RVTR.Account.WebApi.Controllers
         {
           _logger.LogInformation($"Deleted the account.");
         }
-        return Ok(MessageObject.Success);
+        return Accepted(MessageObject.Success);
       }
       catch
       {
@@ -125,23 +125,23 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="account"></param>
     /// <returns></returns>
     [HttpPost]
-    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Post([FromBody] AccountModel account)
     {
-
-      if (_logger != null)
       {
-        _logger.LogDebug("Adding an account...");
-      }
-      await _unitOfWork.Account.InsertAsync(account);
-      await _unitOfWork.CommitAsync();
+        if (_logger != null)
+        {
+          _logger.LogDebug("Adding an account...");
+        }
+        await _unitOfWork.Account.InsertAsync(account);
+        await _unitOfWork.CommitAsync();
 
-      if (_logger != null)
-      {
-        _logger.LogInformation($"Successfully added the account {account}.");
+        if (_logger != null)
+        {
+          _logger.LogInformation($"Successfully added the account {account}.");
+        }
+        return Accepted(MessageObject.Success);
       }
-      return Ok(MessageObject.Success);
-
     }
 
     /// <summary>

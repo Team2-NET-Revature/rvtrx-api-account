@@ -88,7 +88,5 @@ namespace RVTR.Account.UnitTesting.Tests
 
       Assert.IsType<Microsoft.AspNetCore.Mvc.NotFoundObjectResult>(result);
     }
-
-
   }
 }
