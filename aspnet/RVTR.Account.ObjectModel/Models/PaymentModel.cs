@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RVTR.Account.ObjectModel.Models
 {
@@ -10,27 +9,28 @@ namespace RVTR.Account.ObjectModel.Models
   /// </summary>
   public class PaymentModel : IValidatableObject
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public DateTime cardExpirationDate { get; set; }
 
-
-    private string _cardnumber;
+    private string _cardNumber;
     public string cardNumber
     {
-      get => _cardnumber;
+      get => _cardNumber;
       set
       {
-        if (string.IsNullOrEmpty(value))
-        {
-          throw new ArgumentException("Credit card number cannot be null.", nameof(value));
-        }
-        _cardnumber = value;
+        _cardNumber = value;
       }
     }
-    public string securityCode;
+    private string _securitycode;
+    public string securityCode
+    {
+      get => _securitycode;
+      set
+      {
+        _securitycode = value;
+      }
+    }
 
     private string _cardname;
     public string cardName
@@ -38,18 +38,11 @@ namespace RVTR.Account.ObjectModel.Models
       get => _cardname;
       set
       {
-        if (string.IsNullOrEmpty(value))
-        {
-          throw new ArgumentException("Bank name cannot be null.", nameof(value));
-        }
         _cardname = value;
       }
     }
 
-    [ForeignKey("Account")]
-    [Required]
-    public int? AccountId { get; set; }
-
+    public int AccountId { get; set; }
     public AccountModel Account { get; set; }
 
     /// <summary>
@@ -57,6 +50,16 @@ namespace RVTR.Account.ObjectModel.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+      if (string.IsNullOrEmpty(cardName))
+      {
+        yield return new ValidationResult("cardName cannot be null.");
+      }
+      if (string.IsNullOrEmpty(cardNumber))
+      {
+        yield return new ValidationResult("cardNumber cannot be null.");
+      }
+    }
   }
 }

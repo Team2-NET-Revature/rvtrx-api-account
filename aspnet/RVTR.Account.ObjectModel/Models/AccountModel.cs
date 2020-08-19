@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RVTR.Account.ObjectModel.Models
 {
@@ -10,8 +8,6 @@ namespace RVTR.Account.ObjectModel.Models
   /// </summary>
   public class AccountModel : IValidatableObject
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public AddressModel Address { get; set; }
@@ -22,10 +18,6 @@ namespace RVTR.Account.ObjectModel.Models
       get => _name;
       set
       {
-        if (string.IsNullOrEmpty(value))
-        {
-          throw new ArgumentException("Account name cannot be null.", nameof(value));
-        }
         _name = value;
       }
     }
@@ -39,6 +31,12 @@ namespace RVTR.Account.ObjectModel.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+      if (string.IsNullOrEmpty(Name))
+      {
+        yield return new ValidationResult("Account name cannot be null.");
+      }
+    }
   }
 }

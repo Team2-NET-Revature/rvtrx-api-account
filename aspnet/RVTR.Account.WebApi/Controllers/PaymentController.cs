@@ -39,30 +39,25 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id}")]
-    [ProducesResponseType(typeof(PaymentModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
       try
       {
-        if (_logger != null)
-        {
-          _logger.LogDebug("Deleting a payment by its ID number...");
-        }
+        _logger.LogDebug("Deleting a payment by its ID number...");
+        
         await _unitOfWork.Payment.DeleteAsync(id);
         await _unitOfWork.CommitAsync();
-        if (_logger != null)
-        {
-          _logger.LogInformation($"Deleted the payment.");
-        }
+       
+        _logger.LogInformation($"Deleted the payment with ID number {id}.");
+        
         return Ok(MessageObject.Success);
       }
       catch
       {
-        if (_logger != null)
-        {
-          _logger.LogWarning($"Payment with ID number {id} does not exist.");
-        }
+        _logger.LogWarning($"Payment with ID number {id} does not exist.");
+        
         return NotFound(new ErrorObject($"Payment with ID number {id} does not exist"));
       }
 
@@ -76,10 +71,8 @@ namespace RVTR.Account.WebApi.Controllers
     [ProducesResponseType(typeof(IEnumerable<PaymentModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-      if (_logger != null)
-      {
-        _logger.LogInformation($"Retrieved the payments.");
-      }
+      _logger.LogInformation($"Retrieved the payments.");
+      
       return Ok(await _unitOfWork.Payment.SelectAsync());
     }
 
@@ -94,25 +87,21 @@ namespace RVTR.Account.WebApi.Controllers
     public async Task<IActionResult> Get(int id)
     {
       PaymentModel paymentModel;
-      if (_logger != null)
-      {
-        _logger.LogDebug("Getting a payment by its ID number...");
-      }
+      
+      _logger.LogDebug("Getting a payment by its ID number...");
+      
       paymentModel = await _unitOfWork.Payment.SelectAsync(id);
 
 
       if (paymentModel is PaymentModel thePayment)
       {
-        if (_logger != null)
-        {
-          _logger.LogInformation($"Retrieved the payment with ID: {id}.");
-        }
+        _logger.LogInformation($"Retrieved the payment with ID: {id}.");
+        
         return Ok(thePayment);
       }
-      if (_logger != null)
-      {
-        _logger.LogWarning($"Payment with ID number {id} does not exist.");
-      }
+      
+      _logger.LogWarning($"Payment with ID number {id} does not exist.");
+      
       return NotFound(new ErrorObject($"Payment with ID number {id} does not exist."));
     }
 
@@ -122,21 +111,17 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="payment"></param>
     /// <returns></returns>
     [HttpPost]
-    [ProducesResponseType(typeof(PaymentModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Post(PaymentModel payment)
     {
-      if (_logger != null)
-      {
-        _logger.LogDebug("Adding a payment...");
-      }
+      _logger.LogDebug("Adding a payment...");
+      
       await _unitOfWork.Payment.InsertAsync(payment);
       await _unitOfWork.CommitAsync();
 
-      if (_logger != null)
-      {
-        _logger.LogInformation($"Successfully added the payment {payment}.");
-      }
-      return Ok(MessageObject.Success);
+      _logger.LogInformation($"Successfully added the payment {payment}.");
+      
+      return Accepted(payment);
 
     }
 
@@ -146,33 +131,27 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="payment"></param>
     /// <returns></returns>
     [HttpPut]
-    [ProducesResponseType(typeof(PaymentModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Put(PaymentModel payment)
     {
       try
       {
-        if (_logger != null)
-        {
-          _logger.LogDebug("Updating a payment...");
-        }
+        _logger.LogDebug("Updating a payment...");
+        
         _unitOfWork.Payment.Update(payment);
         await _unitOfWork.CommitAsync();
 
 
-        if (_logger != null)
-        {
-          _logger.LogInformation($"Successfully updated the payment {payment}.");
-        }
-        return Ok(MessageObject.Success);
+        _logger.LogInformation($"Successfully updated the payment {payment}.");
+        
+        return Accepted(payment);
       }
 
       catch
       {
-        if (_logger != null)
-        {
-          _logger.LogWarning($"This payment does not exist.");
-        }
+        _logger.LogWarning($"This payment does not exist.");
+        
         return NotFound(new ErrorObject($"Payment with ID number {payment.Id} does not exist"));
       }
     }
