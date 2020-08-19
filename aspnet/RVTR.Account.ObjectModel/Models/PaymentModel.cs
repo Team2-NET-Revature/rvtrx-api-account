@@ -10,8 +10,7 @@ namespace RVTR.Account.ObjectModel.Models
   /// </summary>
   public class PaymentModel : IValidatableObject
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    
     public int Id { get; set; }
 
     public DateTime cardExpirationDate { get; set; }
@@ -39,16 +38,14 @@ namespace RVTR.Account.ObjectModel.Models
       set
       {
         if (string.IsNullOrEmpty(value))
-        {
+        { 
           throw new ArgumentException("Bank name cannot be null.", nameof(value));
         }
         _cardname = value;
       }
     }
 
-    [ForeignKey("Account")]
-    [Required]
-    public int? AccountId { get; set; }
+    public int AccountId { get; set; }
 
     public AccountModel Account { get; set; }
 

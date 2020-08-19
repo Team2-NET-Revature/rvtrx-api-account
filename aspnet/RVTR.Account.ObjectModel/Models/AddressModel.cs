@@ -10,8 +10,7 @@ namespace RVTR.Account.ObjectModel.Models
   /// </summary>
   public class AddressModel : IValidatableObject
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    
     public int Id { get; set; }
 
 
@@ -89,9 +88,7 @@ namespace RVTR.Account.ObjectModel.Models
       }
     }
 
-    [ForeignKey("Account")]
-    [Required]
-    public int? AccountId { get; set; }
+    public int AccountId { get; set; }
 
 
     public AccountModel Account { get; set; }

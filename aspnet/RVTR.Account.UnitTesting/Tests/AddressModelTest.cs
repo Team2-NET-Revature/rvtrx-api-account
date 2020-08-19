@@ -9,7 +9,7 @@ namespace RVTR.Account.UnitTesting.Tests
   public class AddressModelTest
   {
     public static readonly IEnumerable<Object[]> _addresses = new List<Object[]>
-    {
+  {
       new object[]
       {
         new AddressModel()
