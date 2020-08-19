@@ -39,31 +39,27 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id}")]
-    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
       try
       {
-        if (_logger != null)
-        {
-          _logger.LogDebug("Deleting an account by its ID number...");
-        }
+        
+        _logger.LogDebug("Deleting an account by its ID number...");
+        
         await _unitOfWork.Account.DeleteAsync(id);
         await _unitOfWork.CommitAsync();
 
-        if (_logger != null)
-        {
-          _logger.LogInformation($"Deleted the account.");
-        }
+        
+        _logger.LogInformation($"Deleted the account with ID number {id}.");
+        
         return Ok(MessageObject.Success);
       }
       catch
       {
-        if (_logger != null)
-        {
-          _logger.LogWarning($"Account with ID number {id} does not exist.");
-        }
+        _logger.LogWarning($"Account with ID number {id} does not exist.");
+        
         return NotFound(new ErrorObject($"Account with ID number {id} does not exist"));
       }
     }
@@ -76,11 +72,8 @@ namespace RVTR.Account.WebApi.Controllers
     [ProducesResponseType(typeof(IEnumerable<AccountModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-
-      if (_logger != null)
-      {
-        _logger.LogInformation($"Retrieved the accounts.");
-      }
+      _logger.LogInformation($"Retrieved the accounts.");
+      
       return Ok(await _unitOfWork.Account.SelectAsync());
 
     }
@@ -97,25 +90,20 @@ namespace RVTR.Account.WebApi.Controllers
     {
       AccountModel accountModel;
 
-      if (_logger != null)
-      {
-        _logger.LogDebug("Getting an account by its ID number...");
-      }
+      _logger.LogDebug("Getting an account by its ID number...");
+      
       accountModel = await _unitOfWork.Account.SelectAsync(id);
 
 
       if (accountModel is AccountModel theAccount)
       {
-        if (_logger != null)
-        {
-          _logger.LogInformation($"Retrieved the account with ID: {id}.");
-        }
+        _logger.LogInformation($"Retrieved the account with ID: {id}.");
+        
         return Ok(theAccount);
       }
-      if (_logger != null)
-      {
-        _logger.LogWarning($"Account with ID number {id} does not exist.");
-      }
+      
+      _logger.LogWarning($"Account with ID number {id} does not exist.");
+      
       return NotFound(new ErrorObject($"Account with ID number {id} does not exist."));
     }
 
@@ -125,23 +113,19 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="account"></param>
     /// <returns></returns>
     [HttpPost]
-    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Post([FromBody] AccountModel account)
     {
-
-      if (_logger != null)
-      {
-        _logger.LogDebug("Adding an account...");
-      }
+      
+      _logger.LogDebug("Adding an account...");
+        
       await _unitOfWork.Account.InsertAsync(account);
       await _unitOfWork.CommitAsync();
 
-      if (_logger != null)
-      {
-        _logger.LogInformation($"Successfully added the account {account}.");
-      }
-      return Ok(MessageObject.Success);
-
+      _logger.LogInformation($"Successfully added the account {account}.");
+      
+      return Accepted(account);
+      
     }
 
     /// <summary>
@@ -150,33 +134,26 @@ namespace RVTR.Account.WebApi.Controllers
     /// <param name="account"></param>
     /// <returns></returns>
     [HttpPut]
-    [ProducesResponseType(typeof(AccountModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Put([FromBody] AccountModel account)
     {
       try
       {
-        if (_logger != null)
-        {
-          _logger.LogDebug("Updating an account...");
-        }
+        _logger.LogDebug("Updating an account...");
+        
         _unitOfWork.Account.Update(account);
         await _unitOfWork.CommitAsync();
 
-
-        if (_logger != null)
-        {
-          _logger.LogInformation($"Successfully updated the account {account}.");
-        }
-        return Ok(MessageObject.Success);
+        _logger.LogInformation($"Successfully updated the account {account}.");
+        
+        return Accepted(account);
       }
 
       catch
       {
-        if (_logger != null)
-        {
-          _logger.LogWarning($"This account does not exist.");
-        }
+        _logger.LogWarning($"This account does not exist.");
+        
         return NotFound(new ErrorObject($"Account with ID number {account.Id} does not exist"));
       }
 
