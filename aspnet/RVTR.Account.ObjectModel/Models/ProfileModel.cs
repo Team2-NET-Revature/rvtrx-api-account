@@ -10,10 +10,8 @@ namespace RVTR.Account.ObjectModel.Models
   /// </summary>
   public class ProfileModel : IValidatableObject
   {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    
     public int Id { get; set; }
-
 
     private string _email;
     public string Email
@@ -43,7 +41,6 @@ namespace RVTR.Account.ObjectModel.Models
       }
     }
 
-
     private string _givenname;
     public string givenName
     {
@@ -57,8 +54,6 @@ namespace RVTR.Account.ObjectModel.Models
         _givenname = value;
       }
     }
-
-
 
     private string _phone;
     public string Phone
@@ -75,10 +70,7 @@ namespace RVTR.Account.ObjectModel.Models
     }
     public string Type;
 
-    [ForeignKey("Account")]
-    [Required]
-    public int? AccountId { get; set; }
-
+    public int AccountId { get; set; }
 
     public AccountModel Account { get; set; }
 
