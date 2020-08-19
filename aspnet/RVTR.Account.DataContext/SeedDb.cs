@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RVTR.Account.DataContext
 {
   /// <summary>
-  /// Represents the _Account_ context
+  /// Represents the _Seed Database_
   /// </summary>
   public static class SeedDb
   {

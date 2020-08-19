@@ -39,7 +39,7 @@ namespace RVTR.Account.ObjectModel.Models
       set
       {
         if (string.IsNullOrEmpty(value))
-        {
+        { 
           throw new ArgumentException("Bank name cannot be null.", nameof(value));
         }
         _cardname = value;
