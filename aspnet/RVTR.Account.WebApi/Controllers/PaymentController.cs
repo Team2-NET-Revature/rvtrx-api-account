@@ -124,7 +124,7 @@ namespace RVTR.Account.WebApi.Controllers
     [HttpPost]
     [ProducesResponseType(typeof(PaymentModel), StatusCodes.Status200OK)]
     public async Task<IActionResult> Post(PaymentModel payment)
-    { 
+    {
       if (_logger != null)
       {
         _logger.LogDebug("Adding a payment...");
@@ -139,7 +139,6 @@ namespace RVTR.Account.WebApi.Controllers
       return Ok(MessageObject.Success);
 
     }
-
 
     /// <summary>
     /// Updates a payment

@@ -14,7 +14,7 @@ namespace RVTR.Account.ObjectModel.Models
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    
+
     private string _city;
     public string City
     {
@@ -29,7 +29,7 @@ namespace RVTR.Account.ObjectModel.Models
       }
     }
 
-    
+
     private string _country;
     public string Country
     {
@@ -44,7 +44,7 @@ namespace RVTR.Account.ObjectModel.Models
       }
     }
 
-    
+
     private string _postalCode;
     public string PostalCode
     {
@@ -59,7 +59,7 @@ namespace RVTR.Account.ObjectModel.Models
       }
     }
 
-    
+
     private string _stateProvince;
     public string StateProvince
     {
@@ -74,7 +74,7 @@ namespace RVTR.Account.ObjectModel.Models
       }
     }
 
-    
+
     private string _street;
     public string Street
     {
@@ -93,7 +93,7 @@ namespace RVTR.Account.ObjectModel.Models
     [Required]
     public int? AccountId { get; set; }
 
-    
+
     public AccountModel Account { get; set; }
 
     /// <summary>

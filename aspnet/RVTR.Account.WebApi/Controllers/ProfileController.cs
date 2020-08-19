@@ -81,7 +81,6 @@ namespace RVTR.Account.WebApi.Controllers
         _logger.LogInformation($"Retrieved the profiles.");
       }
       return Ok(await _unitOfWork.Profile.SelectAsync());
-
     }
 
     /// <summary>
@@ -116,9 +115,7 @@ namespace RVTR.Account.WebApi.Controllers
         _logger.LogWarning($"Profile with ID number {id} does not exist.");
       }
       return NotFound(new ErrorObject($"Profile with ID number {id} does not exist."));
-
     }
-
 
     /// <summary>
     /// Add a profile to an account
@@ -176,7 +173,6 @@ namespace RVTR.Account.WebApi.Controllers
         }
         return NotFound(new ErrorObject($"Profile with ID number {profile.Id} does not exist."));
       }
-
 
     }
 

@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
-using RVTR.Account.ObjectModel.Models; 
+using RVTR.Account.ObjectModel.Models;
 using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests

@@ -14,7 +14,7 @@ namespace RVTR.Account.WebApi.ResponseObjects
     /// Used to display an error response message alongside a status code 
     /// </summary>
     /// <param name="message"></param>
-    public ErrorObject(string message) : base ("")
+    public ErrorObject(string message) : base("")
     {
       ErrorMessage = message;
     }

@@ -6,9 +6,9 @@ using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
-    public class ProfileModelTest
-    {
-        public static readonly IEnumerable<Object[]> _profiles = new List<Object[]>
+  public class ProfileModelTest
+  {
+    public static readonly IEnumerable<Object[]> _profiles = new List<Object[]>
     {
       new object[]
       {
@@ -26,23 +26,23 @@ namespace RVTR.Account.UnitTesting.Tests
       }
     };
 
-        [Theory]
-        [MemberData(nameof(_profiles))]
-        public void Test_Create_ProfileModel(ProfileModel profile)
-        {
-            var validationContext = new ValidationContext(profile);
-            var actual = Validator.TryValidateObject(profile, validationContext, null, true);
+    [Theory]
+    [MemberData(nameof(_profiles))]
+    public void Test_Create_ProfileModel(ProfileModel profile)
+    {
+      var validationContext = new ValidationContext(profile);
+      var actual = Validator.TryValidateObject(profile, validationContext, null, true);
 
-            Assert.True(actual);
-        }
-
-        [Theory]
-        [MemberData(nameof(_profiles))]
-        public void Test_Validate_ProfileModel(ProfileModel profile)
-        {
-            var validationContext = new ValidationContext(profile);
-
-            Assert.Empty(profile.Validate(validationContext));
-        }
+      Assert.True(actual);
     }
+
+    [Theory]
+    [MemberData(nameof(_profiles))]
+    public void Test_Validate_ProfileModel(ProfileModel profile)
+    {
+      var validationContext = new ValidationContext(profile);
+
+      Assert.Empty(profile.Validate(validationContext));
+    }
+  }
 }
