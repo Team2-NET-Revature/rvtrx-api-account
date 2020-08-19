@@ -30,8 +30,6 @@ namespace RVTR.Account.UnitTesting.Tests
 
           Assert.NotNull(unitOfWork.Account);
           Assert.NotNull(unitOfWork.Profile);
-          Assert.NotNull(unitOfWork.Address);
-          Assert.NotNull(unitOfWork.Payment);
           Assert.Equal(0, actual);
         }
       }

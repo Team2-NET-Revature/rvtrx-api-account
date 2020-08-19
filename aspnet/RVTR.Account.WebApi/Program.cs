@@ -49,7 +49,7 @@ namespace RVTR.Account.WebApi
         var context = provider.GetRequiredService<AccountContext>();
 
         await context.Database.EnsureCreatedAsync();
-        await SeedDb.Seed(context);
+        SeedDb.Seed(context);
       }
     }
   }

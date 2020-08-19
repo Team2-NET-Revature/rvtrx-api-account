@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -93,6 +94,7 @@ namespace RVTR.Account.WebApi
 
       applicationBuilder.UseZipkin();
       applicationBuilder.UseTracing("accountapi.rest");
+      applicationBuilder.UseHttpsRedirection();
       applicationBuilder.UseRouting();
       applicationBuilder.UseSwagger(options =>
       {

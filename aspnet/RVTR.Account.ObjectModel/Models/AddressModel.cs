@@ -10,7 +10,6 @@ namespace RVTR.Account.ObjectModel.Models
   /// </summary>
   public class AddressModel : IValidatableObject
   {
-    
     public int Id { get; set; }
 
 
@@ -88,7 +87,7 @@ namespace RVTR.Account.ObjectModel.Models
       }
     }
 
-    public int AccountId { get; set; }
+    public int? AccountId { get; set; }
 
 
     public AccountModel Account { get; set; }
