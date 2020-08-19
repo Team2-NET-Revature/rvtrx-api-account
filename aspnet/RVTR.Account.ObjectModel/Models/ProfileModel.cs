@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RVTR.Account.ObjectModel.Models
 {
@@ -13,72 +11,44 @@ namespace RVTR.Account.ObjectModel.Models
     
     public int Id { get; set; }
 
-    private string _email;
-    public string Email
-    {
-      get => _email;
-      set
-      {
-        if (string.IsNullOrEmpty(value))
-        {
-          throw new ArgumentException("Email address cannot be null.", nameof(value));
-        }
-        _email = value;
-      }
-    }
+    public string Email;
+    
+    public string familyName;
+   
+    public string givenName;
+    
+    public string Phone;
 
-    private string _familyname;
-    public string familyName
-    {
-      get => _familyname;
-      set
-      {
-        if (string.IsNullOrEmpty(value))
-        {
-          throw new ArgumentException("First name cannot be null.", nameof(value));
-        }
-        _familyname = value;
-      }
-    }
-
-    private string _givenname;
-    public string givenName
-    {
-      get => _givenname;
-      set
-      {
-        if (string.IsNullOrEmpty(value))
-        {
-          throw new ArgumentException("Last name cannot be null.", nameof(value));
-        }
-        _givenname = value;
-      }
-    }
-
-    private string _phone;
-    public string Phone
-    {
-      get => _phone;
-      set
-      {
-        if (string.IsNullOrEmpty(value))
-        {
-          throw new ArgumentException("Phone number cannot be null.", nameof(value));
-        }
-        _phone = value;
-      }
-    }
     public string Type;
 
     public int AccountId { get; set; }
 
     public AccountModel Account { get; set; }
-
+     
     /// <summary>
     /// Represents the _Profile_ `Validate` method
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
+    //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+      if (string.IsNullOrEmpty(Email))
+      {
+        yield return new ValidationResult("Email cannot be null.");
+      }
+      if (string.IsNullOrEmpty(familyName))
+      {
+        yield return new ValidationResult("familyName cannot be null.");
+      }
+      if (string.IsNullOrEmpty(givenName))
+      {
+        yield return new ValidationResult("givenName cannot be null.");
+      }
+      if (string.IsNullOrEmpty(Phone))
+      {
+        yield return new ValidationResult("Phone cannot be null.");
+      }
+    }
   }
 }

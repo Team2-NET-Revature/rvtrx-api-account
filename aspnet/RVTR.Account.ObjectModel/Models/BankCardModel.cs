@@ -10,11 +10,9 @@ namespace RVTR.Account.ObjectModel.Models
   /// </summary>
   public class BankCardModel : IValidatableObject
   {
-    
     public int Id { get; set; }
 
     public DateTime Expiry { get; set; }
-
 
     private string _number;
     public string Number
