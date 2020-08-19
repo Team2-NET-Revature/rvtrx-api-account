@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RVTR.Account.ObjectModel.Models
 {
@@ -9,17 +10,46 @@ namespace RVTR.Account.ObjectModel.Models
   /// </summary>
   public class PaymentModel : IValidatableObject
   {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public DateTime cardExpirationDate { get; set; }
 
-    public string cardNumber;
-    
+
+    private string _cardnumber;
+    public string cardNumber
+    {
+      get => _cardnumber;
+      set
+      {
+        if (string.IsNullOrEmpty(value))
+        {
+          throw new ArgumentException("Credit card number cannot be null.", nameof(value));
+        }
+        _cardnumber = value;
+      }
+    }
     public string securityCode;
 
-    public string cardName;
-    
-    public int AccountId { get; set; }
+    private string _cardname;
+    public string cardName
+    {
+      get => _cardname;
+      set
+      {
+        if (string.IsNullOrEmpty(value))
+        {
+          throw new ArgumentException("Bank name cannot be null.", nameof(value));
+        }
+        _cardname = value;
+      }
+    }
+
+    [ForeignKey("Account")]
+    [Required]
+    public int? AccountId { get; set; }
+
     public AccountModel Account { get; set; }
 
     /// <summary>
@@ -27,17 +57,6 @@ namespace RVTR.Account.ObjectModel.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-      if (string.IsNullOrEmpty(cardName))
-      {
-        yield return new ValidationResult("cardName cannot be null.");
-      }
-      if (string.IsNullOrEmpty(cardNumber))
-      {
-        yield return new ValidationResult("cardNumber cannot be null.");
-      }
-    }
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
   }
 }

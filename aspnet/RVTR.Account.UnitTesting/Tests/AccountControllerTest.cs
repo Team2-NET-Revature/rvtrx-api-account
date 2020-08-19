@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -63,6 +62,7 @@ namespace RVTR.Account.UnitTesting.Tests
       Assert.NotNull(resultMany);
       Assert.NotNull(resultFail);
       Assert.NotNull(resultOne);
+
     }
 
     [Fact]
@@ -80,13 +80,15 @@ namespace RVTR.Account.UnitTesting.Tests
 
       Assert.NotNull(resultPass);
     }
-    
+    //expect error if account isn't found
     [Fact]
     public async void Test_404_Response()
     {
       var result = await _controller.Get(-100);
 
-      Assert.IsType<NotFoundObjectResult>(result);
+      Assert.IsType<Microsoft.AspNetCore.Mvc.NotFoundObjectResult>(result);
     }
+
+
   }
 }
