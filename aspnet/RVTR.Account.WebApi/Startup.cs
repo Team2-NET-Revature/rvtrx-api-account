@@ -77,7 +77,7 @@ namespace RVTR.Account.WebApi
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="descriptionProvider"></param>
     /// <param name="applicationBuilder"></param>

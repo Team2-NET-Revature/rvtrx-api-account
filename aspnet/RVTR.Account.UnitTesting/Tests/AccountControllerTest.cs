@@ -80,7 +80,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
       Assert.NotNull(resultPass);
     }
-    
+
     [Fact]
     public async void Test_404_Response()
     {

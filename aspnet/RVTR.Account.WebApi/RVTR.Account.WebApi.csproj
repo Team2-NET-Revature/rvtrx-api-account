@@ -25,5 +25,5 @@
     <ProjectReference Include="..\RVTR.Account.ObjectModel\RVTR.Account.ObjectModel.csproj" />
     <ProjectReference Include="..\RVTR.Account.DataContext\RVTR.Account.DataContext.csproj" />
   </ItemGroup>
-  
+
 </Project>

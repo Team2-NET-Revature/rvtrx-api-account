@@ -1,4 +1,4 @@
-﻿using RVTR.Account.ObjectModel.Models;
+using RVTR.Account.ObjectModel.Models;
 using System.Collections.Generic;
 using System;
 using System.Linq;

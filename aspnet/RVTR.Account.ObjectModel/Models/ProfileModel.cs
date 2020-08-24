@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RVTR.Account.ObjectModel.Models
@@ -23,7 +23,7 @@ namespace RVTR.Account.ObjectModel.Models
     public int? AccountId { get; set; }
 
     public AccountModel Account { get; set; }
-     
+
     /// <summary>
     /// Represents the _Profile_ `Validate` method
     /// </summary>
