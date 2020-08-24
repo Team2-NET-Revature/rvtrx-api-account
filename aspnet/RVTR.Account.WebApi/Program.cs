@@ -40,14 +40,12 @@ namespace RVTR.Account.WebApi
     /// <returns></returns>
     public static async Task CreateDbContextAsync(IHost host)
     {
-      using (var scope = host.Services.CreateScope())
-      {
-        var provider = scope.ServiceProvider;
-        var context = provider.GetRequiredService<AccountContext>();
+      using var scope = host.Services.CreateScope();
+      var provider = scope.ServiceProvider;
+      var context = provider.GetRequiredService<AccountContext>();
 
-        await context.Database.EnsureCreatedAsync();
-        await SeedDb.Seed(context);
-      }
+      await context.Database.EnsureCreatedAsync();
+      await SeedDb.Seed(context);
     }
   }
 }
