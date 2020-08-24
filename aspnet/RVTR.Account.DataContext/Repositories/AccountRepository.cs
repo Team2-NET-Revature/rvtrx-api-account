@@ -15,16 +15,16 @@ namespace RVTR.Account.DataContext.Repositories
     public AccountRepository(AccountContext context) : base(context) { }
 
     public override async Task<AccountModel> SelectAsync(int id) => await _db
-                                                                          .Where(x => x.Id == id)
-                                                                          .Include(x => x.Address)
-                                                                          .Include(x => x.Profiles)
-                                                                          .Include(x => x.Payments)
-                                                                          .FirstOrDefaultAsync();
+      .Where(x => x.Id == id)
+      .Include(x => x.Address)
+      .Include(x => x.Profiles)
+      .Include(x => x.Payments)
+      .FirstOrDefaultAsync();
 
     public override async Task<IEnumerable<AccountModel>> SelectAsync() => await _db
-                                                                          .Include(x => x.Address)
-                                                                          .Include(x => x.Profiles)
-                                                                          .Include(x => x.Payments)
-                                                                          .ToListAsync();
+      .Include(x => x.Address)
+      .Include(x => x.Profiles)
+      .Include(x => x.Payments)
+      .ToListAsync();
   }
 }

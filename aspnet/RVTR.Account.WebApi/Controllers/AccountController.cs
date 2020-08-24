@@ -1,12 +1,12 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RVTR.Account.DataContext.Repositories;
 using RVTR.Account.ObjectModel.Models;
 using RVTR.Account.WebApi.ResponseObjects;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 
 namespace RVTR.Account.WebApi.Controllers
 {
