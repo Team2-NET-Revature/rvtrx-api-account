@@ -1,12 +1,12 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RVTR.Account.DataContext.Repositories;
 using RVTR.Account.ObjectModel.Models;
 using RVTR.Account.WebApi.ResponseObjects;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 
 namespace RVTR.Account.WebApi.Controllers
 {
@@ -45,21 +45,21 @@ namespace RVTR.Account.WebApi.Controllers
     {
       try
       {
-        
+
         _logger.LogDebug("Deleting an account by its ID number...");
-        
+
         await _unitOfWork.Account.DeleteAsync(id);
         await _unitOfWork.CommitAsync();
 
-        
+
         _logger.LogInformation($"Deleted the account with ID number {id}.");
-        
+
         return Ok(MessageObject.Success);
       }
       catch
       {
         _logger.LogWarning($"Account with ID number {id} does not exist.");
-        
+
         return NotFound(new ErrorObject($"Account with ID number {id} does not exist"));
       }
     }
@@ -73,7 +73,7 @@ namespace RVTR.Account.WebApi.Controllers
     public async Task<IActionResult> Get()
     {
       _logger.LogInformation($"Retrieved the accounts.");
-      
+
       return Ok(await _unitOfWork.Account.SelectAsync());
 
     }
@@ -91,24 +91,24 @@ namespace RVTR.Account.WebApi.Controllers
       AccountModel accountModel;
 
       _logger.LogDebug("Getting an account by its ID number...");
-      
+
       accountModel = await _unitOfWork.Account.SelectAsync(id);
 
 
       if (accountModel is AccountModel theAccount)
       {
         _logger.LogInformation($"Retrieved the account with ID: {id}.");
-        
+
         return Ok(theAccount);
       }
-      
+
       _logger.LogWarning($"Account with ID number {id} does not exist.");
-      
+
       return NotFound(new ErrorObject($"Account with ID number {id} does not exist."));
     }
 
     /// <summary>
-    /// Add an account 
+    /// Add an account
     /// </summary>
     /// <param name="account"></param>
     /// <returns></returns>
@@ -116,16 +116,16 @@ namespace RVTR.Account.WebApi.Controllers
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Post([FromBody] AccountModel account)
     {
-      
+
       _logger.LogDebug("Adding an account...");
-        
+
       await _unitOfWork.Account.InsertAsync(account);
       await _unitOfWork.CommitAsync();
 
       _logger.LogInformation($"Successfully added the account {account}.");
-      
+
       return Accepted(account);
-      
+
     }
 
     /// <summary>
@@ -141,19 +141,19 @@ namespace RVTR.Account.WebApi.Controllers
       try
       {
         _logger.LogDebug("Updating an account...");
-        
+
         _unitOfWork.Account.Update(account);
         await _unitOfWork.CommitAsync();
 
         _logger.LogInformation($"Successfully updated the account {account}.");
-        
+
         return Accepted(account);
       }
 
       catch
       {
         _logger.LogWarning($"This account does not exist.");
-        
+
         return NotFound(new ErrorObject($"Account with ID number {account.Id} does not exist"));
       }
 

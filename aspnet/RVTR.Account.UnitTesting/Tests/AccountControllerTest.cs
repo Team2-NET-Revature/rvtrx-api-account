@@ -36,7 +36,7 @@ namespace RVTR.Account.UnitTesting.Tests
       repositoryMock.Setup(m => m.SelectAsync(0)).Throws(new Exception());
       repositoryMock.Setup(m => m.SelectAsync(1)).Returns(Task.FromResult<AccountModel>(null));
       repositoryMock.Setup(m => m.Update(It.IsAny<AccountModel>()));
-      unitOfWorkMock.Setup(m => m.Account).Returns((AccountRepository)repositoryMock.Object);
+      unitOfWorkMock.Setup(m => m.Account).Returns(repositoryMock.Object);
 
       _logger = loggerMock.Object;
       _unitOfWork = unitOfWorkMock.Object;
@@ -80,7 +80,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
       Assert.NotNull(resultPass);
     }
-    
+
     [Fact]
     public async void Test_404_Response()
     {

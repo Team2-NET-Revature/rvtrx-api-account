@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using RVTR.Account.ObjectModel.Models;
@@ -8,7 +7,7 @@ namespace RVTR.Account.UnitTesting.Tests
 {
   public class AddressModelTest
   {
-    public static readonly IEnumerable<Object[]> _addresses = new List<Object[]>
+    public static readonly IEnumerable<object[]> _addresses = new List<object[]>
     {
       new object[]
       {

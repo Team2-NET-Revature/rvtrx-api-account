@@ -46,24 +46,24 @@ namespace RVTR.Account.WebApi.Controllers
       try
       {
         _logger.LogDebug("Deleting a profile by its ID number...");
-        
+
         await _unitOfWork.Profile.DeleteAsync(id);
         await _unitOfWork.CommitAsync();
 
         _logger.LogInformation($"Deleted the profile with ID number {id}.");
-        
+
         return Ok(MessageObject.Success);
       }
       catch
       {
         _logger.LogWarning($"Profile with ID number {id} does not exist.");
-        
+
         return NotFound(new ErrorObject($"Profile with ID number {id} does not exist."));
       }
     }
 
     /// <summary>
-    /// Get all profiles 
+    /// Get all profiles
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -71,7 +71,7 @@ namespace RVTR.Account.WebApi.Controllers
     public async Task<IActionResult> Get()
     {
       _logger.LogInformation($"Retrieved the profiles.");
-     
+
       return Ok(await _unitOfWork.Profile.SelectAsync());
     }
 
@@ -88,19 +88,19 @@ namespace RVTR.Account.WebApi.Controllers
       ProfileModel profileModel;
 
       _logger.LogDebug("Getting a profile by its ID number...");
-      
+
       profileModel = await _unitOfWork.Profile.SelectAsync(id);
 
 
       if (profileModel is ProfileModel theProfile)
       {
         _logger.LogInformation($"Retrieved the profile with ID: {id}.");
-       
+
         return Ok(theProfile);
       }
-      
+
       _logger.LogWarning($"Profile with ID number {id} does not exist.");
-      
+
       return NotFound(new ErrorObject($"Profile with ID number {id} does not exist."));
     }
 
@@ -114,12 +114,12 @@ namespace RVTR.Account.WebApi.Controllers
     public async Task<IActionResult> Post(ProfileModel profile)
     {
       _logger.LogDebug("Adding a profile...");
-      
+
       await _unitOfWork.Profile.InsertAsync(profile);
       await _unitOfWork.CommitAsync();
 
       _logger.LogInformation($"Successfully added the profile {profile}.");
-      
+
       return Accepted(profile);
     }
 
@@ -136,18 +136,18 @@ namespace RVTR.Account.WebApi.Controllers
       try
       {
         _logger.LogDebug("Updating a profile...");
-        
+
         _unitOfWork.Profile.Update(profile);
         await _unitOfWork.CommitAsync();
 
         _logger.LogInformation($"Successfully updated the profile {profile}.");
-        
+
         return Accepted(profile);
       }
       catch
       {
         _logger.LogWarning($"This profile does not exist.");
-        
+
         return NotFound(new ErrorObject($"Profile with ID number {profile.Id} does not exist."));
       }
 
