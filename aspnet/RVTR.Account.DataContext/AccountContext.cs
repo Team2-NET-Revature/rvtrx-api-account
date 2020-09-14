@@ -21,6 +21,50 @@ namespace RVTR.Account.DataContext
       modelBuilder.Entity<AddressModel>().HasKey(e => e.Id);
       modelBuilder.Entity<PaymentModel>().HasKey(e => e.Id);
       modelBuilder.Entity<ProfileModel>().HasKey(e => e.Id);
+      modelBuilder.Entity<AccountModel>().HasData
+      (
+        new AccountModel(){
+          Id = 2,
+          Name = "user"
+        }
+      );
+      modelBuilder.Entity<PaymentModel>().HasData
+      (
+        new PaymentModel(){
+          Id = 2,
+          AccountId = 2,
+          cardExpirationDate = new System.DateTime(2020,08,31),
+          cardNumber = "1111222233334444",
+          securityCode = "123",
+          cardName = "user's credit card"
+        }
+      );
+      modelBuilder.Entity<AddressModel>().HasData
+      (
+        new AddressModel(){
+          Id = 2,
+          AccountId = 2,
+          City = "Austin",
+          Country = "USA",
+          PostalCode = "73301",
+          StateProvince = "Texas",
+          Street = "Test St"
+        }
+      );
+      modelBuilder.Entity<ProfileModel>().HasData
+      (
+        new ProfileModel(){
+          Id = 2,
+          AccountId = 2,
+          Email = "RandomEmail@random.com",
+          familyName = "familyName",
+          givenName = "givenName",
+          Phone = "123-456-7891",
+          Type = ""
+        }
+      );
+
+      
     }
   }
 }
