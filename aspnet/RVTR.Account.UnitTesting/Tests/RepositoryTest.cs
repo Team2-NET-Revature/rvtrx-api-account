@@ -47,7 +47,7 @@ namespace RVTR.Account.UnitTesting.Tests
           await profiles.DeleteAsync(1);
           await ctx.SaveChangesAsync();
 
-          Assert.Empty(await ctx.Profiles.ToListAsync());
+          Assert.DoesNotContain(new ProfileModel() { Id = 1, Email = "email", familyName = "John", givenName="Johnny", AccountId = 1 }, await ctx.Profiles.ToListAsync());
         }
 
         using (var ctx = new AccountContext(_options))
@@ -57,7 +57,7 @@ namespace RVTR.Account.UnitTesting.Tests
           await addresses.DeleteAsync(1);
           await ctx.SaveChangesAsync();
 
-          Assert.Empty(await ctx.Addresses.ToListAsync());
+          Assert.DoesNotContain(new AddressModel() { Id = 1, City = "Denver",  Country="USA", PostalCode="12345", StateProvince="CO", Street="street", AccountId = 1 },await ctx.Addresses.ToListAsync());
         }
 
         using (var ctx = new AccountContext(_options))
@@ -67,7 +67,7 @@ namespace RVTR.Account.UnitTesting.Tests
           await lodgings.DeleteAsync(1);
           await ctx.SaveChangesAsync();
 
-          Assert.Empty(await ctx.Accounts.ToListAsync());
+          Assert.DoesNotContain(new AccountModel() { Id = 1, Name = "name" },await ctx.Accounts.ToListAsync());
         }
 
       }
@@ -93,7 +93,7 @@ namespace RVTR.Account.UnitTesting.Tests
         using (var ctx = new AccountContext(_options))
         {
           var lodgings = new Repository<AccountModel>(ctx);
-          await lodgings.InsertAsync(new AccountModel() { Id = 2 });
+          await lodgings.InsertAsync(new AccountModel() { Id = 3 });
           await ctx.SaveChangesAsync();
 
           Assert.NotEmpty(await ctx.Accounts.ToListAsync());
@@ -113,7 +113,7 @@ namespace RVTR.Account.UnitTesting.Tests
         {
           var addreses = new Repository<AddressModel>(ctx);
 
-          await addreses.InsertAsync(new AddressModel() { Id = 2, AccountId = 2 });
+          await addreses.InsertAsync(new AddressModel() { Id = 3, AccountId = 3 });
           await ctx.SaveChangesAsync();
 
           Assert.NotEmpty(await ctx.Addresses.ToListAsync());
@@ -143,7 +143,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await lodgings.SelectAsync();
 
-          Assert.Empty(actual);
+          Assert.NotEmpty(actual);
         }
 
         using (var ctx = new AccountContext(_options))
@@ -152,7 +152,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await profiles.SelectAsync();
 
-          Assert.Empty(actual);
+          Assert.NotEmpty(actual);
         }
 
         using (var ctx = new AccountContext(_options))
@@ -161,7 +161,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await addresses.SelectAsync();
 
-          Assert.Empty(actual);
+          Assert.NotEmpty(actual);
         }
       }
       finally

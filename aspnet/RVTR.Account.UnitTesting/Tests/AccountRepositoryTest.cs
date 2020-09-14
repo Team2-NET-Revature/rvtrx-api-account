@@ -40,7 +40,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await lodgings.SelectAsync();
 
-          Assert.Empty(actual);
+          Assert.NotEmpty(actual);
         }
 
       }
