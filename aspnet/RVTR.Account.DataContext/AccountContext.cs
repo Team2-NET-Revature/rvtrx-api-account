@@ -24,17 +24,17 @@ namespace RVTR.Account.DataContext
       modelBuilder.Entity<AccountModel>().HasData
       (
         new AccountModel(){
-          Id = 2,
-          Name = "user"
+          Id = 1,
+          Name = "camper"
         }
       );
       modelBuilder.Entity<PaymentModel>().HasData
       (
         new PaymentModel(){
-          Id = 2,
-          AccountId = 2,
+          Id = 1,
+          AccountId = 1,
           cardExpirationDate = new System.DateTime(2020,08,31),
-          cardNumber = "1111222233334444",
+          cardNumber = "4111111111111111",
           securityCode = "123",
           cardName = "user's credit card"
         }
@@ -42,8 +42,8 @@ namespace RVTR.Account.DataContext
       modelBuilder.Entity<AddressModel>().HasData
       (
         new AddressModel(){
-          Id = 2,
-          AccountId = 2,
+          Id = 1,
+          AccountId = 1,
           City = "Austin",
           Country = "USA",
           PostalCode = "73301",
@@ -54,9 +54,9 @@ namespace RVTR.Account.DataContext
       modelBuilder.Entity<ProfileModel>().HasData
       (
         new ProfileModel(){
-          Id = 2,
-          AccountId = 2,
-          Email = "RandomEmail@random.com",
+          Id = 1,
+          AccountId = 1,
+          Email = "demo.camper@revature.com",
           familyName = "familyName",
           givenName = "givenName",
           Phone = "123-456-7891",
