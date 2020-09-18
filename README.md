@@ -7,6 +7,14 @@
 [![reliability rating](https://sonarcloud.io/api/project_badges/measure?project=rvtr_api_account&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=rvtr_api_account)
 [![security rating](https://sonarcloud.io/api/project_badges/measure?project=rvtr_api_account&metric=security_rating)](https://sonarcloud.io/dashboard?id=rvtr_api_account)
 
+## links
+
+zipkin: https://tracing.rvtr.net:9411/zipkin/
+sentry: https://sentry.io/organizations/rvtr
+prometheus: https://metrics.rvtr.net:9090/
+grafana: https://analytics.rvtr.net:3000/
+traefik: https://traefik.rvtr.net:9000/dashboard/#/
+
 RVTR Servicehub Account API
 
 ## backlog
