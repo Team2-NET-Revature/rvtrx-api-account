@@ -5,6 +5,7 @@ using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
 using RVTR.Account.ObjectModel.Models;
 using Xunit;
+using System.Linq;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
@@ -12,62 +13,49 @@ namespace RVTR.Account.UnitTesting.Tests
   {
     private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
     private static readonly DbContextOptions<AccountContext> _options = new DbContextOptionsBuilder<AccountContext>().UseSqlite(_connection).Options;
+    private AccountModel account = new AccountModel() { Id = 3 };
+    private ProfileModel profile = new ProfileModel(){familyName = "FN", givenName = "GN",Id = 3,Email = "anemail@random.com",Phone = "123456789",Type = ""};
+    private AddressModel address = new AddressModel() { Id = 3, AccountId = 3 };
 
-    public static readonly IEnumerable<object[]> _records = new List<object[]>()
-    {
-      new object[]
-      {
-        new AccountModel() { Id = 1, Name = "name" },
-        new ProfileModel() { Id = 1, Email = "email", familyName = "John", givenName="Johnny", AccountId = 1 },
-        new AddressModel() { Id = 1, City = "Denver",  Country="USA", PostalCode="12345", StateProvince="CO", Street="street", AccountId = 1 },
-      }
-    };
-
-    [Theory]
-    [MemberData(nameof(_records))]
-    public async void Test_Repository_DeleteAsync(AccountModel lodging, ProfileModel profile, AddressModel address)
+    [Fact]
+    public async void Test_Repository_DeleteAsync()
     {
       await _connection.OpenAsync();
 
       try
       {
-        using (var ctx = new AccountContext(_options))
+        using(var ctx = new AccountContext(_options))
         {
           await ctx.Database.EnsureCreatedAsync();
-          await ctx.Accounts.AddAsync(lodging);
-          await ctx.Profiles.AddAsync(profile);
-          await ctx.Addresses.AddAsync(address);
-          await ctx.SaveChangesAsync();
         }
-
         using (var ctx = new AccountContext(_options))
         {
           var profiles = new Repository<ProfileModel>(ctx);
-
+          var sut = await ctx.Profiles.FirstAsync();
           await profiles.DeleteAsync(1);
           await ctx.SaveChangesAsync();
-
-          Assert.Empty(await ctx.Profiles.ToListAsync());
+          
+          Assert.DoesNotContain(sut, await ctx.Profiles.ToListAsync());
         }
 
         using (var ctx = new AccountContext(_options))
         {
           var addresses = new Repository<AddressModel>(ctx);
-
+          var sut = await ctx.Addresses.FirstAsync();
           await addresses.DeleteAsync(1);
           await ctx.SaveChangesAsync();
 
-          Assert.Empty(await ctx.Addresses.ToListAsync());
+          Assert.DoesNotContain(sut,await ctx.Addresses.ToListAsync());
         }
 
         using (var ctx = new AccountContext(_options))
         {
           var lodgings = new Repository<AccountModel>(ctx);
-
+          var sut = await ctx.Accounts.FirstAsync();
           await lodgings.DeleteAsync(1);
           await ctx.SaveChangesAsync();
 
-          Assert.Empty(await ctx.Accounts.ToListAsync());
+          Assert.DoesNotContain(sut,await ctx.Accounts.ToListAsync());
         }
 
       }
@@ -77,9 +65,8 @@ namespace RVTR.Account.UnitTesting.Tests
       }
     }
 
-    [Theory]
-    [MemberData(nameof(_records))]
-    public async void Test_Repository_InsertAsync(AccountModel lodging, ProfileModel profile, AddressModel address)
+    [Fact]
+    public async void Test_Repository_InsertAsync()
     {
       await _connection.OpenAsync();
 
@@ -93,30 +80,29 @@ namespace RVTR.Account.UnitTesting.Tests
         using (var ctx = new AccountContext(_options))
         {
           var lodgings = new Repository<AccountModel>(ctx);
-          await lodgings.InsertAsync(new AccountModel() { Id = 2 });
+          
+          await lodgings.InsertAsync(account);
           await ctx.SaveChangesAsync();
 
-          Assert.NotEmpty(await ctx.Accounts.ToListAsync());
+          Assert.Contains(account,await ctx.Accounts.ToListAsync());
         }
 
         using (var ctx = new AccountContext(_options))
         {
           var profiles = new Repository<ProfileModel>(ctx);
-
           await profiles.InsertAsync(profile);
           await ctx.SaveChangesAsync();
 
-          Assert.NotEmpty(await ctx.Profiles.ToListAsync());
+          Assert.Contains(profile, await ctx.Profiles.ToListAsync());
         }
 
         using (var ctx = new AccountContext(_options))
         {
           var addreses = new Repository<AddressModel>(ctx);
-
-          await addreses.InsertAsync(new AddressModel() { Id = 2, AccountId = 2 });
+          await addreses.InsertAsync(address);
           await ctx.SaveChangesAsync();
 
-          Assert.NotEmpty(await ctx.Addresses.ToListAsync());
+          Assert.Contains(address,await ctx.Addresses.ToListAsync());
         }
       }
       finally
@@ -143,7 +129,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await lodgings.SelectAsync();
 
-          Assert.Empty(actual);
+          Assert.NotEmpty(actual);
         }
 
         using (var ctx = new AccountContext(_options))
@@ -152,7 +138,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await profiles.SelectAsync();
 
-          Assert.Empty(actual);
+          Assert.NotEmpty(actual);
         }
 
         using (var ctx = new AccountContext(_options))
@@ -161,7 +147,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await addresses.SelectAsync();
 
-          Assert.Empty(actual);
+          Assert.NotEmpty(actual);
         }
       }
       finally
@@ -188,7 +174,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await lodgings.SelectAsync(1);
 
-          Assert.Null(actual);
+          Assert.NotNull(actual);
         }
 
         using (var ctx = new AccountContext(_options))
@@ -197,7 +183,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await profiles.SelectAsync(1);
 
-          Assert.Null(actual);
+          Assert.NotNull(actual);
         }
 
         using (var ctx = new AccountContext(_options))
@@ -206,7 +192,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await addreses.SelectAsync(1);
 
-          Assert.Null(actual);
+          Assert.NotNull(actual);
         }
       }
       finally
@@ -215,9 +201,8 @@ namespace RVTR.Account.UnitTesting.Tests
       }
     }
 
-    [Theory]
-    [MemberData(nameof(_records))]
-    public async void Test_Repository_Update(AccountModel lodging, ProfileModel profile, AddressModel address)
+    [Fact]
+    public async void Test_Repository_Update()
     {
       await _connection.OpenAsync();
 
@@ -226,10 +211,6 @@ namespace RVTR.Account.UnitTesting.Tests
         using (var ctx = new AccountContext(_options))
         {
           await ctx.Database.EnsureCreatedAsync();
-          await ctx.Accounts.AddAsync(lodging);
-          await ctx.Profiles.AddAsync(profile);
-          await ctx.Addresses.AddAsync(address);
-          await ctx.SaveChangesAsync();
         }
 
         using (var ctx = new AccountContext(_options))

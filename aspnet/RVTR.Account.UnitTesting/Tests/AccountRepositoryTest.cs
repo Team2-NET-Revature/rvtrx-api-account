@@ -13,15 +13,6 @@ namespace RVTR.Account.UnitTesting.Tests
   {
     private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
     private static readonly DbContextOptions<AccountContext> _options = new DbContextOptionsBuilder<AccountContext>().UseSqlite(_connection).Options;
-
-    public static readonly IEnumerable<object[]> _records = new List<object[]>()
-    {
-      new object[]
-      {
-        new AccountModel() { Id = 1, Name = "name" },
-      }
-    };
-
     [Fact]
     public async void Test_Repository_SelectAsync()
     {
@@ -40,7 +31,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await lodgings.SelectAsync();
 
-          Assert.Empty(actual);
+          Assert.NotEmpty(actual);
         }
 
       }
@@ -69,7 +60,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
           var actual = await lodgings.SelectAsync(1);
 
-          Assert.Null(actual);
+          Assert.NotNull(actual);
         }
 
       }
