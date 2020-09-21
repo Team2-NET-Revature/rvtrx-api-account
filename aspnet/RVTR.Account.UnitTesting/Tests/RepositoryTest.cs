@@ -13,6 +13,9 @@ namespace RVTR.Account.UnitTesting.Tests
   {
     private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
     private static readonly DbContextOptions<AccountContext> _options = new DbContextOptionsBuilder<AccountContext>().UseSqlite(_connection).Options;
+    private AccountModel account = new AccountModel() { Id = 3 };
+    private ProfileModel profile = new ProfileModel(){familyName = "FN", givenName = "GN",Id = 3,Email = "anemail@random.com",Phone = "123456789",Type = ""};
+    private AddressModel address = new AddressModel() { Id = 3, AccountId = 3 };
 
     [Fact]
     public async void Test_Repository_DeleteAsync()
@@ -77,31 +80,29 @@ namespace RVTR.Account.UnitTesting.Tests
         using (var ctx = new AccountContext(_options))
         {
           var lodgings = new Repository<AccountModel>(ctx);
-          var sut = new AccountModel() { Id = 3 };
-          await lodgings.InsertAsync(sut);
+          
+          await lodgings.InsertAsync(account);
           await ctx.SaveChangesAsync();
 
-          Assert.Contains(sut,await ctx.Accounts.ToListAsync());
+          Assert.Contains(account,await ctx.Accounts.ToListAsync());
         }
 
         using (var ctx = new AccountContext(_options))
         {
           var profiles = new Repository<ProfileModel>(ctx);
-          var sut = new ProfileModel(){familyName = "FN", givenName = "GN",Id = 3,Email = "anemail@random.com",Phone = "123456789",Type = ""};
-          await profiles.InsertAsync(sut);
+          await profiles.InsertAsync(profile);
           await ctx.SaveChangesAsync();
 
-          Assert.Contains(sut, await ctx.Profiles.ToListAsync());
+          Assert.Contains(profile, await ctx.Profiles.ToListAsync());
         }
 
         using (var ctx = new AccountContext(_options))
         {
           var addreses = new Repository<AddressModel>(ctx);
-          var sut = new AddressModel() { Id = 3, AccountId = 3 };
-          await addreses.InsertAsync(sut);
+          await addreses.InsertAsync(address);
           await ctx.SaveChangesAsync();
 
-          Assert.Contains(sut,await ctx.Addresses.ToListAsync());
+          Assert.Contains(address,await ctx.Addresses.ToListAsync());
         }
       }
       finally
