@@ -34,7 +34,7 @@ namespace RVTR.Account.UnitTesting.Tests
           var sut = await ctx.Profiles.FirstAsync();
           await profiles.DeleteAsync(1);
           await ctx.SaveChangesAsync();
-          
+
           Assert.DoesNotContain(sut, await ctx.Profiles.ToListAsync());
         }
 
@@ -80,7 +80,7 @@ namespace RVTR.Account.UnitTesting.Tests
         using (var ctx = new AccountContext(_options))
         {
           var lodgings = new Repository<AccountModel>(ctx);
-          
+
           await lodgings.InsertAsync(account);
           await ctx.SaveChangesAsync();
 
