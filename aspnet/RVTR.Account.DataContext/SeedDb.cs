@@ -16,7 +16,6 @@ namespace RVTR.Account.DataContext
       if (ctx.Accounts.Count() > 0)
       {
         ctx.Accounts.RemoveRange(ctx.Accounts);
-        await ctx.SaveChangesAsync();
       }
       await ctx.Accounts.AddAsync(new AccountModel
       {
@@ -34,27 +33,27 @@ namespace RVTR.Account.DataContext
         Name = "Name",
         Payments = new List<PaymentModel>()
         {
-            new PaymentModel()
-            {
-                Id = -1,
-                cardExpirationDate = new DateTime(),
-                cardNumber = "xxxx-1234",
-                cardName = "Visa",
-                securityCode = "123"
-            }
+          new PaymentModel()
+          {
+            Id = -1,
+            cardExpirationDate = new DateTime(),
+            cardNumber = "xxxx-1234",
+            cardName = "Visa",
+            securityCode = "123"
+          }
         },
         Profiles = new List<ProfileModel>()
         {
-            new ProfileModel()
-            {
-                Id = -1,
-                Email = "Test@test.com",
-                familyName = "Jones",
-                givenName = "Tom",
-                Phone = "1234567891",
-                Type = "Adult",
-                AccountId = -1
-            }
+          new ProfileModel()
+          {
+            Id = -1,
+            Email = "Test@test.com",
+            familyName = "Jones",
+            givenName = "Tom",
+            Phone = "1234567891",
+            Type = "Adult",
+            AccountId = -1
+          }
         }
       });
       await ctx.SaveChangesAsync();

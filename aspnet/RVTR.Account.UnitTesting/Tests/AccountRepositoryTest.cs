@@ -30,9 +30,9 @@ namespace RVTR.Account.UnitTesting.Tests
     {
       using var ctx = new AccountContext(_options);
 
-      var lodgings = new AccountRepository(ctx);
+      var accounts = new AccountRepository(ctx);
 
-      var actual = await lodgings.SelectAsync();
+      var actual = await accounts.SelectAsync();
 
       Assert.NotEmpty(actual);
     }
@@ -42,9 +42,9 @@ namespace RVTR.Account.UnitTesting.Tests
     {
       using var ctx = new AccountContext(_options);
 
-      var lodgings = new AccountRepository(ctx);
+      var accounts = new AccountRepository(ctx);
 
-      var actual = await lodgings.SelectAsync(1);
+      var actual = await accounts.SelectAsync(1);
 
       Assert.NotNull(actual);
     }

@@ -59,10 +59,10 @@ namespace RVTR.Account.WebApi
         {
           options.EnableRetryOnFailure(3);
         });
-      });
+      }, ServiceLifetime.Transient);
 
       services.AddScoped<ClientZipkinMiddleware>();
-      services.AddScoped<IUnitOfWork, UnitOfWork>();
+      services.AddTransient<IUnitOfWork, UnitOfWork>();
       services.AddSwaggerGen();
       services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ClientSwaggerOptions>();
       services.AddControllers().AddNewtonsoftJson(options =>

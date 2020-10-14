@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
-using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
 using RVTR.Account.ObjectModel.Models;
 using RVTR.Account.WebApi.Controllers;
@@ -16,30 +13,22 @@ namespace RVTR.Account.UnitTesting.Tests
 {
   public class AccountControllerTest
   {
-    private readonly SqliteConnection _connection;
-    private readonly DbContextOptions<AccountContext> _options;
     private readonly AccountController _controller;
     private readonly ILogger<AccountController> _logger;
     private readonly IUnitOfWork _unitOfWork;
 
     public AccountControllerTest()
     {
-      _connection = new SqliteConnection("Data Source=:memory:");
-      _options = new DbContextOptionsBuilder<AccountContext>()
-        .UseSqlite(_connection)
-        .Options;
-
-      var contextMock = new Mock<AccountContext>(_options);
       var loggerMock = new Mock<ILogger<AccountController>>();
-      var repositoryMock = new Mock<AccountRepository>(contextMock.Object);
+      var repositoryMock = new Mock<IRepository<AccountModel>>();
       var unitOfWorkMock = new Mock<IUnitOfWork>();
 
       repositoryMock.Setup(m => m.DeleteAsync(0)).Throws(new Exception());
-      repositoryMock.Setup(m => m.DeleteAsync(1)).Returns(Task.FromResult(1));
-      repositoryMock.Setup(m => m.InsertAsync(It.IsAny<AccountModel>())).Returns(Task.FromResult<AccountModel>(null));
-      repositoryMock.Setup(m => m.SelectAsync()).Returns(Task.FromResult<IEnumerable<AccountModel>>(null));
+      repositoryMock.Setup(m => m.DeleteAsync(1)).Returns(Task.CompletedTask);
+      repositoryMock.Setup(m => m.InsertAsync(It.IsAny<AccountModel>())).Returns(Task.CompletedTask);
+      repositoryMock.Setup(m => m.SelectAsync()).ReturnsAsync((IEnumerable<AccountModel>)null);
       repositoryMock.Setup(m => m.SelectAsync(0)).Throws(new Exception());
-      repositoryMock.Setup(m => m.SelectAsync(1)).Returns(Task.FromResult<AccountModel>(null));
+      repositoryMock.Setup(m => m.SelectAsync(1)).ReturnsAsync((AccountModel)null);
       repositoryMock.Setup(m => m.Update(It.IsAny<AccountModel>()));
       unitOfWorkMock.Setup(m => m.Account).Returns(repositoryMock.Object);
 

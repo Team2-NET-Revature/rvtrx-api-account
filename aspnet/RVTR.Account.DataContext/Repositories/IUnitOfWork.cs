@@ -5,10 +5,10 @@ namespace RVTR.Account.DataContext.Repositories
 {
   public interface IUnitOfWork
   {
-    AccountRepository Account { get; }
-    Repository<AddressModel> Address { get; }
-    Repository<PaymentModel> Payment { get; }
-    Repository<ProfileModel> Profile { get; }
+    IRepository<AccountModel> Account { get; }
+    IRepository<AddressModel> Address { get; }
+    IRepository<PaymentModel> Payment { get; }
+    IRepository<ProfileModel> Profile { get; }
 
     Task<int> CommitAsync();
   }

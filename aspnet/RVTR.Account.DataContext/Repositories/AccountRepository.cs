@@ -12,7 +12,6 @@ namespace RVTR.Account.DataContext.Repositories
   /// <typeparam name="TEntity"></typeparam>
   public class AccountRepository : Repository<AccountModel>
   {
-
     public AccountRepository(AccountContext context) : base(context) { }
 
     public override async Task<AccountModel> SelectAsync(int id) => await Db
