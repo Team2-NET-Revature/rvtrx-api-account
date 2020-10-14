@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using RVTR.Account.ObjectModel.Models;
 
@@ -6,9 +7,10 @@ namespace RVTR.Account.DataContext.Repositories
   /// <summary>
   /// Represents the _UnitOfWork_ repository
   /// </summary>
-  public class UnitOfWork : IUnitOfWork
+  public class UnitOfWork : IUnitOfWork, IDisposable
   {
     private readonly AccountContext _context;
+    private bool _disposedValue;
 
     public virtual IRepository<AccountModel> Account { get; }
     public virtual IRepository<ProfileModel> Profile { get; }
@@ -30,5 +32,23 @@ namespace RVTR.Account.DataContext.Repositories
     /// </summary>
     /// <returns></returns>
     public async Task<int> CommitAsync() => await _context.SaveChangesAsync();
+
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!_disposedValue)
+      {
+        if (disposing)
+        {
+          _context.Dispose();
+        }
+        _disposedValue = true;
+      }
+    }
+
+    public void Dispose()
+    {
+      Dispose(disposing: true);
+      GC.SuppressFinalize(this);
+    }
   }
 }
