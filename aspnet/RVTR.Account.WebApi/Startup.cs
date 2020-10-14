@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
+using RVTR.Account.ObjectModel.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using zipkin4net.Middleware;
 

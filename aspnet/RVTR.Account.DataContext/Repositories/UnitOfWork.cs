@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using RVTR.Account.ObjectModel.Interfaces;
 using RVTR.Account.ObjectModel.Models;
 
 namespace RVTR.Account.DataContext.Repositories

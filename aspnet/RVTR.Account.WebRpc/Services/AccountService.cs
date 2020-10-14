@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
-using RVTR.Account.DataContext.Repositories;
+using RVTR.Account.ObjectModel.Interfaces;
 
 namespace RVTR.Account.WebRpc
 {

@@ -130,38 +130,43 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_Repository_Update()
     {
-      AccountModel account;
-      ProfileModel profile;
-      AddressModel address;
-
       using (var ctx = new AccountContext(Options))
       {
         var accounts = new Repository<AccountModel>(ctx);
-        account = await ctx.Accounts.FirstAsync();
+        var account = await ctx.Accounts.FirstAsync();
 
         account.Name = "name";
         accounts.Update(account);
-        Assert.Equal(account.Name, (await ctx.Accounts.FindAsync(account.Id)).Name);
+
+        var result = ctx.Accounts.Find(account.Id);
+        Assert.Equal(account.Name, result.Name);
+        Assert.Equal(EntityState.Modified, ctx.Entry(result).State);
       }
 
       using (var ctx = new AccountContext(Options))
       {
         var profiles = new Repository<ProfileModel>(ctx);
-        profile = await ctx.Profiles.FirstAsync();
+        var profile = await ctx.Profiles.FirstAsync();
 
         profile.Email = "email";
         profiles.Update(profile);
-        Assert.Equal(profile.Email, (await ctx.Profiles.FindAsync(profile.Id)).Email);
+
+        var result = ctx.Profiles.Find(profile.Id);
+        Assert.Equal(profile.Email, result.Email);
+        Assert.Equal(EntityState.Modified, ctx.Entry(result).State);
       }
 
       using (var ctx = new AccountContext(Options))
       {
         var addresses = new Repository<AddressModel>(ctx);
-        address = await ctx.Addresses.FirstAsync();
+        var address = await ctx.Addresses.FirstAsync();
 
         address.City = "Denver";
         addresses.Update(address);
-        Assert.Equal(address.City, (await ctx.Addresses.FindAsync(address.Id)).City);
+
+        var result = ctx.Addresses.Find(address.Id);
+        Assert.Equal(address.City, result.City);
+        Assert.Equal(EntityState.Modified, ctx.Entry(result).State);
       }
     }
   }

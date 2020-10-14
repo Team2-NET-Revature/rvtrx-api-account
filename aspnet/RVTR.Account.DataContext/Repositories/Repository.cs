@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using RVTR.Account.ObjectModel.Interfaces;
 
 namespace RVTR.Account.DataContext.Repositories
 {

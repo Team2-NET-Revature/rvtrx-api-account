@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RVTR.Account.DataContext.Repositories;
+using RVTR.Account.ObjectModel.Interfaces;
 
 namespace RVTR.Account.WebRpc
 {

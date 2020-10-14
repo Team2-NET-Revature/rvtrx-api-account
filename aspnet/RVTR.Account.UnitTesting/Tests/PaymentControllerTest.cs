@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moq;
-using RVTR.Account.DataContext.Repositories;
+using RVTR.Account.ObjectModel.Interfaces;
 using RVTR.Account.ObjectModel.Models;
 using RVTR.Account.WebApi.Controllers;
 using Xunit;

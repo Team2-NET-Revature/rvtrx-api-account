@@ -11,7 +11,7 @@ namespace RVTR.Account.UnitTesting
     protected readonly DbContextOptions<AccountContext> Options;
     private bool _disposedValue;
 
-    public DataTest()
+    protected DataTest()
     {
       _connection = new SqliteConnection("Data Source=:memory:");
       _connection.Open();

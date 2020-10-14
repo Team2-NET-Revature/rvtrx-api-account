@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using RVTR.Account.ObjectModel.Models;
 
-namespace RVTR.Account.DataContext.Repositories
+namespace RVTR.Account.ObjectModel.Interfaces
 {
   public interface IUnitOfWork
   {
