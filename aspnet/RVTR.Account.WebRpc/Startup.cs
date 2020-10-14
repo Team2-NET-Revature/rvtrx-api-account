@@ -12,7 +12,7 @@ namespace RVTR.Account.WebRpc
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddGrpc();
-      services.AddScoped<UnitOfWork>();
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

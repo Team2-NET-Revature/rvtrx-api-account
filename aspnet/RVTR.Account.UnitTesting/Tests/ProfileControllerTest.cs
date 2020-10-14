@@ -19,7 +19,7 @@ namespace RVTR.Account.UnitTesting.Tests
     private readonly DbContextOptions<AccountContext> _options;
     private readonly ProfileController _controller;
     private readonly ILogger<ProfileController> _logger;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
     public ProfileControllerTest()
     {
@@ -31,7 +31,7 @@ namespace RVTR.Account.UnitTesting.Tests
       var contextMock = new Mock<AccountContext>(_options);
       var loggerMock = new Mock<ILogger<ProfileController>>();
       var repositoryMock = new Mock<Repository<ProfileModel>>(new AccountContext(_options));
-      var unitOfWorkMock = new Mock<UnitOfWork>(contextMock.Object);
+      var unitOfWorkMock = new Mock<IUnitOfWork>();
 
       repositoryMock.Setup(m => m.DeleteAsync(0)).Throws(new Exception());
       repositoryMock.Setup(m => m.DeleteAsync(1)).Returns(Task.FromResult(1));

@@ -6,7 +6,7 @@ namespace RVTR.Account.DataContext.Repositories
   /// <summary>
   /// Represents the _UnitOfWork_ repository
   /// </summary>
-  public class UnitOfWork
+  public class UnitOfWork : IUnitOfWork
   {
     private readonly AccountContext _context;
 

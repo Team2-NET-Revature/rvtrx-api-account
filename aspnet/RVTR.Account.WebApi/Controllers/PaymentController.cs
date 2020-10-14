@@ -20,14 +20,14 @@ namespace RVTR.Account.WebApi.Controllers
   public class PaymentController : ControllerBase
   {
     private readonly ILogger<PaymentController> _logger;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
     /// <summary>
     /// The _Payment Controller_ constructor
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="unitOfWork"></param>
-    public PaymentController(ILogger<PaymentController> logger, UnitOfWork unitOfWork)
+    public PaymentController(ILogger<PaymentController> logger, IUnitOfWork unitOfWork)
     {
       _logger = logger;
       _unitOfWork = unitOfWork;

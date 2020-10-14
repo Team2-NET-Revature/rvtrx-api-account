@@ -8,9 +8,9 @@ namespace RVTR.Account.WebRpc
   public class AccountService : Account.AccountBase
   {
     private readonly ILogger<AccountService> _logger;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AccountService(ILogger<AccountService> logger, UnitOfWork unitOfWork)
+    public AccountService(ILogger<AccountService> logger, IUnitOfWork unitOfWork)
     {
       _logger = logger;
       _unitOfWork = unitOfWork;
