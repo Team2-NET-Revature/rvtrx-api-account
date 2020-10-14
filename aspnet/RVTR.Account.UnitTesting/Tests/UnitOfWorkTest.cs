@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using RVTR.Account.DataContext;
@@ -6,10 +7,11 @@ using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
-  public class UnitOfWorkTest
+  public class UnitOfWorkTest : IDisposable
   {
     private readonly SqliteConnection _connection;
     private readonly DbContextOptions<AccountContext> _options;
+    private bool _disposedValue;
 
     public UnitOfWorkTest()
     {
@@ -33,6 +35,24 @@ namespace RVTR.Account.UnitTesting.Tests
       Assert.NotNull(unitOfWork.Account);
       Assert.NotNull(unitOfWork.Profile);
       Assert.Equal(0, actual);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!_disposedValue)
+      {
+        if (disposing)
+        {
+          _connection.Dispose();
+        }
+        _disposedValue = true;
+      }
+    }
+
+    public void Dispose()
+    {
+      Dispose(disposing: true);
+      GC.SuppressFinalize(this);
     }
   }
 }
