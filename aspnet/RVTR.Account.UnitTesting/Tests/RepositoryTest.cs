@@ -1,5 +1,3 @@
-using System;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
@@ -8,31 +6,16 @@ using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
-  public class RepositoryTest : IDisposable
+  public class RepositoryTest : DataTest
   {
-    private readonly SqliteConnection _connection;
-    private readonly DbContextOptions<AccountContext> _options;
     private readonly AccountModel _account = new AccountModel() { Id = 3 };
     private readonly ProfileModel _profile = new ProfileModel() { familyName = "FN", givenName = "GN", Id = 3, Email = "anemail@random.com", Phone = "123456789", Type = "" };
     private readonly AddressModel _address = new AddressModel() { Id = 3, AccountId = 3 };
-    private bool _disposedValue;
-
-    public RepositoryTest()
-    {
-      _connection = new SqliteConnection("Data Source=:memory:");
-      _connection.Open();
-      _options = new DbContextOptionsBuilder<AccountContext>()
-        .UseSqlite(_connection)
-        .Options;
-
-      using var ctx = new AccountContext(_options);
-      ctx.Database.EnsureCreated();
-    }
 
     [Fact]
     public async void Test_Repository_DeleteAsync()
     {
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var profiles = new Repository<ProfileModel>(ctx);
         var profile = await ctx.Profiles.FirstAsync();
@@ -40,7 +23,7 @@ namespace RVTR.Account.UnitTesting.Tests
         Assert.Equal(EntityState.Deleted, ctx.Entry(profile).State);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var addresses = new Repository<AddressModel>(ctx);
         var address = await ctx.Addresses.FirstAsync();
@@ -48,7 +31,7 @@ namespace RVTR.Account.UnitTesting.Tests
         Assert.Equal(EntityState.Deleted, ctx.Entry(address).State);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var accounts = new Repository<AccountModel>(ctx);
         var account = await ctx.Accounts.FirstAsync();
@@ -60,21 +43,21 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_Repository_InsertAsync()
     {
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var accounts = new Repository<AccountModel>(ctx);
         await accounts.InsertAsync(_account);
         Assert.Equal(EntityState.Added, ctx.Entry(_account).State);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var profiles = new Repository<ProfileModel>(ctx);
         await profiles.InsertAsync(_profile);
         Assert.Equal(EntityState.Added, ctx.Entry(_profile).State);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var addresses = new Repository<AddressModel>(ctx);
         await addresses.InsertAsync(_address);
@@ -85,7 +68,7 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_Repository_SelectAsync()
     {
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var accounts = new Repository<AccountModel>(ctx);
 
@@ -94,7 +77,7 @@ namespace RVTR.Account.UnitTesting.Tests
         Assert.NotEmpty(actual);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var profiles = new Repository<ProfileModel>(ctx);
 
@@ -103,7 +86,7 @@ namespace RVTR.Account.UnitTesting.Tests
         Assert.NotEmpty(actual);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var addresses = new Repository<AddressModel>(ctx);
 
@@ -116,7 +99,7 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_Repository_SelectAsync_ById()
     {
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var accounts = new Repository<AccountModel>(ctx);
 
@@ -125,7 +108,7 @@ namespace RVTR.Account.UnitTesting.Tests
         Assert.NotNull(actual);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var profiles = new Repository<ProfileModel>(ctx);
 
@@ -134,7 +117,7 @@ namespace RVTR.Account.UnitTesting.Tests
         Assert.NotNull(actual);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var addresses = new Repository<AddressModel>(ctx);
 
@@ -151,7 +134,7 @@ namespace RVTR.Account.UnitTesting.Tests
       ProfileModel profile;
       AddressModel address;
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var accounts = new Repository<AccountModel>(ctx);
         account = await ctx.Accounts.FirstAsync();
@@ -161,7 +144,7 @@ namespace RVTR.Account.UnitTesting.Tests
         Assert.Equal(account.Name, (await ctx.Accounts.FindAsync(account.Id)).Name);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var profiles = new Repository<ProfileModel>(ctx);
         profile = await ctx.Profiles.FirstAsync();
@@ -171,7 +154,7 @@ namespace RVTR.Account.UnitTesting.Tests
         Assert.Equal(profile.Email, (await ctx.Profiles.FindAsync(profile.Id)).Email);
       }
 
-      using (var ctx = new AccountContext(_options))
+      using (var ctx = new AccountContext(Options))
       {
         var addresses = new Repository<AddressModel>(ctx);
         address = await ctx.Addresses.FirstAsync();
@@ -180,24 +163,6 @@ namespace RVTR.Account.UnitTesting.Tests
         addresses.Update(address);
         Assert.Equal(address.City, (await ctx.Addresses.FindAsync(address.Id)).City);
       }
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-      if (!_disposedValue)
-      {
-        if (disposing)
-        {
-          _connection.Dispose();
-        }
-        _disposedValue = true;
-      }
-    }
-
-    public void Dispose()
-    {
-      Dispose(disposing: true);
-      GC.SuppressFinalize(this);
     }
   }
 }
