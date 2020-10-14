@@ -12,10 +12,10 @@ namespace RVTR.Account.DataContext.Repositories
     private readonly AccountContext _context;
     private bool _disposedValue;
 
-    public virtual IRepository<AccountModel> Account { get; }
-    public virtual IRepository<ProfileModel> Profile { get; }
-    public virtual IRepository<AddressModel> Address { get; }
-    public virtual IRepository<PaymentModel> Payment { get; }
+    public IRepository<AccountModel> Account { get; }
+    public IRepository<ProfileModel> Profile { get; }
+    public IRepository<AddressModel> Address { get; }
+    public IRepository<PaymentModel> Payment { get; }
 
     public UnitOfWork(AccountContext context)
     {
