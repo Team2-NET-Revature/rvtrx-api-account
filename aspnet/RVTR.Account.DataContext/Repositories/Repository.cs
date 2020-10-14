@@ -10,21 +10,21 @@ namespace RVTR.Account.DataContext.Repositories
   /// <typeparam name="TEntity"></typeparam>
   public class Repository<TEntity> where TEntity : class
   {
-    public readonly DbSet<TEntity> _db;
+    protected readonly DbSet<TEntity> Db;
 
     public Repository(AccountContext context)
     {
-      _db = context.Set<TEntity>();
+      Db = context.Set<TEntity>();
     }
 
-    public virtual async Task DeleteAsync(int id) => _db.Remove(await SelectAsync(id));
+    public virtual async Task DeleteAsync(int id) => Db.Remove(await SelectAsync(id));
 
-    public virtual async Task InsertAsync(TEntity entry) => await _db.AddAsync(entry).ConfigureAwait(true);
+    public virtual async Task InsertAsync(TEntity entry) => await Db.AddAsync(entry).ConfigureAwait(true);
 
-    public virtual async Task<IEnumerable<TEntity>> SelectAsync() => await _db.ToListAsync();
+    public virtual async Task<IEnumerable<TEntity>> SelectAsync() => await Db.ToListAsync();
 
-    public virtual async Task<TEntity> SelectAsync(int id) => await _db.FindAsync(id).ConfigureAwait(true);
+    public virtual async Task<TEntity> SelectAsync(int id) => await Db.FindAsync(id).ConfigureAwait(true);
 
-    public virtual void Update(TEntity entry) => _db.Update(entry);
+    public virtual void Update(TEntity entry) => Db.Update(entry);
   }
 }

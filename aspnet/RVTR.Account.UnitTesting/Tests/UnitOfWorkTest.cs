@@ -8,35 +8,31 @@ namespace RVTR.Account.UnitTesting.Tests
 {
   public class UnitOfWorkTest
   {
-    private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
-    private static readonly DbContextOptions<AccountContext> _options = new DbContextOptionsBuilder<AccountContext>().UseSqlite(_connection).Options;
+    private readonly SqliteConnection _connection;
+    private readonly DbContextOptions<AccountContext> _options;
+
+    public UnitOfWorkTest()
+    {
+      _connection = new SqliteConnection("Data Source=:memory:");
+      _connection.Open();
+      _options = new DbContextOptionsBuilder<AccountContext>()
+        .UseSqlite(_connection)
+        .Options;
+
+      using var ctx = new AccountContext(_options);
+      ctx.Database.EnsureCreated();
+    }
 
     [Fact]
     public async void Test_UnitOfWork_CommitAsync()
     {
-      await _connection.OpenAsync();
+      using var ctx = new AccountContext(_options);
+      var unitOfWork = new UnitOfWork(ctx);
+      var actual = await unitOfWork.CommitAsync();
 
-      try
-      {
-        using (var ctx = new AccountContext(_options))
-        {
-          await ctx.Database.EnsureCreatedAsync();
-        }
-
-        using (var ctx = new AccountContext(_options))
-        {
-          var unitOfWork = new UnitOfWork(ctx);
-          var actual = await unitOfWork.CommitAsync();
-
-          Assert.NotNull(unitOfWork.Account);
-          Assert.NotNull(unitOfWork.Profile);
-          Assert.Equal(0, actual);
-        }
-      }
-      finally
-      {
-        await _connection.CloseAsync();
-      }
+      Assert.NotNull(unitOfWork.Account);
+      Assert.NotNull(unitOfWork.Profile);
+      Assert.Equal(0, actual);
     }
   }
 }

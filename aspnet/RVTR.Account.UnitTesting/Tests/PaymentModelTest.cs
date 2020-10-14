@@ -7,7 +7,7 @@ namespace RVTR.Account.UnitTesting.Tests
 {
   public class PaymentModelTest
   {
-    public static readonly IEnumerable<object[]> _payments = new List<object[]>
+    public static readonly IEnumerable<object[]> Payments = new List<object[]>
     {
       new object[]
       {
@@ -24,7 +24,7 @@ namespace RVTR.Account.UnitTesting.Tests
     };
 
     [Theory]
-    [MemberData(nameof(_payments))]
+    [MemberData(nameof(Payments))]
     public void Test_Create_PaymentModel(PaymentModel payment)
     {
       var validationContext = new ValidationContext(payment);
@@ -34,7 +34,7 @@ namespace RVTR.Account.UnitTesting.Tests
     }
 
     [Theory]
-    [MemberData(nameof(_payments))]
+    [MemberData(nameof(Payments))]
     public void Test_Validate_PaymentModel(PaymentModel payment)
     {
       var validationContext = new ValidationContext(payment);

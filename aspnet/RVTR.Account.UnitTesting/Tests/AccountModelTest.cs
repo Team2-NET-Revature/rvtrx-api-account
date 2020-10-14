@@ -7,7 +7,7 @@ namespace RVTR.Account.UnitTesting.Tests
 {
   public class AccountModelTest
   {
-    public static readonly IEnumerable<object[]> _accounts = new List<object[]>
+    public static readonly IEnumerable<object[]> Accounts = new List<object[]>
     {
       new object[]
       {
@@ -23,7 +23,7 @@ namespace RVTR.Account.UnitTesting.Tests
     };
 
     [Theory]
-    [MemberData(nameof(_accounts))]
+    [MemberData(nameof(Accounts))]
     public void Test_Create_AccountModel(AccountModel account)
     {
       var validationContext = new ValidationContext(account);
@@ -33,7 +33,7 @@ namespace RVTR.Account.UnitTesting.Tests
     }
 
     [Theory]
-    [MemberData(nameof(_accounts))]
+    [MemberData(nameof(Accounts))]
     public void Test_Validate_AccountModel(AccountModel account)
     {
       var validationContext = new ValidationContext(account);

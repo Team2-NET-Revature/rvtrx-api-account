@@ -16,17 +16,22 @@ namespace RVTR.Account.UnitTesting.Tests
 {
   public class AccountControllerTest
   {
-    private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
-    private static readonly DbContextOptions<AccountContext> _options = new DbContextOptionsBuilder<AccountContext>().UseSqlite(_connection).Options;
+    private readonly SqliteConnection _connection;
+    private readonly DbContextOptions<AccountContext> _options;
     private readonly AccountController _controller;
     private readonly ILogger<AccountController> _logger;
     private readonly UnitOfWork _unitOfWork;
 
     public AccountControllerTest()
     {
+      _connection = new SqliteConnection("Data Source=:memory:");
+      _options = new DbContextOptionsBuilder<AccountContext>()
+        .UseSqlite(_connection)
+        .Options;
+
       var contextMock = new Mock<AccountContext>(_options);
       var loggerMock = new Mock<ILogger<AccountController>>();
-      var repositoryMock = new Mock<AccountRepository>(new AccountContext(_options));
+      var repositoryMock = new Mock<AccountRepository>(contextMock.Object);
       var unitOfWorkMock = new Mock<UnitOfWork>(contextMock.Object);
 
       repositoryMock.Setup(m => m.DeleteAsync(0)).Throws(new Exception());

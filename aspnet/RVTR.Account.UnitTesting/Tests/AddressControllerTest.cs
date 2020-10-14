@@ -15,14 +15,19 @@ namespace RVTR.Account.UnitTesting.Tests
 {
   public class AddressControllerTest
   {
-    private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
-    private static readonly DbContextOptions<AccountContext> _options = new DbContextOptionsBuilder<AccountContext>().UseSqlite(_connection).Options;
+    private readonly SqliteConnection _connection;
+    private readonly DbContextOptions<AccountContext> _options;
     private readonly AddressController _controller;
     private readonly ILogger<AddressController> _logger;
     private readonly UnitOfWork _unitOfWork;
 
     public AddressControllerTest()
     {
+      _connection = new SqliteConnection("Data Source=:memory:");
+      _options = new DbContextOptionsBuilder<AccountContext>()
+        .UseSqlite(_connection)
+        .Options;
+
       var contextMock = new Mock<AccountContext>(_options);
       var loggerMock = new Mock<ILogger<AddressController>>();
       var repositoryMock = new Mock<Repository<AddressModel>>(new AccountContext(_options));

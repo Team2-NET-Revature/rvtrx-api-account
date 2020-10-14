@@ -1,77 +1,70 @@
-
-using System.Collections.Generic;
+using System;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
-using RVTR.Account.ObjectModel.Models;
 using Xunit;
 
 namespace RVTR.Account.UnitTesting.Tests
 {
-  public class AccountRepositoryTest
+  public class AccountRepositoryTest : IDisposable
   {
-    private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
-    private static readonly DbContextOptions<AccountContext> _options = new DbContextOptionsBuilder<AccountContext>().UseSqlite(_connection).Options;
+    private readonly SqliteConnection _connection;
+    private readonly DbContextOptions<AccountContext> _options;
+    private bool _disposedValue;
+
+    public AccountRepositoryTest()
+    {
+      _connection = new SqliteConnection("Data Source=:memory:");
+      _connection.Open();
+      _options = new DbContextOptionsBuilder<AccountContext>()
+        .UseSqlite(_connection)
+        .Options;
+
+      using var ctx = new AccountContext(_options);
+      ctx.Database.EnsureCreated();
+    }
+
     [Fact]
     public async void Test_Repository_SelectAsync()
     {
-      await _connection.OpenAsync();
+      using var ctx = new AccountContext(_options);
 
-      try
-      {
-        using (var ctx = new AccountContext(_options))
-        {
-          await ctx.Database.EnsureCreatedAsync();
-        }
+      var lodgings = new AccountRepository(ctx);
 
-        using (var ctx = new AccountContext(_options))
-        {
-          var lodgings = new AccountRepository(ctx);
+      var actual = await lodgings.SelectAsync();
 
-          var actual = await lodgings.SelectAsync();
-
-          Assert.NotEmpty(actual);
-        }
-
-      }
-
-      finally
-      {
-        await _connection.CloseAsync();
-      }
+      Assert.NotEmpty(actual);
     }
 
     [Fact]
     public async void Test_Repository_SelectAsync_ById()
     {
-      await _connection.OpenAsync();
+      using var ctx = new AccountContext(_options);
 
-      try
+      var lodgings = new AccountRepository(ctx);
+
+      var actual = await lodgings.SelectAsync(1);
+
+      Assert.NotNull(actual);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!_disposedValue)
       {
-        using (var ctx = new AccountContext(_options))
+        if (disposing)
         {
-          await ctx.Database.EnsureCreatedAsync();
+          _connection.Dispose();
         }
-
-        using (var ctx = new AccountContext(_options))
-        {
-          var lodgings = new AccountRepository(ctx);
-
-          var actual = await lodgings.SelectAsync(1);
-
-          Assert.NotNull(actual);
-        }
-
-      }
-      finally
-      {
-        await _connection.CloseAsync();
+        _disposedValue = true;
       }
     }
 
-    public AccountRepositoryTest()
+    public void Dispose()
     {
+      Dispose(disposing: true);
+      GC.SuppressFinalize(this);
     }
   }
 }
