@@ -7,7 +7,7 @@ namespace RVTR.Account.UnitTesting.Tests
 {
   public class ProfileModelTest
   {
-    public static readonly IEnumerable<object[]> _profiles = new List<object[]>
+    public static readonly IEnumerable<object[]> Profiles = new List<object[]>
     {
       new object[]
       {
@@ -26,7 +26,7 @@ namespace RVTR.Account.UnitTesting.Tests
     };
 
     [Theory]
-    [MemberData(nameof(_profiles))]
+    [MemberData(nameof(Profiles))]
     public void Test_Create_ProfileModel(ProfileModel profile)
     {
       var validationContext = new ValidationContext(profile);
@@ -36,7 +36,7 @@ namespace RVTR.Account.UnitTesting.Tests
     }
 
     [Theory]
-    [MemberData(nameof(_profiles))]
+    [MemberData(nameof(Profiles))]
     public void Test_Validate_ProfileModel(ProfileModel profile)
     {
       var validationContext = new ValidationContext(profile);

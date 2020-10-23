@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RVTR.Account.DataContext.Repositories;
+using RVTR.Account.ObjectModel.Interfaces;
 using RVTR.Account.ObjectModel.Models;
 using RVTR.Account.WebApi.ResponseObjects;
 
@@ -20,14 +20,14 @@ namespace RVTR.Account.WebApi.Controllers
   public class AccountController : ControllerBase
   {
     private readonly ILogger<AccountController> _logger;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="unitOfWork"></param>
-    public AccountController(ILogger<AccountController> logger, UnitOfWork unitOfWork)
+    public AccountController(ILogger<AccountController> logger, IUnitOfWork unitOfWork)
     {
       _logger = logger;
       _unitOfWork = unitOfWork;

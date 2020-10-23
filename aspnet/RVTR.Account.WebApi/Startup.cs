@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RVTR.Account.DataContext;
 using RVTR.Account.DataContext.Repositories;
+using RVTR.Account.ObjectModel.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using zipkin4net.Middleware;
 
@@ -59,10 +60,10 @@ namespace RVTR.Account.WebApi
         {
           options.EnableRetryOnFailure(3);
         });
-      });
+      }, ServiceLifetime.Transient);
 
       services.AddScoped<ClientZipkinMiddleware>();
-      services.AddScoped<UnitOfWork>();
+      services.AddTransient<IUnitOfWork, UnitOfWork>();
       services.AddSwaggerGen();
       services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ClientSwaggerOptions>();
       services.AddControllers().AddNewtonsoftJson(options =>

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RVTR.Account.DataContext.Repositories;
+using RVTR.Account.ObjectModel.Interfaces;
 using RVTR.Account.ObjectModel.Models;
 using RVTR.Account.WebApi.ResponseObjects;
 
@@ -20,14 +20,14 @@ namespace RVTR.Account.WebApi.Controllers
   public class AddressController : ControllerBase
   {
     private readonly ILogger<AddressController> _logger;
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
     /// <summary>
     /// The _Address Component_ constructor
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="unitOfWork"></param>
-    public AddressController(ILogger<AddressController> logger, UnitOfWork unitOfWork)
+    public AddressController(ILogger<AddressController> logger, IUnitOfWork unitOfWork)
     {
       _logger = logger;
       _unitOfWork = unitOfWork;

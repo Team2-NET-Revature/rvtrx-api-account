@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RVTR.Account.DataContext.Repositories;
+using RVTR.Account.ObjectModel.Interfaces;
 
 namespace RVTR.Account.WebRpc
 {
@@ -12,7 +13,7 @@ namespace RVTR.Account.WebRpc
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddGrpc();
-      services.AddScoped<UnitOfWork>();
+      services.AddTransient<IUnitOfWork, UnitOfWork>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
