@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using RVTR.Account.ObjectModel.Models;
 
@@ -23,6 +24,11 @@ namespace RVTR.Account.DataContext
       modelBuilder.Entity<ProfileModel>().HasKey(e => e.Id);
       modelBuilder.Entity<AccountModel>().HasData
       (
+        new AccountModel
+        {
+          Id = -1,
+          Name = "Name",
+        },
         new AccountModel()
         {
           Id = 1,
@@ -31,6 +37,15 @@ namespace RVTR.Account.DataContext
       );
       modelBuilder.Entity<PaymentModel>().HasData
       (
+        new PaymentModel()
+        {
+          Id = -1,
+          cardExpirationDate = new DateTime(),
+          cardNumber = "xxxx-1234",
+          cardName = "Visa",
+          securityCode = "123",
+          AccountId = -1
+        },
         new PaymentModel()
         {
           Id = 1,
@@ -45,6 +60,16 @@ namespace RVTR.Account.DataContext
       (
         new AddressModel()
         {
+          Id = -1,
+          City = "City",
+          Country = "Country",
+          PostalCode = "21345",
+          StateProvince = "Somewhere",
+          Street = "123 elm street",
+          AccountId = -1,
+        },
+        new AddressModel()
+        {
           Id = 1,
           AccountId = 1,
           City = "Austin",
@@ -56,6 +81,16 @@ namespace RVTR.Account.DataContext
       );
       modelBuilder.Entity<ProfileModel>().HasData
       (
+        new ProfileModel()
+        {
+          Id = -1,
+          Email = "Test@test.com",
+          familyName = "Jones",
+          givenName = "Tom",
+          Phone = "1234567891",
+          Type = "Adult",
+          AccountId = -1
+        },
         new ProfileModel()
         {
           Id = 1,
