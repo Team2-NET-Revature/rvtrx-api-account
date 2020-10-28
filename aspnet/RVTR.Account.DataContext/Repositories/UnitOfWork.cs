@@ -13,7 +13,7 @@ namespace RVTR.Account.DataContext.Repositories
     private readonly AccountContext _context;
     private bool _disposedValue;
 
-    public IRepository<AccountModel> Account { get; }
+    public IAccountRepository Account { get; }
     public IRepository<ProfileModel> Profile { get; }
     public IRepository<AddressModel> Address { get; }
     public IRepository<PaymentModel> Payment { get; }

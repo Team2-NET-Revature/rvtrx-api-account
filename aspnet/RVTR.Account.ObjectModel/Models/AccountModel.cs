@@ -12,6 +12,8 @@ namespace RVTR.Account.ObjectModel.Models
 
     public AddressModel Address { get; set; }
 
+    public string Email { get; set; }
+
     public string Name { get; set; }
 
     public IEnumerable<PaymentModel> Payments { get; set; }
