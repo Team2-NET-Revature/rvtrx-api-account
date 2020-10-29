@@ -9,7 +9,7 @@ namespace RVTR.Account.UnitTesting.Tests
   public class RepositoryTest : DataTest
   {
     private readonly AccountModel _account = new AccountModel() { Id = 3 };
-    private readonly ProfileModel _profile = new ProfileModel() { familyName = "FN", givenName = "GN", Id = 3, Email = "anemail@random.com", Phone = "123456789", Type = "" };
+    private readonly ProfileModel _profile = new ProfileModel() { FamilyName = "FN", GivenName = "GN", Id = 3, Email = "anemail@random.com", Phone = "123456789", Type = "" };
     private readonly AddressModel _address = new AddressModel() { Id = 3, AccountId = 3 };
 
     [Fact]

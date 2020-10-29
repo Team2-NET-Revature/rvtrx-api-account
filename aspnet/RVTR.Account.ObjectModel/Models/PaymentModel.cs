@@ -11,16 +11,28 @@ namespace RVTR.Account.ObjectModel.Models
   {
     public int Id { get; set; }
 
-    public DateTime cardExpirationDate { get; set; }
+    [Required]
+    public DateTime CardExpirationDate { get; set; }
 
-    public string cardNumber { get; set; }
+    [Required(ErrorMessage = "Card number required")]
+    [StringLength(19)]
+    [RegularExpression(@"[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}", ErrorMessage = "Credit card must be properly formatted")]
+    public string CardNumber { get; set; }
 
-    public string securityCode { get; set; }
+    [Required(ErrorMessage = "Security code required")]
+    [StringLength(3)]
+    [RegularExpression(@"[0-9]{3}", ErrorMessage = "Security code must be properly formatted")]
+    public string SecurityCode { get; set; }
 
-    public string cardName { get; set; }
+    [Required(ErrorMessage = "Name is required")]
+    [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Name must start with a capital letter and only use letters.")]
+    public string CardName { get; set; }
 
     public int AccountId { get; set; }
+
+    [Required(ErrorMessage = "Account is required")]
     public AccountModel Account { get; set; }
+
 
     /// <summary>
     /// Represents the _Payment_ `Validate` method
@@ -29,11 +41,11 @@ namespace RVTR.Account.ObjectModel.Models
     /// <returns></returns>
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-      if (string.IsNullOrEmpty(cardName))
+      if (string.IsNullOrEmpty(CardName))
       {
         yield return new ValidationResult("cardName cannot be null.");
       }
-      if (string.IsNullOrEmpty(cardNumber))
+      if (string.IsNullOrEmpty(CardNumber))
       {
         yield return new ValidationResult("cardNumber cannot be null.");
       }

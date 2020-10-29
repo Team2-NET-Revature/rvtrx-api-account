@@ -14,13 +14,13 @@ namespace RVTR.Account.UnitTesting.Tests
         new AddressModel()
         {
           Id = 0,
-          City = "city",
-          Country = "country",
-          PostalCode = "postalcode",
-          StateProvince = "stateprovince",
+          City = "City",
+          Country = "USA",
+          PostalCode = "11111",
+          StateProvince = "NC",
           Street = "street",
           AccountId = 0,
-          Account = null,
+          Account = new AccountModel(),
         }
       }
     };
@@ -34,6 +34,80 @@ namespace RVTR.Account.UnitTesting.Tests
 
       Assert.True(actual);
     }
+
+    /// <summary>
+    /// Tests false if bad country name given
+    /// </summary>
+    [Fact]
+    public void Test_Create_AccountModel_BadCountry()
+    {
+      AddressModel address = new AddressModel()
+      {
+        Id = 0,
+        City = "City",
+        Country = "USAD", //Bad country name
+        PostalCode = "11111",
+        StateProvince = "NC",
+        Street = "street",
+        AccountId = 0,
+        Account = new AccountModel(),
+      };
+
+      var validationContext = new ValidationContext(address);
+      var actual = Validator.TryValidateObject(address, validationContext, null, true);
+
+      Assert.False(actual);
+    }
+
+
+    /// <summary>
+    /// Tests false if bad country zip code given
+    /// </summary>
+    [Fact]
+    public void Test_Create_AccountModel_BadPostCode()
+    {
+      AddressModel address = new AddressModel()
+      {
+        Id = 0,
+        City = "City",
+        Country = "USA",
+        PostalCode = "abc", //Bad post code
+        StateProvince = "NC",
+        Street = "street",
+        AccountId = 0,
+        Account = new AccountModel(),
+      };
+
+      var validationContext = new ValidationContext(address);
+      var actual = Validator.TryValidateObject(address, validationContext, null, true);
+
+      Assert.False(actual);
+    }
+
+    /// <summary>
+    /// Tests false if bad state abbreviation given
+    /// </summary>
+    [Fact]
+    public void Test_Create_AccountModel_BadStateAbbr()
+    {
+      AddressModel address = new AddressModel()
+      {
+        Id = 0,
+        City = "City",
+        Country = "USA",
+        PostalCode = "11111",
+        StateProvince = "NCa", //Bad state
+        Street = "street",
+        AccountId = 0,
+        Account = new AccountModel(),
+      };
+
+      var validationContext = new ValidationContext(address);
+      var actual = Validator.TryValidateObject(address, validationContext, null, true);
+
+      Assert.False(actual);
+    }
+
 
     [Theory]
     [MemberData(nameof(Addresses))]

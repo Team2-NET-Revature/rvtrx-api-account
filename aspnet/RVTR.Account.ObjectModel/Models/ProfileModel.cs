@@ -10,18 +10,30 @@ namespace RVTR.Account.ObjectModel.Models
   {
     public int Id { get; set; }
 
+    [Required(ErrorMessage = "Email address required")]
+    [EmailAddress(ErrorMessage = "must be a real email address.")]
     public string Email { get; set; }
 
-    public string familyName { get; set; }
+    [Required(ErrorMessage = "Family name required")]
+    [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Name must start with a capital letter and only use letters.")]
+    public string FamilyName { get; set; }
 
-    public string givenName { get; set; }
+    [Required(ErrorMessage = "Given name name required")]
+    [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Name must start with a capital letter and only use letters.")]
+    public string GivenName { get; set; }
 
+    [Required(ErrorMessage = "Phone number required")]
+    [Phone(ErrorMessage = "Must be a phone number")]
     public string Phone { get; set; }
 
+    [Required(ErrorMessage = "Type is required")]
+    [MinLength(1)]
+    [MaxLength(50)]
     public string Type { get; set; }
 
     public int? AccountId { get; set; }
 
+    [Required(ErrorMessage = "Account is required")]
     public AccountModel Account { get; set; }
 
     /// <summary>
@@ -35,11 +47,11 @@ namespace RVTR.Account.ObjectModel.Models
       {
         yield return new ValidationResult("Email cannot be null.");
       }
-      if (string.IsNullOrEmpty(familyName))
+      if (string.IsNullOrEmpty(FamilyName))
       {
         yield return new ValidationResult("familyName cannot be null.");
       }
-      if (string.IsNullOrEmpty(givenName))
+      if (string.IsNullOrEmpty(GivenName))
       {
         yield return new ValidationResult("givenName cannot be null.");
       }
