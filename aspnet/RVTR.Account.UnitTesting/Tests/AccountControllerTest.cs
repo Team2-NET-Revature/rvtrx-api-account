@@ -41,7 +41,7 @@ namespace RVTR.Account.UnitTesting.Tests
     public async void Test_Controller_Delete()
     {
       var resultFail = await _controller.Delete("fake@email.com");
-      var resultPass = await _controller.Delete("Test@email.com");
+      var resultPass = await _controller.Delete("Test@test.com");
 
       Assert.NotNull(resultFail);
       Assert.NotNull(resultPass);
