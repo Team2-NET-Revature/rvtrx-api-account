@@ -28,11 +28,13 @@ namespace RVTR.Account.DataContext
         {
           Id = -1,
           Name = "Name",
+          Email = "Test@test.com"
         },
         new AccountModel()
         {
           Id = 1,
-          Name = "camper"
+          Name = "camper",
+          Email = "demo.camper@revature.com"
         }
       );
       modelBuilder.Entity<PaymentModel>().HasData

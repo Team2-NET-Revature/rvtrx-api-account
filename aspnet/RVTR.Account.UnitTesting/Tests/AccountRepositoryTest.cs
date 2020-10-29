@@ -29,5 +29,17 @@ namespace RVTR.Account.UnitTesting.Tests
 
       Assert.NotNull(actual);
     }
+
+    [Fact]
+    public async void Test_Repository_SelectByEmailAsync()
+    {
+      using var ctx = new AccountContext(Options);
+
+      var accounts = new AccountRepository(ctx);
+
+      var actual = await accounts.SelectByEmailAsync("Test@test.com");
+
+      Assert.NotNull(actual);
+    }
   }
 }

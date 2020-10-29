@@ -20,7 +20,7 @@ namespace RVTR.Account.UnitTesting.Tests
     public AccountControllerTest()
     {
       var loggerMock = new Mock<ILogger<AccountController>>();
-      var repositoryMock = new Mock<IRepository<AccountModel>>();
+      var repositoryMock = new Mock<IAccountRepository>();
       var unitOfWorkMock = new Mock<IUnitOfWork>();
 
       repositoryMock.Setup(m => m.DeleteAsync(0)).Throws(new Exception());
@@ -40,8 +40,8 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_Controller_Delete()
     {
-      var resultFail = await _controller.Delete(0);
-      var resultPass = await _controller.Delete(1);
+      var resultFail = await _controller.Delete("fake@email.com");
+      var resultPass = await _controller.Delete("Test@test.com");
 
       Assert.NotNull(resultFail);
       Assert.NotNull(resultPass);
@@ -51,8 +51,8 @@ namespace RVTR.Account.UnitTesting.Tests
     public async void Test_Controller_Get()
     {
       var resultMany = await _controller.Get();
-      var resultFail = await _controller.Get(-5);
-      var resultOne = await _controller.Get(-1);
+      var resultFail = await _controller.Get("fake@email.com");
+      var resultOne = await _controller.Get("Test@test.com");
 
       Assert.NotNull(resultMany);
       Assert.NotNull(resultFail);
@@ -78,7 +78,7 @@ namespace RVTR.Account.UnitTesting.Tests
     [Fact]
     public async void Test_404_Response()
     {
-      var result = await _controller.Get(-100);
+      var result = await _controller.Get("fake@email.com");
 
       Assert.IsType<NotFoundObjectResult>(result);
     }
