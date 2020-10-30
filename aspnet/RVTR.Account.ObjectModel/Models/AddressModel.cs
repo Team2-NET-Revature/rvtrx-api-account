@@ -17,7 +17,7 @@ namespace RVTR.Account.ObjectModel.Models
     public string City { get; set; }
 
     [Required(ErrorMessage = "Country is required")]
-    [RegularExpression(@"(USA)|(US)")]
+    [RegularExpression(@"(^USA$)|(^US$)")]
     public string Country { get; set; }
 
     [Required(ErrorMessage = "Postal code is required")]

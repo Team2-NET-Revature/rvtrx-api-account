@@ -33,7 +33,7 @@ namespace RVTR.Account.DataContext
         new AccountModel()
         {
           Id = 1,
-          Name = "camper",
+          Name = "Camper",
           Email = "demo.camper@revature.com"
         }
       );
@@ -43,7 +43,7 @@ namespace RVTR.Account.DataContext
         {
           Id = -1,
           CardExpirationDate = new DateTime(),
-          CardNumber = "xxxx-1234",
+          CardNumber = "1234123412341234",
           CardName = "Visa",
           SecurityCode = "123",
           AccountId = -1
@@ -55,7 +55,7 @@ namespace RVTR.Account.DataContext
           CardExpirationDate = new System.DateTime(2020, 08, 31),
           CardNumber = "4111111111111111",
           SecurityCode = "123",
-          CardName = "user's credit card"
+          CardName = "User's credit card"
         }
       );
       modelBuilder.Entity<AddressModel>().HasData
@@ -64,9 +64,9 @@ namespace RVTR.Account.DataContext
         {
           Id = -1,
           City = "City",
-          Country = "Country",
+          Country = "USA",
           PostalCode = "21345",
-          StateProvince = "Somewhere",
+          StateProvince = "NC",
           Street = "123 elm street",
           AccountId = -1,
         },
@@ -77,7 +77,7 @@ namespace RVTR.Account.DataContext
           City = "Austin",
           Country = "USA",
           PostalCode = "73301",
-          StateProvince = "Texas",
+          StateProvince = "TX",
           Street = "Test St"
         }
       );
@@ -98,10 +98,10 @@ namespace RVTR.Account.DataContext
           Id = 1,
           AccountId = 1,
           Email = "demo.camper@revature.com",
-          FamilyName = "familyName",
-          GivenName = "givenName",
+          FamilyName = "FamilyName",
+          GivenName = "GivenName",
           Phone = "123-456-7891",
-          Type = ""
+          Type = "Type"
         }
       );
     }

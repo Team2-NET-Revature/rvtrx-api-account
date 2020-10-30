@@ -35,6 +35,30 @@ namespace RVTR.Account.UnitTesting.Tests
       Assert.True(actual);
     }
 
+    /// <summary>
+    /// Tests for phone number with dashes
+    /// </summary>
+    [Fact]
+    public void Test_Create_AccountModel_BadEmail()
+    {
+      ProfileModel profile = new ProfileModel()
+      {
+        Id = 0,
+        Email = "email@email.com",
+        FamilyName = "Family",
+        GivenName = "Given",
+        Phone = "123-456-7890",
+        Type = "Adult",
+        AccountId = 0,
+        Account = new AccountModel(),
+      };
+
+      var validationContext = new ValidationContext(profile);
+      var actual = Validator.TryValidateObject(profile, validationContext, null, true);
+
+      Assert.True(actual);
+    }
+
     [Theory]
     [MemberData(nameof(Profiles))]
     public void Test_Validate_ProfileModel(ProfileModel profile)

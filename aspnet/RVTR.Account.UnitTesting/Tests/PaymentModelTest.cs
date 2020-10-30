@@ -15,7 +15,7 @@ namespace RVTR.Account.UnitTesting.Tests
         {
           Id = 0,
           CardName = "Name",
-          CardNumber = "4234-1234-1234-1234",
+          CardNumber = "4234123412341234",
           SecurityCode = "111",
           AccountId = 0,
           Account = new AccountModel(),
