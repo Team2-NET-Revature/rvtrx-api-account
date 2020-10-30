@@ -17,7 +17,6 @@ namespace RVTR.Account.ObjectModel.Models
     public string Email { get; set; }
 
     [Required(ErrorMessage = "Name required")]
-    [MinLength(1, ErrorMessage = "Name must be at least one character.")]
     [MaxLength(50, ErrorMessage = "Name must be fewer than 50 characters.")]
     [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Name must start with a capital letter and only use letters.")]
     public string Name { get; set; }
