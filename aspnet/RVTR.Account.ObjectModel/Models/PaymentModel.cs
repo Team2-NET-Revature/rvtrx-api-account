@@ -15,8 +15,8 @@ namespace RVTR.Account.ObjectModel.Models
     public DateTime CardExpirationDate { get; set; }
 
     [Required(ErrorMessage = "Card number required")]
-    [StringLength(19)]
-    [RegularExpression(@"[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}", ErrorMessage = "Credit card must be properly formatted")]
+    [StringLength(16)]
+    [RegularExpression(@"[0-9]{16}", ErrorMessage = "Credit card must be properly formatted")]
     public string CardNumber { get; set; }
 
     [Required(ErrorMessage = "Security code required")]
