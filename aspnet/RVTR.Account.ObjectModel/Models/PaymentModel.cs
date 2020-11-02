@@ -11,17 +11,16 @@ namespace RVTR.Account.ObjectModel.Models
   {
     public int Id { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Expiration date required")]
     public DateTime CardExpirationDate { get; set; }
 
     [Required(ErrorMessage = "Card number required")]
-    [StringLength(16)]
-    [RegularExpression(@"[0-9]{16}", ErrorMessage = "Credit card must be properly formatted")]
+    [RegularExpression(@"(^\d{16}$|^\d{4}-\d{4}-\d{4}-\d{4}$)", ErrorMessage = "Credit card must be properly formatted as 16 digits with or without dashes")]
     public string CardNumber { get; set; }
 
     [Required(ErrorMessage = "Security code required")]
-    [StringLength(3)]
-    [RegularExpression(@"[0-9]{3}", ErrorMessage = "Security code must be properly formatted")]
+    [StringLength(3, ErrorMessage = "Security code must be 3 digits long")]
+    [RegularExpression(@"^\d{3}$", ErrorMessage = "Security code must be 3 digits")]
     public string SecurityCode { get; set; }
 
     [Required(ErrorMessage = "Name is required")]
