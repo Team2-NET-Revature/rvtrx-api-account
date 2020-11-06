@@ -27,14 +27,26 @@ namespace RVTR.Account.DataContext
         new AccountModel
         {
           Id = -1,
-          Name = "Name",
-          Email = "Test@test.com"
+          Name = "David Dowd",
+          Email = "ddowd97@gmail.com"
         },
         new AccountModel()
         {
           Id = 1,
-          Name = "Camper",
-          Email = "demo.camper@revature.com"
+          Name = "JonnyCode",
+          Email = "jonsledge39@gmail.com"
+        },
+        new AccountModel()
+        {
+          Id = 2,
+          Name = "Richard Noel",
+          Email = "richard.noel@revature.net"
+        },
+        new AccountModel()
+        {
+          Id = 3,
+          Name = "Mr. Sun",
+          Email = "sunzh95@gmail.com"
         }
       );
       modelBuilder.Entity<PaymentModel>().HasData
@@ -56,6 +68,24 @@ namespace RVTR.Account.DataContext
           CardNumber = "4111111111111111",
           SecurityCode = "123",
           CardName = "User's credit card"
+        },
+        new PaymentModel()
+        {
+          Id = 2,
+          AccountId = 2,
+          CardExpirationDate = new System.DateTime(9999, 01, 01),
+          CardNumber = "9999999999999999",
+          SecurityCode = "999",
+          CardName = "Richard's Trusty Card"
+        },
+        new PaymentModel()
+        {
+          Id = 3,
+          AccountId = 3,
+          CardExpirationDate = new System.DateTime(2020, 12, 01),
+          CardNumber = "1234567887654321",
+          SecurityCode = "010",
+          CardName = "Sun's Credit Card"
         }
       );
       modelBuilder.Entity<AddressModel>().HasData
@@ -79,6 +109,26 @@ namespace RVTR.Account.DataContext
           PostalCode = "73301",
           StateProvince = "TX",
           Street = "Test St"
+        },
+        new AddressModel()
+        {
+          Id = 2,
+          AccountId = 2,
+          City = "Seattle",
+          Country = "USA",
+          PostalCode = "65780",
+          StateProvince = "WA",
+          Street = "See Sharp St"
+        },
+        new AddressModel()
+        {
+          Id = 3,
+          AccountId = 3,
+          City = "West Lafayette",
+          Country = "USA",
+          PostalCode = "47906",
+          StateProvince = "IN",
+          Street = "272 Littleton St"
         }
       );
       modelBuilder.Entity<ProfileModel>().HasData
@@ -101,7 +151,27 @@ namespace RVTR.Account.DataContext
           FamilyName = "FamilyName",
           GivenName = "GivenName",
           Phone = "123-456-7891",
-          Type = "Type"
+          Type = "Child"
+        },
+        new ProfileModel()
+        {
+          Id = 2,
+          AccountId = 2,
+          Email = "random@email.com",
+          FamilyName = "FamilyName",
+          GivenName = "GivenName",
+          Phone = "123-456-7891",
+          Type = "Adult"
+        },
+        new ProfileModel()
+        {
+          Id = 3,
+          AccountId = 3,
+          Email = "anotherone@email.com",
+          FamilyName = "FamilyName",
+          GivenName = "GivenName",
+          Phone = "123-456-7891",
+          Type = "Adult"
         }
       );
     }
