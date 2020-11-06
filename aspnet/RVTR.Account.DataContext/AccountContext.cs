@@ -41,7 +41,7 @@ namespace RVTR.Account.DataContext
           Id = 2,
           Name = "Richard Noel",
           Email = "richard.noel@revature.net"
-        }
+        },
         new AccountModel()
         {
           Id = 3,
@@ -68,7 +68,7 @@ namespace RVTR.Account.DataContext
           CardNumber = "4111111111111111",
           SecurityCode = "123",
           CardName = "User's credit card"
-        }
+        },
         new PaymentModel()
         {
           Id = 2,
@@ -77,7 +77,7 @@ namespace RVTR.Account.DataContext
           CardNumber = "9999999999999999",
           SecurityCode = "999",
           CardName = "Richard's Trusty Card"
-        }
+        },
         new PaymentModel()
         {
           Id = 3,
@@ -109,7 +109,7 @@ namespace RVTR.Account.DataContext
           PostalCode = "73301",
           StateProvince = "TX",
           Street = "Test St"
-        }
+        },
         new AddressModel()
         {
           Id = 2,
@@ -119,7 +119,7 @@ namespace RVTR.Account.DataContext
           PostalCode = "65780",
           StateProvince = "WA",
           Street = "See Sharp St"
-        }
+        },
         new AddressModel()
         {
           Id = 3,
@@ -152,7 +152,7 @@ namespace RVTR.Account.DataContext
           GivenName = "GivenName",
           Phone = "123-456-7891",
           Type = "Child"
-        }
+        },
         new ProfileModel()
         {
           Id = 2,
@@ -162,7 +162,7 @@ namespace RVTR.Account.DataContext
           GivenName = "GivenName",
           Phone = "123-456-7891",
           Type = "Adult"
-        }
+        },
         new ProfileModel()
         {
           Id = 3,
