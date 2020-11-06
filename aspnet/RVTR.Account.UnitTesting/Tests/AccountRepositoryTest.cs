@@ -37,7 +37,7 @@ namespace RVTR.Account.UnitTesting.Tests
 
       var accounts = new AccountRepository(ctx);
 
-      var actual = await accounts.SelectByEmailAsync("Test@test.com");
+      var actual = await accounts.SelectByEmailAsync("ddowd97@gmail.com");
 
       Assert.NotNull(actual);
     }
