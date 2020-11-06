@@ -24,7 +24,7 @@ spec:
               value: 'Host=localhost;Database=AccountData;Username=postgres;Password=AccountData@2020;'
             - name: ConnectionStrings__zipkin
               value: 'http://zipkin:9411/'
-          image: docker.pkg.github.com/rvtr/rvtr-svc-account/account:master-aspnet-rest
+          image: docker.pkg.github.com/rvtr/rvtrx-api-account/account:master-aspnet-rest
           imagePullPolicy: Always
           name: account
           ports:
