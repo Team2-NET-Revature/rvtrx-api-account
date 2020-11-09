@@ -17,8 +17,7 @@ namespace RVTR.Account.UnitTesting.Tests
           CardName = "Name",
           CardNumber = "4234123412341234",
           SecurityCode = "111",
-          AccountId = 0,
-          Account = new AccountModel(),
+          AccountModelId = 0
         }
       }
     };
@@ -45,8 +44,7 @@ namespace RVTR.Account.UnitTesting.Tests
         CardName = "Name",
         CardNumber = "abc", //bad card number given
         SecurityCode = "111",
-        AccountId = 0,
-        Account = new AccountModel(),
+        AccountModelId = 0
       };
 
       var validationContext = new ValidationContext(payment);

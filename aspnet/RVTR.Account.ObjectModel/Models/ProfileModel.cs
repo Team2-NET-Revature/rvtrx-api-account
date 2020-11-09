@@ -32,10 +32,7 @@ namespace RVTR.Account.ObjectModel.Models
     [MaxLength(50, ErrorMessage = "Type must be fewer than 50 characters.")]
     public string Type { get; set; }
 
-    public int? AccountId { get; set; }
-
-    [Required(ErrorMessage = "Account is required")]
-    public AccountModel Account { get; set; }
+    public int AccountModelId { get; set; }
 
     /// <summary>
     /// Represents the _Profile_ `Validate` method

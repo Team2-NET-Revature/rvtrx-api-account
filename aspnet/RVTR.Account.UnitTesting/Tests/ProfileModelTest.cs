@@ -19,8 +19,7 @@ namespace RVTR.Account.UnitTesting.Tests
           GivenName = "Given",
           Phone = "1234567890",
           Type = "Adult",
-          AccountId = 0,
-          Account = new AccountModel(),
+          AccountModelId = 0
         }
       }
     };
@@ -49,8 +48,7 @@ namespace RVTR.Account.UnitTesting.Tests
         GivenName = "Given",
         Phone = "123-456-7890",
         Type = "Adult",
-        AccountId = 0,
-        Account = new AccountModel(),
+        AccountModelId = 0
       };
 
       var validationContext = new ValidationContext(profile);
