@@ -149,8 +149,8 @@ namespace RVTR.Account.DataContext
           Id = 1,
           AccountId = 1,
           Email = "demo.camper@revature.com",
-          FamilyName = "FamilyName",
-          GivenName = "GivenName",
+          FamilyName = "Sledge",
+          GivenName = "Jon",
           Phone = "123-456-7891",
           Type = "Child",
           ImageUri = "img src='https://avataaars.io/?avatarStyle=Circle&topType=LongHairFrida&accessoriesType=Round&hatColor=Blue01&facialHairType=MoustacheMagnum&facialHairColor=Black&clotheType=BlazerSweater&clotheColor=Heather&eyeType=Side&eyebrowType=SadConcerned&mouthType=Serious&skinColor=Brown"
@@ -160,8 +160,8 @@ namespace RVTR.Account.DataContext
           Id = 2,
           AccountId = 2,
           Email = "random@email.com",
-          FamilyName = "FamilyName",
-          GivenName = "GivenName",
+          FamilyName = "Noel",
+          GivenName = "Richard",
           Phone = "123-456-7891",
           Type = "Adult",
           ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=LongHairCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=BeardMedium&facialHairColor=Auburn&clotheType=CollarSweater&clotheColor=White&eyeType=Close&eyebrowType=DefaultNatural&mouthType=Twinkle&skinColor=DarkBrown"
@@ -171,8 +171,8 @@ namespace RVTR.Account.DataContext
           Id = 3,
           AccountId = 3,
           Email = "anotherone@email.com",
-          FamilyName = "FamilyName",
-          GivenName = "GivenName",
+          FamilyName = "Sun",
+          GivenName = "Mr.",
           Phone = "123-456-7891",
           Type = "Adult",
           ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Prescription01&hairColor=BlondeGolden&facialHairType=MoustacheFancy&facialHairColor=Auburn&clotheType=BlazerSweater&clotheColor=Gray02&eyeType=Cry&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Brown"
