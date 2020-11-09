@@ -137,11 +137,12 @@ namespace RVTR.Account.DataContext
         {
           Id = -1,
           Email = "Test@test.com",
-          FamilyName = "Jones",
-          GivenName = "Tom",
+          FamilyName = "Dowd",
+          GivenName = "David",
           Phone = "1234567891",
           Type = "Adult",
-          AccountId = -1
+          AccountId = -1,
+          ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=Platinum&facialHairType=BeardLight&facialHairColor=Platinum&clotheType=CollarSweater&clotheColor=PastelYellow&eyeType=Default&eyebrowType=Angry&mouthType=Twinkle&skinColor=Brown"
         },
         new ProfileModel()
         {
@@ -151,7 +152,8 @@ namespace RVTR.Account.DataContext
           FamilyName = "FamilyName",
           GivenName = "GivenName",
           Phone = "123-456-7891",
-          Type = "Child"
+          Type = "Child",
+          ImageUri = "img src='https://avataaars.io/?avatarStyle=Circle&topType=LongHairFrida&accessoriesType=Round&hatColor=Blue01&facialHairType=MoustacheMagnum&facialHairColor=Black&clotheType=BlazerSweater&clotheColor=Heather&eyeType=Side&eyebrowType=SadConcerned&mouthType=Serious&skinColor=Brown"
         },
         new ProfileModel()
         {
@@ -161,7 +163,8 @@ namespace RVTR.Account.DataContext
           FamilyName = "FamilyName",
           GivenName = "GivenName",
           Phone = "123-456-7891",
-          Type = "Adult"
+          Type = "Adult",
+          ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=LongHairCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=BeardMedium&facialHairColor=Auburn&clotheType=CollarSweater&clotheColor=White&eyeType=Close&eyebrowType=DefaultNatural&mouthType=Twinkle&skinColor=DarkBrown"
         },
         new ProfileModel()
         {
@@ -171,7 +174,8 @@ namespace RVTR.Account.DataContext
           FamilyName = "FamilyName",
           GivenName = "GivenName",
           Phone = "123-456-7891",
-          Type = "Adult"
+          Type = "Adult",
+          ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Prescription01&hairColor=BlondeGolden&facialHairType=MoustacheFancy&facialHairColor=Auburn&clotheType=BlazerSweater&clotheColor=Gray02&eyeType=Cry&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Brown"
         }
       );
     }
