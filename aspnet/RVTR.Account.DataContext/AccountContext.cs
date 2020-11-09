@@ -137,41 +137,45 @@ namespace RVTR.Account.DataContext
         {
           Id = -1,
           Email = "Test@test.com",
-          FamilyName = "Jones",
-          GivenName = "Tom",
+          FamilyName = "Dowd",
+          GivenName = "David",
           Phone = "1234567891",
           Type = "Adult",
-          AccountModelId = -1
+          AccountModelId = -1,
+          ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=Platinum&facialHairType=BeardLight&facialHairColor=Platinum&clotheType=CollarSweater&clotheColor=PastelYellow&eyeType=Default&eyebrowType=Angry&mouthType=Twinkle&skinColor=Brown"
         },
         new ProfileModel()
         {
           Id = 1,
           AccountModelId = 1,
           Email = "demo.camper@revature.com",
-          FamilyName = "FamilyName",
-          GivenName = "GivenName",
+          FamilyName = "Sledge",
+          GivenName = "Jon",
           Phone = "123-456-7891",
-          Type = "Child"
+          Type = "Child",
+          ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=LongHairFrida&accessoriesType=Round&hatColor=Blue01&facialHairType=MoustacheMagnum&facialHairColor=Black&clotheType=BlazerSweater&clotheColor=Heather&eyeType=Side&eyebrowType=SadConcerned&mouthType=Serious&skinColor=Brown"
         },
         new ProfileModel()
         {
           Id = 2,
           AccountModelId = 2,
           Email = "random@email.com",
-          FamilyName = "FamilyName",
-          GivenName = "GivenName",
+          FamilyName = "Noel",
+          GivenName = "Richard",
           Phone = "123-456-7891",
-          Type = "Adult"
+          Type = "Adult",
+          ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=LongHairCurly&accessoriesType=Prescription01&hairColor=Black&facialHairType=BeardMedium&facialHairColor=Auburn&clotheType=CollarSweater&clotheColor=White&eyeType=Close&eyebrowType=DefaultNatural&mouthType=Twinkle&skinColor=DarkBrown"
         },
         new ProfileModel()
         {
           Id = 3,
           AccountModelId = 3,
           Email = "anotherone@email.com",
-          FamilyName = "FamilyName",
-          GivenName = "GivenName",
+          FamilyName = "Sun",
+          GivenName = "Mr.",
           Phone = "123-456-7891",
-          Type = "Adult"
+          Type = "Adult",
+          ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Prescription01&hairColor=BlondeGolden&facialHairType=MoustacheFancy&facialHairColor=Auburn&clotheType=BlazerSweater&clotheColor=Gray02&eyeType=Cry&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Brown"
         }
       );
     }

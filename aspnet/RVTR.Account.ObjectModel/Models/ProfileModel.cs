@@ -34,6 +34,9 @@ namespace RVTR.Account.ObjectModel.Models
 
     public int AccountModelId { get; set; }
 
+    [RegularExpression(@"^(http(s?):\/\/)([\w])([\/|.|\w|\s|-|&|?|=])*$", ErrorMessage = "Image URI must be a real image URI.")]
+    public string ImageUri { get; set; } = "https://bulma.io/images/placeholders/256x256.png"; //Default is bulma placeholder
+
     /// <summary>
     /// Represents the _Profile_ `Validate` method
     /// </summary>
