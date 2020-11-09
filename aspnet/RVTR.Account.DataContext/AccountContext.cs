@@ -153,7 +153,7 @@ namespace RVTR.Account.DataContext
           GivenName = "Jon",
           Phone = "123-456-7891",
           Type = "Child",
-          ImageUri = "img src='https://avataaars.io/?avatarStyle=Circle&topType=LongHairFrida&accessoriesType=Round&hatColor=Blue01&facialHairType=MoustacheMagnum&facialHairColor=Black&clotheType=BlazerSweater&clotheColor=Heather&eyeType=Side&eyebrowType=SadConcerned&mouthType=Serious&skinColor=Brown"
+          ImageUri = "https://avataaars.io/?avatarStyle=Circle&topType=LongHairFrida&accessoriesType=Round&hatColor=Blue01&facialHairType=MoustacheMagnum&facialHairColor=Black&clotheType=BlazerSweater&clotheColor=Heather&eyeType=Side&eyebrowType=SadConcerned&mouthType=Serious&skinColor=Brown"
         },
         new ProfileModel()
         {
