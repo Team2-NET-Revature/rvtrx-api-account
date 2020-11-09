@@ -58,12 +58,12 @@ namespace RVTR.Account.DataContext
           CardNumber = "1234123412341234",
           CardName = "Visa",
           SecurityCode = "123",
-          AccountId = -1
+          AccountModelId = -1
         },
         new PaymentModel()
         {
           Id = 1,
-          AccountId = 1,
+          AccountModelId = 1,
           CardExpirationDate = new System.DateTime(2020, 08, 31),
           CardNumber = "4111111111111111",
           SecurityCode = "123",
@@ -72,7 +72,7 @@ namespace RVTR.Account.DataContext
         new PaymentModel()
         {
           Id = 2,
-          AccountId = 2,
+          AccountModelId = 2,
           CardExpirationDate = new System.DateTime(9999, 01, 01),
           CardNumber = "9999999999999999",
           SecurityCode = "999",
@@ -81,7 +81,7 @@ namespace RVTR.Account.DataContext
         new PaymentModel()
         {
           Id = 3,
-          AccountId = 3,
+          AccountModelId = 3,
           CardExpirationDate = new System.DateTime(2020, 12, 01),
           CardNumber = "1234567887654321",
           SecurityCode = "010",
@@ -141,12 +141,12 @@ namespace RVTR.Account.DataContext
           GivenName = "Tom",
           Phone = "1234567891",
           Type = "Adult",
-          AccountId = -1
+          AccountModelId = -1
         },
         new ProfileModel()
         {
           Id = 1,
-          AccountId = 1,
+          AccountModelId = 1,
           Email = "demo.camper@revature.com",
           FamilyName = "FamilyName",
           GivenName = "GivenName",
@@ -156,7 +156,7 @@ namespace RVTR.Account.DataContext
         new ProfileModel()
         {
           Id = 2,
-          AccountId = 2,
+          AccountModelId = 2,
           Email = "random@email.com",
           FamilyName = "FamilyName",
           GivenName = "GivenName",
@@ -166,7 +166,7 @@ namespace RVTR.Account.DataContext
         new ProfileModel()
         {
           Id = 3,
-          AccountId = 3,
+          AccountModelId = 3,
           Email = "anotherone@email.com",
           FamilyName = "FamilyName",
           GivenName = "GivenName",

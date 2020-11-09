@@ -27,11 +27,7 @@ namespace RVTR.Account.ObjectModel.Models
     [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Name must start with a capital letter and only use letters.")]
     public string CardName { get; set; }
 
-    public int AccountId { get; set; }
-
-    [Required(ErrorMessage = "Account is required")]
-    public AccountModel Account { get; set; }
-
+    public int AccountModelId { get; set; }
 
     /// <summary>
     /// Represents the _Payment_ `Validate` method
