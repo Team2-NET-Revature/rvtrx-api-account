@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: account
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: account
@@ -18,6 +18,10 @@ spec:
       labels:
         app: account
     spec:
+      volumes:
+        - name: acct-pv-storage
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
       containers:
         - env:
             - name: ConnectionStrings__pgsql
@@ -40,6 +44,8 @@ spec:
           ports:
             - containerPort: 5432
               name: postgres-tcp
-
+          volumeMounts:
+            - mountPath: /acct/storage
+              name: acct-pv-storage
       imagePullSecrets:
         - name: github
