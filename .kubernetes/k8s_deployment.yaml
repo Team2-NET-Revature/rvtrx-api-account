@@ -19,9 +19,9 @@ spec:
         app: account
     spec:
       volumes:
-        - name: acct-pv-storage
+        - name: postgres-pv-account
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: account-pv-claim
       containers:
         - env:
             - name: ConnectionStrings__pgsql
@@ -46,6 +46,6 @@ spec:
               name: postgres-tcp
           volumeMounts:
             - mountPath: /acct/storage
-              name: acct-pv-storage
+              name: postgres-pv-account
       imagePullSecrets:
         - name: github
