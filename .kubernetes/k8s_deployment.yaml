@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: account
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: account
@@ -18,13 +18,17 @@ spec:
       labels:
         app: account
     spec:
+      volumes:
+        - name: acct-pv-storage
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
       containers:
         - env:
             - name: ConnectionStrings__pgsql
               value: 'Host=localhost;Database=AccountData;Username=postgres;Password=AccountData@2020;'
             - name: ConnectionStrings__zipkin
               value: 'http://zipkin:9411/'
-          image: docker.pkg.github.com/rvtr/rvtr-svc-account/account:master-aspnet-rest
+          image: docker.pkg.github.com/rvtr/rvtrx-api-account/account:master-aspnet-rest
           imagePullPolicy: Always
           name: account
           ports:
@@ -40,6 +44,8 @@ spec:
           ports:
             - containerPort: 5432
               name: postgres-tcp
-
+          volumeMounts:
+            - mountPath: /acct/storage
+              name: acct-pv-storage
       imagePullSecrets:
         - name: github
