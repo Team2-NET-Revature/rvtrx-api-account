@@ -127,6 +127,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: drop
+          path: drop
       - name: docker_login
         run: echo ${GITHUB_TOKEN} | docker login --username ${GITHUB_ACTOR} --password-stdin docker.pkg.github.com
       - name: docker_build
