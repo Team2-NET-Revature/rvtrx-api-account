@@ -6,9 +6,8 @@ namespace RVTR.Account.Domain.Models
   /// <summary>
   /// Represents the _Profile_ model
   /// </summary>
-  public class ProfileModel : IValidatableObject
+  public class ProfileModel : AEntity
   {
-    public int Id { get; set; }
 
     [Required(ErrorMessage = "Email address required")]
     [EmailAddress(ErrorMessage = "must be a real email address.")]
@@ -42,7 +41,7 @@ namespace RVTR.Account.Domain.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
       if (string.IsNullOrEmpty(Email))
       {

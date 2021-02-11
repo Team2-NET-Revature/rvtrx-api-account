@@ -6,9 +6,8 @@ namespace RVTR.Account.Domain.Models
   /// <summary>
   /// Represents the _Address_ model
   /// </summary>
-  public class AddressModel : IValidatableObject
+  public class AddressModel : AEntity
   {
-    public int Id { get; set; }
 
     [Required(ErrorMessage = "City is required")]
     [MaxLength(50, ErrorMessage = "Name must be fewer than 50 characters.")]
@@ -42,7 +41,7 @@ namespace RVTR.Account.Domain.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
       if (string.IsNullOrEmpty(City))
       {
