@@ -7,7 +7,7 @@ namespace RVTR.Account.Domain.Models
   /// <summary>
   /// Represents the _Payment_ model
   /// </summary>
-  public class PaymentModel : AEntity
+  public class PaymentModel : AEntity, IValidatableObject
   {
 
     [Required(ErrorMessage = "Expiration date required")]
@@ -33,7 +33,7 @@ namespace RVTR.Account.Domain.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
       if (string.IsNullOrEmpty(CardName))
       {

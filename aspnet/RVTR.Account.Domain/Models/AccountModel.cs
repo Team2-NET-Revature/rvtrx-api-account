@@ -6,7 +6,7 @@ namespace RVTR.Account.Domain.Models
   /// <summary>
   /// Represents the _Account_ model
   /// </summary>
-  public class AccountModel : AEntity
+  public class AccountModel : AEntity, IValidatableObject
   {
     public AddressModel Address { get; set; }
 
@@ -46,7 +46,7 @@ namespace RVTR.Account.Domain.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
       if (string.IsNullOrEmpty(Name))
       {
