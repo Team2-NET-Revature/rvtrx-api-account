@@ -1,5 +1,5 @@
 networks:
-  locally:
+  accountly:
 
 services:
   rest:
@@ -10,7 +10,7 @@ services:
       ConnectionStrings__pgsql: 'Host=data;Database=AccountData;Username=postgres;Password=AccountData@2020;'
       ConnectionStrings__zipkin: 'http://trace:9411/'
     networks:
-      - locally
+      - accountly
     ports:
       - 8000:80
 
@@ -19,12 +19,12 @@ services:
       POSTGRES_PASSWORD: AccountData@2020
     image: postgres:12
     networks:
-      - locally
+      - accountly
 
   trace:
     image: openzipkin/zipkin-slim
     networks:
-      - locally
+      - accountly
     ports:
       - 9000:9411
 
