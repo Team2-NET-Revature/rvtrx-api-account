@@ -37,10 +37,11 @@ namespace RVTR.Account.Testing.Tests
     /// <summary>
     /// Tests for phone number with dashes
     /// </summary>
-    [Fact]
-    public void Test_Create_AccountModel_BadEmail()
+    [Theory]
+    [MemberData(nameof(Profiles))]
+    public void Test_Create_AccountModel_BadEmail(ProfileModel profile)
     {
-      ProfileModel profile = new ProfileModel()
+      profile = new ProfileModel()
       {
         EntityId = 0,
         Email = "email@email.com",

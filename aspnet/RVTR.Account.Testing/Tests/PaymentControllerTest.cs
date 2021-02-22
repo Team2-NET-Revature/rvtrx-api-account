@@ -16,6 +16,20 @@ namespace RVTR.Account.UnitTesting.Tests
     private readonly ILogger<PaymentController> _logger;
     private readonly IUnitOfWork _unitOfWork;
 
+    public static readonly IEnumerable<object[]> Payments = new List<object[]>
+    {
+      new object[]
+      {
+        new PaymentModel()
+        {
+          EntityId = 0,
+          CardName = "Name",
+          CardNumber = "4234123412341234",
+          SecurityCode = "111",
+          AccountModelId = 0
+        }
+      }
+    };
     public PaymentControllerTest()
     {
       var loggerMock = new Mock<ILogger<PaymentController>>();
@@ -36,38 +50,44 @@ namespace RVTR.Account.UnitTesting.Tests
       _controller = new PaymentController(_logger, _unitOfWork);
     }
 
-    [Fact]
-    public async void Test_Controller_Delete()
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    public async void Test_Controller_Delete(int id)
     {
-      var resultFail = await _controller.Delete(0);
-      var resultPass = await _controller.Delete(1);
+      var resultFail = await _controller.Delete(id);
+      var resultPass = await _controller.Delete(id);
 
       Assert.NotNull(resultFail);
       Assert.NotNull(resultPass);
     }
 
-    [Fact]
-    public async void Test_Controller_Get()
+    [Theory]
+    [InlineData(-5)]
+    [InlineData(-1)]
+    public async void Test_Controller_Get(int id)
     {
-      var resultMany = await _controller.Get();
-      var resultFail = await _controller.Get(-5);
-      var resultOne = await _controller.Get(-1);
+      var resultMany = await _controller.Get(id);
+      var resultFail = await _controller.Get(id);
+      var resultOne = await _controller.Get(id);
 
       Assert.NotNull(resultMany);
       Assert.NotNull(resultFail);
       Assert.NotNull(resultOne);
     }
 
-    [Fact]
-    public async void Test_Controller_Post()
+    [Theory]
+    [MemberData(nameof(Payments))]
+    public async void Test_Controller_Post(PaymentModel payment)
     {
       var resultPass = await _controller.Post(new PaymentModel());
 
       Assert.NotNull(resultPass);
     }
 
-    [Fact]
-    public async void Test_Controller_Put()
+    [Theory]
+    [MemberData(nameof(Payments))]
+    public async void Test_Controller_Put(PaymentModel payment)
     {
       var resultPass = await _controller.Put(new PaymentModel());
 

@@ -16,6 +16,23 @@ namespace RVTR.Account.Testing.Tests
     private readonly ILogger<AddressController> _logger;
     private readonly IUnitOfWork _unitOfWork;
 
+    public static readonly IEnumerable<object[]> Addresses = new List<object[]>
+    {
+      new object[]
+      {
+        new AddressModel()
+        {
+          EntityId = 0,
+          City = "City",
+          Country = "USA",
+          PostalCode = "11111",
+          StateProvince = "NC",
+          Street = "street",
+          AccountId = 0,
+          Account = new AccountModel(),
+        }
+      }
+    };
     public AddressControllerTest()
     {
       var loggerMock = new Mock<ILogger<AddressController>>();
@@ -36,38 +53,44 @@ namespace RVTR.Account.Testing.Tests
       _controller = new AddressController(_logger, _unitOfWork);
     }
 
-    [Fact]
-    public async void Test_Controller_Delete()
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public async void Test_Controller_Delete(int id)
     {
-      var resultFail = await _controller.Delete(0);
-      var resultPass = await _controller.Delete(-1);
+      var resultFail = await _controller.Delete(id);
+      var resultPass = await _controller.Delete(id);
 
       Assert.NotNull(resultFail);
       Assert.NotNull(resultPass);
     }
 
-    [Fact]
-    public async void Test_Controller_Get()
+    [Theory]
+    [InlineData(-5)]
+    [InlineData(-1)]
+    public async void Test_Controller_Get(int id)
     {
       var resultMany = await _controller.Get();
-      var resultFail = await _controller.Get(-5);
-      var resultOne = await _controller.Get(-1);
+      var resultFail = await _controller.Get(id);
+      var resultOne = await _controller.Get(id);
 
       Assert.NotNull(resultMany);
       Assert.NotNull(resultFail);
       Assert.NotNull(resultOne);
     }
 
-    [Fact]
-    public async void Test_Controller_Post()
+    [Theory]
+    [MemberData(nameof(Addresses))]
+    public async void Test_Controller_Post(AddressModel address)
     {
       var resultPass = await _controller.Post(new AddressModel());
 
       Assert.NotNull(resultPass);
     }
 
-    [Fact]
-    public async void Test_Controller_Put()
+    [Theory]
+    [MemberData(nameof(Addresses))]
+    public async void Test_Controller_Put(AddressModel address)
     {
       var resultPass = await _controller.Put(new AddressModel());
 

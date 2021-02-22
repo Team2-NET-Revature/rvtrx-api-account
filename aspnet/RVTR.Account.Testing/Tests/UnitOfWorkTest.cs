@@ -1,5 +1,6 @@
 using RVTR.Account.Context;
 using RVTR.Account.Context.Repositories;
+using RVTR.Account.Domain.Models;
 using Xunit;
 
 namespace RVTR.Account.Testing.Tests

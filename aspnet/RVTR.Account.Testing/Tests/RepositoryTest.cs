@@ -8,12 +8,13 @@ namespace RVTR.Account.Testing.Tests
 {
   public class RepositoryTest : DataTest
   {
-    private readonly AccountModel _account = new AccountModel() { EntityId = 1, Email = "ddowd97@gmail.com" };
-    private readonly ProfileModel _profile = new ProfileModel() { FamilyName = "Dowd", GivenName = "David", EntityId = 1, Email = "ddowd97@gmail.com", Phone = "123456789", Type = "Adult" };
+    private readonly AccountModel _account = new AccountModel() { EntityId = 1, Email = "jsmith@gmail.com" };
+    private readonly ProfileModel _profile = new ProfileModel() { FamilyName = "Smith", GivenName = "John", EntityId = 1, Email = "jsmith@gmail.com", Phone = "123456789", Type = "Adult" };
     private readonly AddressModel _address = new AddressModel() { EntityId = 1, AccountId = 1 };
 
-    [Fact]
-    public async void Test_Repository_DeleteAsync()
+    [Theory]
+    [InlineData(3)]
+    public async void Test_Repository_DeleteAsync(int id)
     {
       using (var ctx = new AccountContext(Options))
       {
@@ -96,14 +97,15 @@ namespace RVTR.Account.Testing.Tests
       }
     }
 
-    [Fact]
-    public async void Test_Repository_SelectAsync_ById()
+    [Theory]
+    [InlineData(1)]
+    public async void Test_Repository_SelectAsync_ById(int id)
     {
       using (var ctx = new AccountContext(Options))
       {
         var accounts = new Repository<AccountModel>(ctx);
 
-        var actual = await accounts.SelectAsync(1);
+        var actual = await accounts.SelectAsync(id);
 
         Assert.NotNull(actual);
       }
@@ -112,7 +114,7 @@ namespace RVTR.Account.Testing.Tests
       {
         var profiles = new Repository<ProfileModel>(ctx);
 
-        var actual = await profiles.SelectAsync(1);
+        var actual = await profiles.SelectAsync(id);
 
         Assert.NotNull(actual);
       }
@@ -121,21 +123,23 @@ namespace RVTR.Account.Testing.Tests
       {
         var addresses = new Repository<AddressModel>(ctx);
 
-        var actual = await addresses.SelectAsync(1);
+        var actual = await addresses.SelectAsync(id);
 
         Assert.NotNull(actual);
       }
     }
 
-    [Fact]
-    public async void Test_Repository_Update()
+    [Theory]
+    [InlineData("email", "Denver")]
+    public async void Test_Repository_Update(string email, string city)
     {
+
       using (var ctx = new AccountContext(Options))
       {
         var profiles = new Repository<ProfileModel>(ctx);
         var profile = await ctx.Profiles.FirstAsync();
 
-        profile.Email = "email";
+        profile.Email = email;
         profiles.Update(profile);
 
         var result = ctx.Profiles.Find(profile.EntityId);
@@ -148,7 +152,7 @@ namespace RVTR.Account.Testing.Tests
         var addresses = new Repository<AddressModel>(ctx);
         var address = await ctx.Addresses.FirstAsync();
 
-        address.City = "Denver";
+        address.City = city;
         addresses.Update(address);
 
         var result = ctx.Addresses.Find(address.EntityId);
