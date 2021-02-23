@@ -89,8 +89,7 @@ namespace RVTR.Account.Service.Controllers
 
       _logger.LogDebug("Getting an address by its ID number...");
 
-      addressModel = await _unitOfWork.Address.SelectAsync(id);
-
+      addressModel = await _unitOfWork.Address.SelectAsync(e => e.EntityId == id);
 
       if (addressModel is AddressModel theAddress)
       {
@@ -143,17 +142,13 @@ namespace RVTR.Account.Service.Controllers
         _logger.LogInformation($"Successfully updated the address {address}.");
 
         return Accepted(address);
-
       }
       catch
       {
         _logger.LogWarning($"This address does not exist.");
 
         return NotFound(new ErrorObject($"Address with ID number {address.EntityId} does not exist."));
-
       }
-
     }
-
   }
 }

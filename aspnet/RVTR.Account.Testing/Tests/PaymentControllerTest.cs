@@ -40,8 +40,8 @@ namespace RVTR.Account.UnitTesting.Tests
       repositoryMock.Setup(m => m.DeleteAsync(1)).Returns(Task.CompletedTask);
       repositoryMock.Setup(m => m.InsertAsync(It.IsAny<PaymentModel>())).Returns(Task.CompletedTask);
       repositoryMock.Setup(m => m.SelectAsync()).ReturnsAsync((IEnumerable<PaymentModel>)null);
-      repositoryMock.Setup(m => m.SelectAsync(0)).Throws(new Exception());
-      repositoryMock.Setup(m => m.SelectAsync(1)).ReturnsAsync((PaymentModel)null);
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 0)).Throws(new Exception());
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((PaymentModel)null);
       repositoryMock.Setup(m => m.Update(It.IsAny<PaymentModel>()));
       unitOfWorkMock.Setup(m => m.Payment).Returns(repositoryMock.Object);
 

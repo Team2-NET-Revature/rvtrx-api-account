@@ -5,7 +5,7 @@ namespace RVTR.Account.Domain.Interfaces
 {
   public interface IUnitOfWork
   {
-    IAccountRepository Account { get; }
+    IRepository<AccountModel> Account { get; }
     IRepository<AddressModel> Address { get; }
     IRepository<PaymentModel> Payment { get; }
     IRepository<ProfileModel> Profile { get; }

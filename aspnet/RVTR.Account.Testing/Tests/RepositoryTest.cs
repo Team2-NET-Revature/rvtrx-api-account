@@ -105,7 +105,7 @@ namespace RVTR.Account.Testing.Tests
       {
         var accounts = new Repository<AccountModel>(ctx);
 
-        var actual = await accounts.SelectAsync(id);
+        var actual = await accounts.SelectAsync(e => e.EntityId == id);
 
         Assert.NotNull(actual);
       }
@@ -114,7 +114,7 @@ namespace RVTR.Account.Testing.Tests
       {
         var profiles = new Repository<ProfileModel>(ctx);
 
-        var actual = await profiles.SelectAsync(id);
+        var actual = await profiles.SelectAsync(e => e.EntityId == id);
 
         Assert.NotNull(actual);
       }
@@ -123,7 +123,7 @@ namespace RVTR.Account.Testing.Tests
       {
         var addresses = new Repository<AddressModel>(ctx);
 
-        var actual = await addresses.SelectAsync(id);
+        var actual = await addresses.SelectAsync(e => e.EntityId == id);
 
         Assert.NotNull(actual);
       }

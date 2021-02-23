@@ -60,7 +60,6 @@ namespace RVTR.Account.Service.Controllers
 
         return NotFound(new ErrorObject($"Payment with ID number {id} does not exist"));
       }
-
     }
 
     /// <summary>
@@ -90,7 +89,7 @@ namespace RVTR.Account.Service.Controllers
 
       _logger.LogDebug("Getting a payment by its ID number...");
 
-      paymentModel = await _unitOfWork.Payment.SelectAsync(id);
+      paymentModel = await _unitOfWork.Payment.SelectAsync(e => e.EntityId == id);
 
 
       if (paymentModel is PaymentModel thePayment)
@@ -122,7 +121,6 @@ namespace RVTR.Account.Service.Controllers
       _logger.LogInformation($"Successfully added the payment {payment}.");
 
       return Accepted(payment);
-
     }
 
     /// <summary>
@@ -142,7 +140,6 @@ namespace RVTR.Account.Service.Controllers
         _unitOfWork.Payment.Update(payment);
         await _unitOfWork.CommitAsync();
 
-
         _logger.LogInformation($"Successfully updated the payment {payment}.");
 
         return Accepted(payment);
@@ -155,6 +152,5 @@ namespace RVTR.Account.Service.Controllers
         return NotFound(new ErrorObject($"Payment with ID number {payment.EntityId} does not exist"));
       }
     }
-
   }
 }

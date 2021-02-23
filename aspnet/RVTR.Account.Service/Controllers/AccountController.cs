@@ -48,7 +48,7 @@ namespace RVTR.Account.Service.Controllers
         _logger.LogDebug("Deleting an account by its email...");
 
         // Instead of directly deleting by passed ID, search for account (& it's ID) from passed email first
-        AccountModel accountModel = await _unitOfWork.Account.SelectByEmailAsync(email);
+        AccountModel accountModel = await _unitOfWork.Account.SelectAsync(e => e.Email == email);
 
         await _unitOfWork.Account.DeleteAsync(accountModel.EntityId);
         await _unitOfWork.CommitAsync();
@@ -92,7 +92,7 @@ namespace RVTR.Account.Service.Controllers
     {
       _logger.LogDebug("Getting an account by its email...");
 
-      AccountModel accountModel = await _unitOfWork.Account.SelectByEmailAsync(email);
+      AccountModel accountModel = await _unitOfWork.Account.SelectAsync(e => e.Email == email);
 
       if (accountModel is AccountModel theAccount)
       {

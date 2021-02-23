@@ -20,15 +20,15 @@ namespace RVTR.Account.Testing.Tests
     public AccountControllerTest()
     {
       var loggerMock = new Mock<ILogger<AccountController>>();
-      var repositoryMock = new Mock<IAccountRepository>();
+      var repositoryMock = new Mock<IRepository<AccountModel>>();
       var unitOfWorkMock = new Mock<IUnitOfWork>();
 
       repositoryMock.Setup(m => m.DeleteAsync(0)).Throws(new Exception());
       repositoryMock.Setup(m => m.DeleteAsync(1)).Returns(Task.CompletedTask);
       repositoryMock.Setup(m => m.InsertAsync(It.IsAny<AccountModel>())).Returns(Task.CompletedTask);
       repositoryMock.Setup(m => m.SelectAsync()).ReturnsAsync((IEnumerable<AccountModel>)null);
-      repositoryMock.Setup(m => m.SelectAsync(0)).Throws(new Exception());
-      repositoryMock.Setup(m => m.SelectAsync(1)).ReturnsAsync((AccountModel)null);
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 0)).Throws(new Exception());
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((AccountModel)null);
       repositoryMock.Setup(m => m.Update(It.IsAny<AccountModel>()));
       unitOfWorkMock.Setup(m => m.Account).Returns(repositoryMock.Object);
 

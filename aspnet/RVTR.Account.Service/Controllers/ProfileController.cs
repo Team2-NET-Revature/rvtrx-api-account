@@ -89,8 +89,7 @@ namespace RVTR.Account.Service.Controllers
 
       _logger.LogDebug("Getting a profile by its ID number...");
 
-      profileModel = await _unitOfWork.Profile.SelectAsync(id);
-
+      profileModel = await _unitOfWork.Profile.SelectAsync(e => e.EntityId == id);
 
       if (profileModel is ProfileModel theProfile)
       {
@@ -150,8 +149,6 @@ namespace RVTR.Account.Service.Controllers
 
         return NotFound(new ErrorObject($"Profile with ID number {profile.EntityId} does not exist."));
       }
-
     }
-
   }
 }

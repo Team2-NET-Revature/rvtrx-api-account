@@ -63,7 +63,7 @@ namespace RVTR.Account.Service
       }, ServiceLifetime.Transient);
 
       services.AddScoped<ClientZipkinMiddleware>();
-      services.AddTransient<IUnitOfWork, UnitOfWork>();
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
       services.AddSwaggerGen();
       services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ClientSwaggerOptions>();
       services.AddControllers().AddNewtonsoftJson(options =>
@@ -99,6 +99,7 @@ namespace RVTR.Account.Service
       {
         options.RouteTemplate = "rest/account/{documentName}/swagger.json";
       });
+
       applicationBuilder.UseSwaggerUI(options =>
       {
         options.RoutePrefix = "rest/account";

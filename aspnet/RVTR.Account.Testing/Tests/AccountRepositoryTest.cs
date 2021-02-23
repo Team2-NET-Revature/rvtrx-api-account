@@ -13,9 +13,9 @@ namespace RVTR.Account.Testing.Tests
     {
       using var ctx = new AccountContext(Options);
 
-      var accounts = new AccountRepository(ctx);
+      var accounts = new Repository<AccountModel>(ctx);
 
-      var actual = await accounts.SelectAsync(id);
+      var actual = await accounts.SelectAsync(e => e.EntityId == id);
 
       Assert.NotNull(actual);
     }
@@ -26,9 +26,9 @@ namespace RVTR.Account.Testing.Tests
     {
       using var ctx = new AccountContext(Options);
 
-      var accounts = new AccountRepository(ctx);
+      var accounts = new Repository<AccountModel>(ctx);
 
-      var actual = await accounts.SelectByEmailAsync(email);
+      var actual = await accounts.SelectAsync(e => e.Email == email);
 
       Assert.NotNull(actual);
     }
