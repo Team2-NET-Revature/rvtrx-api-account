@@ -44,7 +44,7 @@ namespace RVTR.Account.Testing.Tests
       repositoryMock.Setup(m => m.InsertAsync(It.IsAny<AddressModel>())).Returns(Task.CompletedTask);
       repositoryMock.Setup(m => m.SelectAsync()).ReturnsAsync((IEnumerable<AddressModel>)null);
       repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 0)).Throws(new Exception());
-      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((AddressModel)null);
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((IEnumerable<AddressModel>)null);
       repositoryMock.Setup(m => m.Update(It.IsAny<AddressModel>()));
       unitOfWorkMock.Setup(m => m.Address).Returns(repositoryMock.Object);
 

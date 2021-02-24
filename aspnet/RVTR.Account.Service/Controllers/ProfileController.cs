@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -89,7 +90,7 @@ namespace RVTR.Account.Service.Controllers
 
       _logger.LogDebug("Getting a profile by its ID number...");
 
-      profileModel = await _unitOfWork.Profile.SelectAsync(e => e.EntityId == id);
+      profileModel = (await _unitOfWork.Profile.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
 
       if (profileModel is ProfileModel theProfile)
       {

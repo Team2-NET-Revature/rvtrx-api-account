@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -89,7 +90,7 @@ namespace RVTR.Account.Service.Controllers
 
       _logger.LogDebug("Getting a payment by its ID number...");
 
-      paymentModel = await _unitOfWork.Payment.SelectAsync(e => e.EntityId == id);
+      paymentModel = (await _unitOfWork.Payment.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
 
 
       if (paymentModel is PaymentModel thePayment)

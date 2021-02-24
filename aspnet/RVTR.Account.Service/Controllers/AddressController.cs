@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -89,7 +90,7 @@ namespace RVTR.Account.Service.Controllers
 
       _logger.LogDebug("Getting an address by its ID number...");
 
-      addressModel = await _unitOfWork.Address.SelectAsync(e => e.EntityId == id);
+      addressModel = (await _unitOfWork.Address.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
 
       if (addressModel is AddressModel theAddress)
       {

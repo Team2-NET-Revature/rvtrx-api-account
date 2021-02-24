@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,7 @@ namespace RVTR.Account.Context.Repositories
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public virtual async Task DeleteAsync(int id) => _dbSet.Remove(await SelectAsync(e => e.EntityId == id));
+    public virtual async Task DeleteAsync(int id) => _dbSet.Remove((await SelectAsync(e => e.EntityId == id)).FirstOrDefault());
 
     /// <summary>
     ///
@@ -43,23 +44,19 @@ namespace RVTR.Account.Context.Repositories
     ///
     /// </summary>
     /// <returns></returns>
-    public virtual async Task<IEnumerable<TEntity>> SelectAsync() => await _dbSet.ToListAsync();
+    public virtual async Task<IEnumerable<TEntity>> SelectAsync()
+    {
+      return await LoadAsync(await _dbSet.ToListAsync());
+    }
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public virtual async Task<TEntity> SelectAsync(Expression<Func<TEntity, bool>> predicate)
+    public virtual async Task<IEnumerable<TEntity>> SelectAsync(Expression<Func<TEntity, bool>> predicate)
     {
-      var entity = await _dbSet.FirstOrDefaultAsync(predicate).ConfigureAwait(true);
-
-      foreach (var navigation in _dbSet.Attach(entity).Navigations)
-      {
-        await navigation.LoadAsync();
-      }
-
-      return entity;
+      return await LoadAsync(await _dbSet.Where(predicate).ToListAsync().ConfigureAwait(true));
     }
 
     /// <summary>
@@ -67,5 +64,23 @@ namespace RVTR.Account.Context.Repositories
     /// </summary>
     /// <param name="entry"></param>
     public virtual void Update(TEntity entry) => _dbSet.Update(entry);
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="entities"></param>
+    /// <returns></returns>
+    private async Task<IEnumerable<TEntity>> LoadAsync(IEnumerable<TEntity> entities)
+    {
+      foreach (var entity in entities)
+      {
+        foreach (var navigation in _dbSet.Attach(entity).Navigations)
+        {
+          await navigation.LoadAsync();
+        }
+      }
+
+      return entities;
+    }
   }
 }

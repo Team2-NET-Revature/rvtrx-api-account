@@ -28,7 +28,7 @@ namespace RVTR.Account.Testing.Tests
       repositoryMock.Setup(m => m.InsertAsync(It.IsAny<AccountModel>())).Returns(Task.CompletedTask);
       repositoryMock.Setup(m => m.SelectAsync()).ReturnsAsync((IEnumerable<AccountModel>)null);
       repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 0)).Throws(new Exception());
-      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((AccountModel)null);
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((IEnumerable<AccountModel>)null);
       repositoryMock.Setup(m => m.Update(It.IsAny<AccountModel>()));
       unitOfWorkMock.Setup(m => m.Account).Returns(repositoryMock.Object);
 
