@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,18 +47,14 @@ namespace RVTR.Account.Service.Controllers
     {
       try
       {
-        _logger.LogDebug("Deleting an address by its ID number...");
-
         await _unitOfWork.Address.DeleteAsync(id);
         await _unitOfWork.CommitAsync();
 
-        _logger.LogInformation($"Deleted the address with ID number {id}.");
-
         return Ok(MessageObject.Success);
       }
-      catch
+      catch(Exception error)
       {
-        _logger.LogWarning($"Address with ID number {id} does not exist.");
+        _logger.LogError(error, error.Message);
 
         return NotFound(new ErrorObject($"Address with ID number {id} does not exist."));
       }
@@ -71,8 +68,6 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(typeof(IEnumerable<AddressModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-      _logger.LogInformation($"Retrieved the addresses.");
-
       return Ok(await _unitOfWork.Address.SelectAsync());
     }
 
@@ -86,22 +81,14 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(int id)
     {
-      AddressModel addressModel;
+      var addressModel = (await _unitOfWork.Address.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
 
-      _logger.LogDebug("Getting an address by its ID number...");
-
-      addressModel = (await _unitOfWork.Address.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
-
-      if (addressModel is AddressModel theAddress)
+      if (addressModel == null)
       {
-        _logger.LogInformation($"Retrieved the address with ID: {id}.");
-
-        return Ok(theAddress);
+        return NotFound(new ErrorObject($"Address with ID number {id} does not exist."));
       }
 
-      _logger.LogWarning($"Address with ID number {id} does not exist.");
-
-      return NotFound(new ErrorObject($"Address with ID number {id} does not exist."));
+      return Ok(addressModel);
     }
 
     /// <summary>
@@ -113,12 +100,8 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Post(AddressModel address)
     {
-      _logger.LogDebug("Adding an address...");
-
       await _unitOfWork.Address.InsertAsync(address);
       await _unitOfWork.CommitAsync();
-
-      _logger.LogInformation($"Successfully added the address {address}.");
 
       return Accepted(address);
     }
@@ -135,18 +118,15 @@ namespace RVTR.Account.Service.Controllers
     {
       try
       {
-        _logger.LogDebug("Updating an address...");
-
         _unitOfWork.Address.Update(address);
-        await _unitOfWork.CommitAsync();
 
-        _logger.LogInformation($"Successfully updated the address {address}.");
+        await _unitOfWork.CommitAsync();
 
         return Accepted(address);
       }
-      catch
+      catch(Exception error)
       {
-        _logger.LogWarning($"This address does not exist.");
+        _logger.LogError(error, error.Message);
 
         return NotFound(new ErrorObject($"Address with ID number {address.EntityId} does not exist."));
       }

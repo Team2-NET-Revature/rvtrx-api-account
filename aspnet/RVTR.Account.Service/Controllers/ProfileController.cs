@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,18 +47,14 @@ namespace RVTR.Account.Service.Controllers
     {
       try
       {
-        _logger.LogDebug("Deleting a profile by its ID number...");
-
         await _unitOfWork.Profile.DeleteAsync(id);
         await _unitOfWork.CommitAsync();
 
-        _logger.LogInformation($"Deleted the profile with ID number {id}.");
-
         return Ok(MessageObject.Success);
       }
-      catch
+      catch(Exception error)
       {
-        _logger.LogWarning($"Profile with ID number {id} does not exist.");
+        _logger.LogError(error, error.Message);
 
         return NotFound(new ErrorObject($"Profile with ID number {id} does not exist."));
       }
@@ -71,8 +68,6 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(typeof(IEnumerable<ProfileModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-      _logger.LogInformation($"Retrieved the profiles.");
-
       return Ok(await _unitOfWork.Profile.SelectAsync());
     }
 
@@ -86,22 +81,14 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(int id)
     {
-      ProfileModel profileModel;
+      var profileModel = (await _unitOfWork.Profile.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
 
-      _logger.LogDebug("Getting a profile by its ID number...");
-
-      profileModel = (await _unitOfWork.Profile.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
-
-      if (profileModel is ProfileModel theProfile)
+      if (profileModel == null)
       {
-        _logger.LogInformation($"Retrieved the profile with ID: {id}.");
-
-        return Ok(theProfile);
+        return NotFound(new ErrorObject($"Profile with ID number {id} does not exist."));
       }
 
-      _logger.LogWarning($"Profile with ID number {id} does not exist.");
-
-      return NotFound(new ErrorObject($"Profile with ID number {id} does not exist."));
+      return Ok(profileModel);
     }
 
     /// <summary>
@@ -113,12 +100,8 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Post(ProfileModel profile)
     {
-      _logger.LogDebug("Adding a profile...");
-
       await _unitOfWork.Profile.InsertAsync(profile);
       await _unitOfWork.CommitAsync();
-
-      _logger.LogInformation($"Successfully added the profile {profile}.");
 
       return Accepted(profile);
     }
@@ -135,18 +118,15 @@ namespace RVTR.Account.Service.Controllers
     {
       try
       {
-        _logger.LogDebug("Updating a profile...");
-
         _unitOfWork.Profile.Update(profile);
-        await _unitOfWork.CommitAsync();
 
-        _logger.LogInformation($"Successfully updated the profile {profile}.");
+        await _unitOfWork.CommitAsync();
 
         return Accepted(profile);
       }
-      catch
+      catch(Exception error)
       {
-        _logger.LogWarning($"This profile does not exist.");
+        _logger.LogError(error, error.Message);
 
         return NotFound(new ErrorObject($"Profile with ID number {profile.EntityId} does not exist."));
       }

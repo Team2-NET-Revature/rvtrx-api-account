@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,18 +47,14 @@ namespace RVTR.Account.Service.Controllers
     {
       try
       {
-        _logger.LogDebug("Deleting a payment by its ID number...");
-
         await _unitOfWork.Payment.DeleteAsync(id);
         await _unitOfWork.CommitAsync();
 
-        _logger.LogInformation($"Deleted the payment with ID number {id}.");
-
         return Ok(MessageObject.Success);
       }
-      catch
+      catch(Exception error)
       {
-        _logger.LogWarning($"Payment with ID number {id} does not exist.");
+        _logger.LogError(error, error.Message);
 
         return NotFound(new ErrorObject($"Payment with ID number {id} does not exist"));
       }
@@ -71,8 +68,6 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(typeof(IEnumerable<PaymentModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-      _logger.LogInformation($"Retrieved the payments.");
-
       return Ok(await _unitOfWork.Payment.SelectAsync());
     }
 
@@ -86,23 +81,14 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(int id)
     {
-      PaymentModel paymentModel;
+      var paymentModel = (await _unitOfWork.Payment.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
 
-      _logger.LogDebug("Getting a payment by its ID number...");
-
-      paymentModel = (await _unitOfWork.Payment.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
-
-
-      if (paymentModel is PaymentModel thePayment)
+      if (paymentModel == null)
       {
-        _logger.LogInformation($"Retrieved the payment with ID: {id}.");
-
-        return Ok(thePayment);
+        return NotFound(new ErrorObject($"Payment with ID number {id} does not exist."));
       }
 
-      _logger.LogWarning($"Payment with ID number {id} does not exist.");
-
-      return NotFound(new ErrorObject($"Payment with ID number {id} does not exist."));
+      return Ok(paymentModel);
     }
 
     /// <summary>
@@ -114,12 +100,8 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Post(PaymentModel payment)
     {
-      _logger.LogDebug("Adding a payment...");
-
       await _unitOfWork.Payment.InsertAsync(payment);
       await _unitOfWork.CommitAsync();
-
-      _logger.LogInformation($"Successfully added the payment {payment}.");
 
       return Accepted(payment);
     }
@@ -136,19 +118,15 @@ namespace RVTR.Account.Service.Controllers
     {
       try
       {
-        _logger.LogDebug("Updating a payment...");
-
         _unitOfWork.Payment.Update(payment);
-        await _unitOfWork.CommitAsync();
 
-        _logger.LogInformation($"Successfully updated the payment {payment}.");
+        await _unitOfWork.CommitAsync();
 
         return Accepted(payment);
       }
-
-      catch
+      catch(Exception error)
       {
-        _logger.LogWarning($"This payment does not exist.");
+        _logger.LogError(error, error.Message);
 
         return NotFound(new ErrorObject($"Payment with ID number {payment.EntityId} does not exist"));
       }

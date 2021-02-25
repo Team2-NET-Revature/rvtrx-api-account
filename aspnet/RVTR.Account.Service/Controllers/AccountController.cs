@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,20 +47,16 @@ namespace RVTR.Account.Service.Controllers
     {
       try
       {
-        _logger.LogDebug("Deleting an account by its email...");
-
-        AccountModel accountModel = (await _unitOfWork.Account.SelectAsync(e => e.Email == email)).FirstOrDefault();
+        var accountModel = (await _unitOfWork.Account.SelectAsync(e => e.Email == email)).FirstOrDefault();
 
         await _unitOfWork.Account.DeleteAsync(accountModel.EntityId);
         await _unitOfWork.CommitAsync();
 
-        _logger.LogInformation($"Deleted the account with email {email}.");
-
         return Ok(MessageObject.Success);
       }
-      catch
+      catch(Exception error)
       {
-        _logger.LogWarning($"Account with email {email} does not exist.");
+        _logger.LogError(error, error.Message);
 
         return NotFound(new ErrorObject($"Account with email {email} does not exist"));
       }
@@ -73,10 +70,7 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(typeof(IEnumerable<AccountModel>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-      _logger.LogInformation($"Retrieved the accounts.");
-
       return Ok(await _unitOfWork.Account.SelectAsync());
-
     }
 
     /// <summary>
@@ -89,20 +83,14 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(string email)
     {
-      _logger.LogDebug("Getting an account by its email...");
+      var accountModel = (await _unitOfWork.Account.SelectAsync(e => e.Email == email)).FirstOrDefault();
 
-      AccountModel accountModel = (await _unitOfWork.Account.SelectAsync(e => e.Email == email)).FirstOrDefault();
-
-      if (accountModel is AccountModel theAccount)
+      if (accountModel == null)
       {
-        _logger.LogInformation($"Retrieved the account with email {email}.");
-
-        return Ok(theAccount);
+        return NotFound(new ErrorObject($"Account with email {email} does not exist."));
       }
 
-      _logger.LogWarning($"Account with email {email} does not exist.");
-
-      return NotFound(new ErrorObject($"Account with email {email} does not exist."));
+      return Ok(accountModel);
     }
 
     /// <summary>
@@ -114,16 +102,10 @@ namespace RVTR.Account.Service.Controllers
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Post([FromBody] AccountModel account)
     {
-
-      _logger.LogDebug("Adding an account...");
-
       await _unitOfWork.Account.InsertAsync(account);
       await _unitOfWork.CommitAsync();
 
-      _logger.LogInformation($"Successfully added the account {account}.");
-
       return Accepted(account);
-
     }
 
     /// <summary>
@@ -138,24 +120,18 @@ namespace RVTR.Account.Service.Controllers
     {
       try
       {
-        _logger.LogDebug("Updating an account...");
-
         _unitOfWork.Account.Update(account);
-        await _unitOfWork.CommitAsync();
 
-        _logger.LogInformation($"Successfully updated the account {account}.");
+        await _unitOfWork.CommitAsync();
 
         return Accepted(account);
       }
-
-      catch
+      catch (Exception error)
       {
-        _logger.LogWarning($"This account does not exist.");
+        _logger.LogError(error, error.Message);
 
         return NotFound(new ErrorObject($"Account with ID number {account.EntityId} does not exist"));
       }
-
     }
-
   }
 }
