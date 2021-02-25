@@ -76,18 +76,16 @@ namespace RVTR.Account.UnitTesting.Tests
       Assert.NotNull(resultOne);
     }
 
-    [Theory]
-    [MemberData(nameof(Payments))]
-    public async void Test_Controller_Post(PaymentModel payment)
+    [Fact]
+    public async void Test_Controller_Post()
     {
       var resultPass = await _controller.Post(new PaymentModel());
 
       Assert.NotNull(resultPass);
     }
 
-    [Theory]
-    [MemberData(nameof(Payments))]
-    public async void Test_Controller_Put(PaymentModel payment)
+    [Fact]
+    public async void Test_Controller_Put()
     {
       var resultPass = await _controller.Put(new PaymentModel());
 

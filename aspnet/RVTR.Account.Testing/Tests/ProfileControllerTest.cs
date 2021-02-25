@@ -77,18 +77,16 @@ namespace RVTR.Account.Testing.Tests
       Assert.NotNull(resultOne);
     }
 
-    [Theory]
-    [MemberData(nameof(Profiles))]
-    public async void Test_Controller_Post(ProfileModel profile)
+    [Fact]
+    public async void Test_Controller_Post()
     {
       var resultPass = await _controller.Post(new ProfileModel());
 
       Assert.NotNull(resultPass);
     }
 
-    [Theory]
-    [MemberData(nameof(Profiles))]
-    public async void Test_Controller_Put(ProfileModel profile)
+    [Fact]
+    public async void Test_Controller_Put()
     {
       var resultPass = await _controller.Put(new ProfileModel());
 

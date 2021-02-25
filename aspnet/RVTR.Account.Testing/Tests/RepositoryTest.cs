@@ -12,9 +12,8 @@ namespace RVTR.Account.Testing.Tests
     private readonly ProfileModel _profile = new ProfileModel() { FamilyName = "Smith", GivenName = "John", EntityId = 1, Email = "jsmith@gmail.com", Phone = "123456789", Type = "Adult" };
     private readonly AddressModel _address = new AddressModel() { EntityId = 1, AccountId = 1 };
 
-    [Theory]
-    [InlineData(3)]
-    public async void Test_Repository_DeleteAsync(int id)
+    [Fact]
+    public async void Test_Repository_DeleteAsync()
     {
       using (var ctx = new AccountContext(Options))
       {
