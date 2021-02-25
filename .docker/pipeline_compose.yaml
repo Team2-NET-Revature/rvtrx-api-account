@@ -1,5 +1,5 @@
 networks:
-  account_api:
+  accountly:
 
 services:
   rest:
