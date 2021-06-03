@@ -64,5 +64,10 @@ namespace RVTR.Account.Domain.Models
         yield return new ValidationResult("Street cannot be null.");
       }
     }
+
+    private string AddressBuilder()
+    {
+      return $"{Street}%20{City},%20{StateProvince}%20{Country}%20{PostalCode}";
+    }
   }
 }
