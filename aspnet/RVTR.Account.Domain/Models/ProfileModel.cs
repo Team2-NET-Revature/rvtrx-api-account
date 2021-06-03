@@ -73,10 +73,12 @@ namespace RVTR.Account.Domain.Models
       }
       if (age < adultAge)
       {
+        Type = "Minor";
         return false;
       }
       else
       {
+        Type = "Adult";
         return true;
       }
 
