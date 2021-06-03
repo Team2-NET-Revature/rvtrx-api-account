@@ -33,6 +33,7 @@ namespace RVTR.Account.Domain.Models
     /// <param name="firstName"></param>
     /// <param name="lastName"></param>
     /// <param name="email"></param>
+    /// <param name="birtDate"></param>
     public AccountModel(string firstName, string lastName, string email, DateTime birthDate)
     {
       Email = email;

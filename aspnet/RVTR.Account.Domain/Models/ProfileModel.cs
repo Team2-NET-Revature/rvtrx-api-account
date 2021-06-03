@@ -11,6 +11,8 @@ namespace RVTR.Account.Domain.Models
   {
 
     public bool IsAccountHolder { get; }
+    public bool IsActive { get; set; }
+
 
     [Required(ErrorMessage = "Email address required")]
     [EmailAddress(ErrorMessage = "must be a real email address.")]
@@ -43,8 +45,7 @@ namespace RVTR.Account.Domain.Models
     /// <summary>
     /// Empty Constructor
     /// </summary>
-    public ProfileModel()
-    { }
+    public ProfileModel() { }
 
     /// <summary>
     /// Constructor that takes a first name, last name, email, and isAccountHolder value
@@ -61,9 +62,13 @@ namespace RVTR.Account.Domain.Models
       Email = email;
       IsAccountHolder = isAccountHolder;
       DateOfBirth = birthDate;
+      IsActive = true;
       IsAdult = CheckAge(birthDate);
     }
 
+    /// <summary>
+    /// Checks Age by Year and (Month and day)
+    /// </summary>
     public bool CheckAge(DateTime birthDate)
     {
       var adultAge = 18;
@@ -84,6 +89,7 @@ namespace RVTR.Account.Domain.Models
         return true;
       }
 
+
     }
 
     [RegularExpression(@"^(http(s?):\/\/)[^\s]*$", ErrorMessage = "Image URI must be a real image URI.")]
@@ -96,6 +102,7 @@ namespace RVTR.Account.Domain.Models
     /// <returns></returns>
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
+      IsAdult = CheckAge(DateOfBirth);
       if (GivenName == FamilyName)
       {
         yield return new ValidationResult("Given name and Family name can't be the same.");
