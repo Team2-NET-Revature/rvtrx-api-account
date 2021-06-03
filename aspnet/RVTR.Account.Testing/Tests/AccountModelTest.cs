@@ -42,10 +42,10 @@ namespace RVTR.Account.Testing.Tests
     /// </summary>
     /// <param name="account"></param>
     [Theory]
-    [InlineData("Jim", "Peters", "abcd", "2000-01-01")]
-    public void Test_Create_AccountModel_BadEmail(string firstName, string lastName, string email, DateTime birthDate)
+    [InlineData("Jim", "Peters", "abcd")]
+    public void Test_Create_AccountModel_BadEmail(string firstName, string lastName, string email)
     {
-      AccountModel account = new AccountModel(firstName, lastName, email, birthDate); //bad email given
+      AccountModel account = new AccountModel(firstName, lastName, email, adultAge); //bad email given
 
       var validationContext = new ValidationContext(account);
       var actual = Validator.TryValidateObject(account, validationContext, null, true);
