@@ -36,7 +36,8 @@ namespace RVTR.Account.Domain.Models
 
     public int AccountModelId { get; set; }
 
-    public DateTime dateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public bool IsAdult { get; set; }
     /// <summary>
     /// Empty Constructor
     /// </summary>
@@ -50,12 +51,14 @@ namespace RVTR.Account.Domain.Models
     /// <param name="lastName"></param>
     /// <param name="email"></param>
     /// <param name="isAccountHolder"></param>
-    public ProfileModel(string firstName, string lastName, string email, bool isAccountHolder)
+    /// <param name="isAdult"></param>
+    public ProfileModel(string firstName, string lastName, string email, bool isAccountHolder, DateTime birthDate)
     {
       GivenName = firstName;
       FamilyName = lastName;
       Email = email;
       IsAccountHolder = isAccountHolder;
+      DateOfBirth = birthDate;
     }
 
     [RegularExpression(@"^(http(s?):\/\/)[^\s]*$", ErrorMessage = "Image URI must be a real image URI.")]
