@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -35,10 +36,12 @@ namespace RVTR.Account.Domain.Models
 
     public int AccountModelId { get; set; }
 
+    public DateTime dateOfBirth { get; set; }
     /// <summary>
     /// Empty Constructor
     /// </summary>
-    public ProfileModel(){}
+    public ProfileModel()
+    { }
 
     /// <summary>
     /// Constructor that takes a first name, last name, email, and isAccountHolder value
