@@ -133,10 +133,7 @@ namespace RVTR.Account.Service.Controllers
 
         return NotFound(new ErrorObject($"Profile with ID number {ID} does not exist."));
       }
-
     }
-
-
 
     /// <summary>
     /// Update a user's profile
