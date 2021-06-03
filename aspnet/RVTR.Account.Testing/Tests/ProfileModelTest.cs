@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using RVTR.Account.Domain.Models;
@@ -18,10 +19,11 @@ namespace RVTR.Account.Testing.Tests
           FamilyName = "Family",
           GivenName = "Given",
           Phone = "1234567890",
+          DateOfBirth = DateTime.Now,
           Type = "Adult",
           AccountModelId = 0
         }
-      }
+}
     };
 
     [Theory]
@@ -73,12 +75,27 @@ namespace RVTR.Account.Testing.Tests
     [Fact]
     public void Test_Profile_BadName()
     {
-      AccountModel account = new AccountModel("jim", " ","abc@gmail.com"); //bad name given (empty string for last name)
+      AccountModel account = new AccountModel("jim", " ", "abc@gmail.com", DateTime.Now); //bad name given (empty string for last name)
 
       var validationContext = new ValidationContext(account.Profiles[0]);
       var actual = Validator.TryValidateObject(account.Profiles[0], validationContext, null, true);
 
       Assert.False(actual);
+    }
+
+    [Fact]
+    public void Test_Profile_Age()
+    {
+      ProfileModel profile = new ProfileModel("", "", "", true, DateTime.Today);
+      Assert.False(profile.IsAdult);
+    }
+
+    [Fact]
+    public void Test_Profile_Adult()
+    {
+      DateTime adult = new DateTime(2003, 2, 30);
+      ProfileModel profile = new ProfileModel("", "", "", true, adult);
+      Assert.True(profile.IsAdult);
     }
   }
 }
