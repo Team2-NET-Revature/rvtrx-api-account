@@ -10,6 +10,8 @@ namespace RVTR.Account.Domain.Models
   {
 
     public bool IsAccountHolder { get; }
+    public bool IsActive { get; set; }
+
 
     [Required(ErrorMessage = "Email address required")]
     [EmailAddress(ErrorMessage = "must be a real email address.")]
@@ -38,7 +40,7 @@ namespace RVTR.Account.Domain.Models
     /// <summary>
     /// Empty Constructor
     /// </summary>
-    public ProfileModel(){}
+    public ProfileModel() { }
 
     /// <summary>
     /// Constructor that takes a first name, last name, email, and isAccountHolder value
@@ -53,6 +55,7 @@ namespace RVTR.Account.Domain.Models
       FamilyName = lastName;
       Email = email;
       IsAccountHolder = isAccountHolder;
+      IsActive = true;
     }
 
     [RegularExpression(@"^(http(s?):\/\/)[^\s]*$", ErrorMessage = "Image URI must be a real image URI.")]
