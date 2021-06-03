@@ -8,6 +8,7 @@ namespace RVTR.Account.Testing.Tests
 {
   public class AccountModelTest
   {
+    private static DateTime adultAge = new DateTime(2003, 1, 30);
     public static readonly IEnumerable<object[]> Accounts = new List<object[]>
     {
       new object[]
@@ -19,7 +20,7 @@ namespace RVTR.Account.Testing.Tests
           Payments = new List<PaymentModel>(),
           Profiles = new List<ProfileModel>
             {
-              new ProfileModel("John", "Smith", "jsmith@gmail.com", true, DateTime.Now)
+              new ProfileModel("John", "Smith", "jsmith@gmail.com", true, adultAge)
             },
           Email = "test@gmail.com"
         }
