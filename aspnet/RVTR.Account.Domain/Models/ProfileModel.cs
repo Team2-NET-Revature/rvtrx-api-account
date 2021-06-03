@@ -30,12 +30,14 @@ namespace RVTR.Account.Domain.Models
     [Phone(ErrorMessage = "Must be a phone number")]
     public string Phone { get; set; }
 
-    [Required(ErrorMessage = "Type is required")]
-    [MaxLength(50, ErrorMessage = "Type must be fewer than 50 characters.")]
+    // [Required(ErrorMessage = "Type is required")]
+    // [MaxLength(50, ErrorMessage = "Type must be fewer than 50 characters.")]
     public string Type { get; set; }
 
     public int AccountModelId { get; set; }
 
+    [Required(ErrorMessage = "Date of Birth is required")]
+    [MaxLength(50, ErrorMessage = "Must be a date")]
     public DateTime DateOfBirth { get; set; }
     public bool IsAdult { get; set; }
     /// <summary>
