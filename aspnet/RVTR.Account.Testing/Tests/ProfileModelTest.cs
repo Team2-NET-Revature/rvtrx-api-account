@@ -52,6 +52,7 @@ namespace RVTR.Account.Testing.Tests
         FamilyName = "Family",
         GivenName = "Given",
         Phone = "123-456-7890",
+        DateOfBirth = adultAge,
         Type = "Adult",
         AccountModelId = 0
       };
