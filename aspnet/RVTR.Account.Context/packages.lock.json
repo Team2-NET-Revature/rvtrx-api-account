@@ -119,6 +119,11 @@
         "resolved": "5.0.0",
         "contentHash": "cI/VWn9G1fghXrNDagX9nYaaB/nokkZn0HYAawGaELQrl8InSezfe9OnfPZLcJq3esXxygh3hkq2c3qoV3SDyQ=="
       },
+      "Newtonsoft.Json": {
+        "type": "Transitive",
+        "resolved": "13.0.1",
+        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
+      },
       "Npgsql": {
         "type": "Transitive",
         "resolved": "5.0.2",
@@ -150,6 +155,7 @@
       "rvtr.account.domain": {
         "type": "Project",
         "dependencies": {
+          "Newtonsoft.Json": "0.0.0",
           "system.componentmodel.annotations": "5.0.0"
         }
       }

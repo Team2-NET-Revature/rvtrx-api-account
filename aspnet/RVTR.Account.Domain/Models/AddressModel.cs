@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RVTR.Account.Domain.Validators;
 using System.ComponentModel.DataAnnotations;
 
 namespace RVTR.Account.Domain.Models
@@ -63,9 +64,15 @@ namespace RVTR.Account.Domain.Models
       {
         yield return new ValidationResult("Street cannot be null.");
       }
+
+      if(!ValidatorSwitch.validateAddress(ToString()).Result)
+      {
+        yield return new ValidationResult("Address is not valid");
+      }
+
     }
 
-    private string AddressBuilder()
+    public override string ToString()
     {
       return $"{Street}%20{City},%20{StateProvince}%20{Country}%20{PostalCode}";
     }
