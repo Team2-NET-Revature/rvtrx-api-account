@@ -15,7 +15,8 @@ namespace RVTR.Account.Domain.Validators
     {
       try
       {
-        HttpResponseMessage response = await client.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyDbnHwx_6BDq2gcBfETYjbvVn-Y0QUa6mo");
+        var geoKey = Environment.GetEnvironmentVariable("GOOGLE_GEOCODE_API_KEY");
+        HttpResponseMessage response = await client.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={geoKey}");
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
 
