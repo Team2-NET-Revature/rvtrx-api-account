@@ -20,23 +20,20 @@ namespace RVTR.Account.Domain.Validators
         string responseBody = await response.Content.ReadAsStringAsync();
 
         Console.WriteLine(responseBody);
-        dynamic result = JObject.Parse(responseBody);
-        string resultStatus = result.status;
-        List<string> types = result.results.types;
+        JObject result = JObject.Parse(responseBody);
         List<string> acceptedTypes = new List<string>();
         acceptedTypes.Add("subpremise");
         acceptedTypes.Add("street_address");
-        if (resultStatus == "OK")
+      
+        JToken resultStatus = result.GetValue("status");
+        if(resultStatus.ToString().Contains("OK"))
         {
-          foreach (var type in acceptedTypes)
-          {
-            if (types.Contains(type))
-            {
-              return true;
-            }
-          }
-          return false;
+          JToken resultType = result.GetValue("results");
+          Console.WriteLine($"result type: {resultType.ToString()}");
+          if(resultType.ToString().Contains("subpremise") || result.ToString().Contains("street_address"))
+            return true;
         }
+
       }
       catch (HttpRequestException e)
       {
