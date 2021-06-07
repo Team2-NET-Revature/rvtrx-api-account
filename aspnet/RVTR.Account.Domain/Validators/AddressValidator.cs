@@ -9,9 +9,8 @@ namespace RVTR.Account.Domain.Validators
 {
   public class AddressValidator : IValidator
   {
-    static readonly HttpClient client;
 
-    internal static async Task<bool> getValidation(string address)
+    internal static async Task<bool> getValidation(string address, HttpClient client)
     {
       try
       {
