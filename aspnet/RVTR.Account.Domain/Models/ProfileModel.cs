@@ -37,7 +37,6 @@ namespace RVTR.Account.Domain.Models
     public int AccountModelId { get; set; }
 
     [Required(ErrorMessage = "Date of Birth is required")]
-    [MaxLength(50, ErrorMessage = "Must be a date")]
     public DateTime DateOfBirth { get; set; }
     public bool IsAdult { get; set; }
     /// <summary>
