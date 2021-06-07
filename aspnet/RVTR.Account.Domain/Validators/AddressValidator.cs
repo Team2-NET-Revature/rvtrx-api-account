@@ -30,7 +30,7 @@ namespace RVTR.Account.Domain.Validators
         {
           JToken resultType = result.GetValue("results");
           Console.WriteLine($"result type: {resultType.ToString()}");
-          if(resultType.ToString().Contains("subpremise") || result.ToString().Contains("street_address"))
+          if(resultType.ToString().Contains("subpremise") || result.ToString().Contains("street_address") || result.ToString().Contains("premise"))
             return true;
         }
 
