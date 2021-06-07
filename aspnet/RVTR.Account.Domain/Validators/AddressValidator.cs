@@ -19,7 +19,6 @@ namespace RVTR.Account.Domain.Validators
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
 
-        Console.WriteLine(responseBody);
         JObject result = JObject.Parse(responseBody);
         List<string> acceptedTypes = new List<string>(){
           "subpremise", "street_address", "premise"
@@ -28,8 +27,8 @@ namespace RVTR.Account.Domain.Validators
         JToken resultStatus = result.GetValue("status");
         if (resultStatus.ToString().Contains("OK"))
         {
+          
           JToken resultType = result.GetValue("results");
-          Console.WriteLine($"result type: {resultType.ToString()}");
           foreach (var acceptedType in acceptedTypes)
           {
             if (resultType.ToString().Contains(acceptedType))
