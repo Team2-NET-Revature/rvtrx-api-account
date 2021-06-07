@@ -22,7 +22,7 @@ namespace RVTR.Account.Testing.Tests
             {
               new ProfileModel("John", "Smith", "jsmith@gmail.com", true, adultAge)
             },
-          Email = "test@gmail.com"
+          Email = "jsmith@gmail.com"
         }
       }
     };

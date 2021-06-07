@@ -85,18 +85,17 @@ namespace RVTR.Account.Service.Controllers
     public async Task<IActionResult> Get(string email)
     {
       var accountModel = (await _unitOfWork.Account.SelectAsync(e => e.Email == email)).FirstOrDefault();
-      var accountAddress = accountModel.Address;
       if (accountModel == null)
       {
         return NotFound(new ErrorObject($"Account with email {email} does not exist."));
 
       }
-      if (accountAddress == null)
+      if (accountModel.Address == null)
       {
         return NotFound(new ErrorObject($"Address cannot be found."));
 
       }
-      return Ok(accountAddress);
+      return Ok(accountModel);
     }
 
     /// <summary>
