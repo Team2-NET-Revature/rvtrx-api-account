@@ -21,17 +21,22 @@ namespace RVTR.Account.Domain.Validators
 
         Console.WriteLine(responseBody);
         JObject result = JObject.Parse(responseBody);
-        List<string> acceptedTypes = new List<string>();
-        acceptedTypes.Add("subpremise");
-        acceptedTypes.Add("street_address");
-      
+        List<string> acceptedTypes = new List<string>(){
+          "subpremise", "street_address", "premise"
+        };
+
         JToken resultStatus = result.GetValue("status");
-        if(resultStatus.ToString().Contains("OK"))
+        if (resultStatus.ToString().Contains("OK"))
         {
           JToken resultType = result.GetValue("results");
           Console.WriteLine($"result type: {resultType.ToString()}");
-          if(resultType.ToString().Contains("subpremise") || result.ToString().Contains("street_address") || result.ToString().Contains("premise"))
-            return true;
+          foreach (var acceptedType in acceptedTypes)
+          {
+            if (resultType.ToString().Contains(acceptedType))
+            {
+              return true;
+            }
+          }
         }
 
       }
