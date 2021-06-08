@@ -109,8 +109,33 @@ namespace RVTR.Account.Service.Controllers
 
         return NotFound(new ErrorObject($"Profile with Email {email} does not exist."));
       }
-    }
+    }/// <summary>
+     /// Activates a profile from an account
+     /// </summary>
+     /// <param name="email"></param>
+     /// <returns></returns>
+    [HttpPost]
+    [Route("Activate")]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    public async Task<IActionResult> Activate(string email)
+    {
+      try
+      {
+        var result = (await _unitOfWork.Profile.SelectAsync(p => p.Email == email)).FirstOrDefault();
+        result.IsActive = true;
 
+        _unitOfWork.Profile.Update(result);
+        await _unitOfWork.CommitAsync();
+
+        return Accepted();
+      }
+      catch (Exception error)
+      {
+        _logger.LogError(error, error.Message);
+
+        return NotFound(new ErrorObject($"Profile with Email {email} does not exist."));
+      }
+    }
     /// <summary>
     /// Update a user's profile
     /// </summary>
