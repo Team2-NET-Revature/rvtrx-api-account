@@ -20,7 +20,13 @@ namespace RVTR.Account.Testing.Tests
           Payments = new List<PaymentModel>(),
           Profiles = new List<ProfileModel>
             {
-              new ProfileModel("John", "Smith", "jsmith@gmail.com", true, adultAge)
+              new ProfileModel(){
+                GivenName = "John", 
+                FamilyName = "Smith", 
+                Email = "jsmith@gmail.com", 
+                IsAccountHolder = true, 
+                DateOfBirth = adultAge
+              }
             },
           Email = "test@gmail.com"
         }
@@ -45,7 +51,15 @@ namespace RVTR.Account.Testing.Tests
     [InlineData("Jim", "Peters", "abcd")]
     public void Test_Create_AccountModel_BadEmail(string firstName, string lastName, string email)
     {
-      AccountModel account = new AccountModel(firstName, lastName, email, adultAge); //bad email given
+      AccountModel account = new AccountModel()
+            {
+              Profiles = new List<ProfileModel>{new ProfileModel(){
+                GivenName = firstName, 
+                FamilyName = lastName, 
+                Email = email, 
+                IsAccountHolder = true, 
+                DateOfBirth = adultAge
+              }}}; //bad email given
 
       var validationContext = new ValidationContext(account);
       var actual = Validator.TryValidateObject(account, validationContext, null, true);

@@ -18,31 +18,7 @@ namespace RVTR.Account.Domain.Models
     public List<PaymentModel> Payments { get; set; }
     public List<ProfileModel> Profiles { get; set; }
 
-    /// <summary>
-    /// Empty constructor
-    /// </summary>
-    public AccountModel()
-    {
-      Profiles = new List<ProfileModel>();
-      Payments = new List<PaymentModel>();
-    }
-
-    /// <summary>
-    /// Constructor that takes a first name, last name, and an email
-    /// </summary>
-    /// <param name="firstName"></param>
-    /// <param name="lastName"></param>
-    /// <param name="email"></param>
-    /// <param name="birtDate"></param>
-    public AccountModel(string firstName, string lastName, string email, DateTime birthDate)
-    {
-      Email = email;
-      Profiles = new List<ProfileModel> {
-        new ProfileModel(firstName, lastName, email, true, birthDate)
-      };
-      Payments = new List<PaymentModel>();
-    }
-
+   
     /// <summary>
     /// Represents the _Account_ `Validate` method
     /// </summary>

@@ -7,9 +7,15 @@ namespace RVTR.Account.Domain.Validators
   {
     private static HttpClient client = new HttpClient();
 
-    public static async Task<bool> validateAddress(string address)
+    public static async Task<bool> validate(string address, int option)
     {
-      return await AddressValidator.getValidation(address, client);
+      switch(option){
+      case 0:
+        return await AddressValidator.getValidation(address, client);
+      default:
+        break;
+      }
+       return false;
     }
   } 
 }

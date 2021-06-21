@@ -10,7 +10,7 @@ namespace RVTR.Account.Domain.Models
   public class ProfileModel : AEntity, IValidatableObject
   {
 
-    public bool IsAccountHolder { get; }
+    public bool IsAccountHolder { get; set;}
     public bool IsActive { get; set; }
 
 
@@ -32,8 +32,7 @@ namespace RVTR.Account.Domain.Models
     [Phone(ErrorMessage = "Must be a phone number")]
     public string Phone { get; set; }
 
-    // [Required(ErrorMessage = "Type is required")]
-    // [MaxLength(50, ErrorMessage = "Type must be fewer than 50 characters.")]
+  
     public string Type { get; set; }
 
     public int AccountModelId { get; set; }
@@ -41,29 +40,8 @@ namespace RVTR.Account.Domain.Models
     [Required(ErrorMessage = "Date of Birth is required")]
     public DateTime DateOfBirth { get; set; }
     public bool IsAdult { get; set; }
-    /// <summary>
-    /// Empty Constructor
-    /// </summary>
-    public ProfileModel() { }
-
-    /// <summary>
-    /// Constructor that takes a first name, last name, email, and isAccountHolder value
-    /// </summary>
-    /// <param name="firstName"></param>
-    /// <param name="lastName"></param>
-    /// <param name="email"></param>
-    /// <param name="isAccountHolder"></param>
-    /// <param name="birthDate"></param>
-    public ProfileModel(string firstName, string lastName, string email, bool isAccountHolder, DateTime birthDate)
-    {
-      GivenName = firstName;
-      FamilyName = lastName;
-      Email = email;
-      IsAccountHolder = isAccountHolder;
-      DateOfBirth = birthDate;
-      IsActive = true;
-      IsAdult = CheckAge(birthDate);
-    }
+   
+    
 
     /// <summary>
     /// Checks Age by Year and (Month and day)

@@ -88,7 +88,7 @@ namespace RVTR.Account.Service.Controllers
     /// </summary>
     /// <param name="email"></param>
     /// <returns></returns>
-    [HttpPost]
+    [HttpDelete]
     [Route("Deactivate")]
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> Deactivate(string email)

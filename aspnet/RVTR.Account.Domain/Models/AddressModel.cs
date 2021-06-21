@@ -65,14 +65,14 @@ namespace RVTR.Account.Domain.Models
         yield return new ValidationResult("Street cannot be null.");
       }
 
-      if(!ValidatorSwitch.validateAddress(ToString()).Result)
+      if(!ValidatorSwitch.validate(AddressBuilder(), 0).Result)
       {
         yield return new ValidationResult("Address is not valid");
       }
 
     }
 
-    public override string ToString()
+    private string AddressBuilder()
     {
       return $"{Street}%20{City},%20{StateProvince}%20{Country}%20{PostalCode}";
     }

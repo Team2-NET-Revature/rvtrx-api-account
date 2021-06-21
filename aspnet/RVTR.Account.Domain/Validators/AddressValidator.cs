@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace RVTR.Account.Domain.Validators
     {
       try
       {
-        var geoKey = Environment.GetEnvironmentVariable("GOOGLE_GEOCODE_API_KEY");
+        var geoKey = "ConfigurationManager.AppSettings['GOOGLE_GEOCODE_API_KEY']";
         HttpResponseMessage response = await client.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={geoKey}");
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
