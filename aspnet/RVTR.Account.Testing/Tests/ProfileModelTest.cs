@@ -9,7 +9,8 @@ namespace RVTR.Account.Testing.Tests
 
   public class ProfileModelTest
   {
-    private static DateTime adultAge = new DateTime(2003, 1, 30);
+
+    private static DateTime adultAge = DateTime.Now.AddYears(-19);
     public static readonly IEnumerable<object[]> Profiles = new List<object[]>
     {
       new object[]
@@ -108,6 +109,7 @@ namespace RVTR.Account.Testing.Tests
         IsAccountHolder = true, 
         DateOfBirth = DateTime.Today
       };
+      profile.SetAge(DateTime.Today);
       Assert.False(profile.IsAdult);
     }
 
@@ -121,6 +123,8 @@ namespace RVTR.Account.Testing.Tests
         IsAccountHolder = true, 
         DateOfBirth = adultAge
       };
+      profile.SetAge(adultAge);
+      Console.WriteLine(adultAge);
       Assert.True(profile.IsAdult);
     }
   }

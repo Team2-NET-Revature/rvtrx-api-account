@@ -46,7 +46,7 @@ namespace RVTR.Account.Domain.Models
     /// <summary>
     /// Checks Age by Year and (Month and day)
     /// </summary>
-    public bool CheckAge(DateTime birthDate)
+    public void SetAge(DateTime birthDate)
     {
       var adultAge = 18;
       var now = DateTime.Today;
@@ -58,12 +58,12 @@ namespace RVTR.Account.Domain.Models
       if (age < adultAge)
       {
         Type = "Minor";
-        return false;
+        IsAdult = false;
       }
       else
       {
         Type = "Adult";
-        return true;
+        IsAdult = true;
       }
 
 
@@ -79,7 +79,7 @@ namespace RVTR.Account.Domain.Models
     /// <returns></returns>
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-      IsAdult = CheckAge(DateOfBirth);
+      SetAge(DateOfBirth);
       if (GivenName == FamilyName)
       {
         yield return new ValidationResult("Given name and Family name can't be the same.");

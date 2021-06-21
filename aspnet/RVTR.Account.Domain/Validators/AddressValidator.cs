@@ -11,11 +11,13 @@ namespace RVTR.Account.Domain.Validators
   public class AddressValidator : IValidator
   {
 
+
     internal static async Task<bool> getValidation(string address, HttpClient client)
     {
       try
       {
-        var geoKey = "ConfigurationManager.AppSettings['GOOGLE_GEOCODE_API_KEY']";
+        var geoKey = ConfigurationManager.AppSettings["GOOGLE_GEOCODE_API_KEY"];
+        Console.WriteLine($"{geoKey}: geokey");
         HttpResponseMessage response = await client.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={geoKey}");
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();

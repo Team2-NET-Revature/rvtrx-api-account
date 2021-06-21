@@ -15,5 +15,5 @@ appsettings*
 # sonarcloud
 .sonarqube/
 
-#api key
+#environment variables
 .env
