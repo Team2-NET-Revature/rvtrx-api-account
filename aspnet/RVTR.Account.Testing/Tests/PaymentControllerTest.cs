@@ -50,31 +50,33 @@ namespace RVTR.Account.UnitTesting.Tests
       _controller = new PaymentController(_logger, _unitOfWork);
     }
 
-    [Theory]
-    [InlineData("jsmith@gmail.com", 1)]
-    [InlineData("fake@email.com", 0)]
-    public async void Test_Controller_Delete(string email, int id)
-    {
-      var resultFail = await _controller.Delete(email, id);
-      var resultPass = await _controller.Delete(email, id);
+    //Demo purposes
 
-      Assert.NotNull(resultFail);
-      Assert.NotNull(resultPass);
-    }
+    // [Theory]
+    // [InlineData("jsmith@gmail.com", 1)]
+    // [InlineData("fake@email.com", 0)]
+    // public async void Test_Controller_Delete(string email, int id)
+    // {
+    //   var resultFail = await _controller.Delete(email, id);
+    //   var resultPass = await _controller.Delete(email, id);
 
-    [Theory]
-    [InlineData("jsmith@gmail.com")]
-    [InlineData("fake@email.com")]
-    public async void Test_Controller_Get(string email)
-    {
-      var resultMany = await _controller.Get(email);
-      var resultFail = await _controller.Get(email);
-      var resultOne = await _controller.Get(email);
+    //   Assert.NotNull(resultFail);
+    //   Assert.NotNull(resultPass);
+    // }
 
-      Assert.NotNull(resultMany);
-      Assert.NotNull(resultFail);
-      Assert.NotNull(resultOne);
-    }
+    // [Theory]
+    // [InlineData("jsmith@gmail.com")]
+    // [InlineData("fake@email.com")]
+    // public async void Test_Controller_Get(string email)
+    // {
+    //   var resultMany = await _controller.Get(email);
+    //   var resultFail = await _controller.Get(email);
+    //   var resultOne = await _controller.Get(email);
+
+    //   Assert.NotNull(resultMany);
+    //   Assert.NotNull(resultFail);
+    //   Assert.NotNull(resultOne);
+    // }
 
     [Fact]
     public async void Test_Controller_Post()
